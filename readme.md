@@ -16,17 +16,29 @@
 
 ## 功能
 
-- ### Tip
+1. ### Tip
 
-- ### Bug
+    > 小知识
 
-- ### Trick
+2. ### Trick
 
-- ### BestPratice
+    > 小技巧
 
-- ### Tutorial
+3. ### Bug
 
-- ### Tao​
+    > 错误记录
+
+4. ### BestPratice
+
+    > 最佳实践
+
+5. ### Tutorial
+
+    > 全套教程
+
+6. ### Tao​
+
+    > 心得体会
 
 ## 注意事项
 
