@@ -2,17 +2,21 @@
 
 ## 分类
 
-- ### Unity3d
+1. ### Unity3d
 
-- ### PHP
+2. ### PHP
 
-- ### Kali
+3. ### Kali
 
-- ### Python
+4. ### Python
 
-- ### Android
+5. ### Android
 
-- ### IOS
+6. ### IOS
+
+7. ### Linux
+
+8. ### Git
 
 ## 功能
 
