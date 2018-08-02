@@ -9,8 +9,8 @@
 ## 设置全局配置
 
 ```sh
-git config --global user.name "your name"
-git config --global user.email "your email"  //注意这里的email要和git服务器账户的email保持一致
+git config --global user.name "Michael"
+git config --global user.email "qiaogaojian@vip.qq.com"  //注意这里的email要和服务器账户的email保持一致
 ```
 
 ## 新建项目
