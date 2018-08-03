@@ -100,7 +100,7 @@ Unity将会在一个貌似随机的时间调用一个对象的默认构造器。
 如果有三个对象，a1 > a2 > a3 （父子级的关系），挂有三个脚本s1，s2，s3，三个脚本都有
 
 ```C#
-Awake，Start，OnEnable，OnDisable，Update
+Awake,Start,OnEnable,OnDisable,Update
 ```
 
 方法，那么unity执行的顺序为：
