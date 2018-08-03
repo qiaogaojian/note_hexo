@@ -2,48 +2,58 @@
 
 ## 分类
 
-1. ### Unity3d
+### Unity3d
 
-2. ### PHP
+### PHP
 
-3. ### Kali
+### Kali
 
-4. ### Python
+### Python
 
-5. ### Android
+### Android
 
-6. ### IOS
+### IOS
 
-7. ### Linux
+### OS
 
-8. ### Git
+#### Linux
+
+#### Mac
+
+#### Windows
+
+### Tools
+
+#### Git
+
+#### VSCode
 
 ## 功能
 
-1. ### Tip
+### Tip
 
-    > 小知识
+    小知识
 
-2. ### Trick
+### Trick
 
-    > 小技巧
+    小技巧
 
-3. ### Bug
+### Bug
 
-    > 错误记录
+    错误记录
 
-4. ### BestPratice
+### BestPratice
 
-    > 最佳实践
+    最佳实践
 
-5. ### Tutorial
+### Tutorial
 
-    > 全套教程
+    全套教程
 
-6. ### Tao​
+### Tao​
 
-    > 心得体会
+    心得体会
 
 ## 注意事项
 
-- 图片尽量用简书外链,没网络的或有特殊需求的情况下存 image 相对路径下
+### 图片尽量用简书外链,没网络的或有特殊需求的情况下存 image 相对路径下
