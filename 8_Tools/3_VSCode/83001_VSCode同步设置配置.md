@@ -1,5 +1,7 @@
 # VSCode同步设置配置
 
+## Token Gist
+
 ```sh
 sync
 CODE SETTINGS SYNC DOWNLOAD SUMMARY
@@ -12,3 +14,30 @@ GitHub Gist Type: Secret
 Restarting Visual Studio Code may be required to apply color and file icon theme.
 --------------------
 ```
+
+## Github Cloud Setting
+
+[地址](https://gist.github.com/qiaogaojian/85b86979f73ec410b16184fdaf91f72b)
+
+## Git Path
+
+```sh
+cd C:\Users\Michael\AppData\Roaming\Code\User
+```
+
+## Git Clone
+
+```github
+github: git clone https://gist.github.com/85b86979f73ec410b16184fdaf91f72b.git
+```
+
+```gitee
+gitee:  git clone https://gitee.com/qiaogaojian/vscodesetting.git
+```
+
+## Change Extension Path
+
+```Target
+"C:\Program Files\Microsoft VS Code\Code.exe" --extensions-dir="C:\Users\Michael\AppData\Roaming\Code\User\extensions"
+```
+
