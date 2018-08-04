@@ -40,4 +40,3 @@ gitee:  git clone https://gitee.com/qiaogaojian/vscodesetting.git
 ```Target
 "C:\Program Files\Microsoft VS Code\Code.exe" --extensions-dir="C:\Users\Michael\AppData\Roaming\Code\User\extensions"
 ```
-
