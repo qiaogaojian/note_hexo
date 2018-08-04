@@ -3,15 +3,19 @@
 ## Button
 
 ```C#
-  void OnGUI()
+void OnGUI()
+{
+    if (GUI.Button(new Rect(10, 360, 200, 50), "开始新手引导"))
     {
-        if (GUI.Button(new Rect(10, 360, 200, 50), "开始新手引导"))
-        {
-            GuideManager.Instance.InitGuide();
-        }
+        GuideManager.Instance.InitGuide();
     }
+}
 ```
 
-### Rect.x Rect.y   按钮左下角坐标
+### Rect.x Rect.y
 
-### Rect.z Rect.w   按钮的宽和高
+  按钮左下角坐标
+
+### Rect.z Rect.w
+
+  按钮的宽和高
