@@ -14,8 +14,12 @@ void OnGUI()
 
 ### Rect.x Rect.y
 
-  按钮左下角坐标
+按钮左下角坐标
 
 ### Rect.z Rect.w
 
-  按钮的宽和高
+按钮的宽和高
+
+## OnGUI注意事项
+
+### 坐标原点: 左上角
