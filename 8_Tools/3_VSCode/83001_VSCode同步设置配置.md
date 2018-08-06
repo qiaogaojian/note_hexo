@@ -38,5 +38,6 @@ gitee:  git clone https://gitee.com/qiaogaojian/vscodesetting.git
 ## Change Extension Path
 
 ```Target
-"C:\Program Files\Microsoft VS Code\Code.exe" --extensions-dir="C:\Users\Michael\AppData\Roaming\Code\User\extensions"
+Home: "C:\Program Files\Microsoft VS Code\Code.exe" --extensions-dir="C:\Users\Michael\AppData\Roaming\Code\User\extensions"
+Company: "C:\Program Files\Microsoft VS Code\Code.exe" --extensions-dir="C:\Users\ETA\AppData\Roaming\Code\User\extensions"
 ```
