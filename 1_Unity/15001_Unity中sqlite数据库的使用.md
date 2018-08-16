@@ -66,3 +66,96 @@ sqlite> UPDATE COMPANY SET ADDRESS = 'Texas' WHERE ID = 6;
 ```sql
 SELECT column1, column2, columnN FROM table_name;
 ```
+
+## 操作记录
+
+```sh
+ETA@QiaoGaojian-PC MINGW64 /d/gitee/etaframe (develop)
+$ cd sqlitetool
+
+ETA@QiaoGaojian-PC MINGW64 /d/gitee/etaframe/sqlitetool (develop)
+$ ls
+sqldiff.exe  sqlite3.exe  sqlite3_analyzer.exe  test.db
+
+ETA@QiaoGaojian-PC MINGW64 /d/gitee/etaframe/sqlitetool (develop)
+$ sqlite3 test.db
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite> .databases
+seq  name             file
+---  ---------------  ----------------------------------------------------------
+0    main             D:\gitee\etaframe\sqlitetool\test.db
+sqlite> .tables;
+Error: unknown command or invalid arguments:  "tables;". Enter ".help" for help
+sqlite> .tables
+user
+sqlite> select * from user;
+1|Michael|18
+sqlite> insert into user values
+   ...> (2,"Michelle",19);
+sqlite> select * from user;
+1|Michael|18
+2|Michelle|19
+sqlite> .header on
+sqlite> select * from user;
+id|name|age
+1|Michael|18
+2|Michelle|19
+sqlite> .mode column
+sqlite> .timer on
+sqlite> select * from user;
+id          name        age
+----------  ----------  ----------
+1           Michael     18
+2           Michelle    19
+Run Time: real 0.004 user 0.000000 sys 0.000000
+sqlite> exit
+   ...> ;
+Run Time: real 0.001 user 0.000000 sys 0.000000
+Error: near "exit": syntax error
+sqlite> .exit
+
+ETA@QiaoGaojian-PC MINGW64 /d/gitee/etaframe/sqlitetool (develop)
+$ sqlite3 test.db
+SQLite version 3.8.10.2 2015-05-20 18:17:19
+Enter ".help" for usage hints.
+sqlite> .status
+Error: unknown command or invalid arguments:  "status". Enter ".help" for help
+sqlite> .show
+        echo: off
+         eqp: off
+  explain: off
+     headers: off
+        mode: list
+   nullvalue: ""
+      output: stdout
+colseparator: "|"
+rowseparator: "\n"
+       stats: off
+       width:
+sqlite> select * from user;
+1|Michael|18
+2|Michelle|19
+sqlite> .header on
+sqlite> .mode column
+sqlite> select * from user;
+id          name        age
+----------  ----------  ----------
+1           Michael     18
+2           Michelle    19
+sqlite> .timer on
+sqlite> select * from user;
+id          name        age
+----------  ----------  ----------
+1           Michael     18
+2           Michelle    19
+Run Time: real 0.005 user 0.015625 sys 0.000000
+sqlite> sqlite3 test.db .dump > test.sql
+   ...> ;
+Run Time: real 0.000 user 0.000000 sys 0.000000
+Error: near "sqlite3": syntax error
+sqlite> .exit
+
+ETA@QiaoGaojian-PC MINGW64 /d/gitee/etaframe/sqlitetool (develop)
+$
+```
