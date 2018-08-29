@@ -1,75 +1,64 @@
 # key
 
-## QQ
+## Often
 
-### 11566946
+### QQ
 
-1200
-
-### 85990243
-
+11566946
 200
 
-### 1281208053
-
+85990243
 200
 
-## Baidu
-
-### 乔高建
-
+1281208053
 200
 
-### qiaogaojian
+### Baidu
 
+乔高建
 200
 
-### etatech
-
+qiaogaojian
 200
 
-### duomo寂寞
-
+etatech
 200
 
-## Google
+duomo寂寞
+200
 
-### qiaogaojian@gamil.com
+### Google
 
+qiaogaojian@gamil.com
 400
 
-### etagamestudio@gmail.com
-
+etagamestudio@gmail.com
 400
 
-## Git
-
-### Github
-
-qiaogaojian@vip.qq.com
-1200
-
-### Gitee
-
-qiaogaojian@vip.qq.com
-1200
-
-### Gitbook
-
-qiaogaojian@vip.qq.com
-1200
-
-## Tools
+## Common
 
 ### Amazon.cn
 
 qiaogaojian@vip.qq.com
-1200
+200
 
 远程传输邮箱
 qiaogaojian@kindle.cn
 
-## BlockChain
+### Gitee
+
+qiaogaojian@vip.qq.com
+200
+
+1281208053@vip.qq.com
+200
+
+### Github
+
+qiaogaojian@vip.qq.com
+200
+
+## Rarely
 
 ### Huobi
 
