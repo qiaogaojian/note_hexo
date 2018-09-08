@@ -5,42 +5,47 @@
 ### QQ
 
 11566946
-200
+300
 
 85990243
-200
+300
 
 1281208053
-200
+300
 
 ### Baidu
 
 乔高建
-200
+300
 
 qiaogaojian
-200
+300
 
 etatech
-200
+300
 
 duomo寂寞
-200
+300
 
 ### Google
 
 qiaogaojian@gamil.com
-400
+500
 
 etagamestudio@gmail.com
-400
+500
+
+### Steam
+
+qiaogaojian
+300
 
 ## Common
 
 ### Amazon.cn
 
 qiaogaojian@vip.qq.com
-200
+300
 
 远程传输邮箱
 qiaogaojian@kindle.cn
@@ -48,38 +53,34 @@ qiaogaojian@kindle.cn
 ### Gitee
 
 qiaogaojian@vip.qq.com
-200
+300
 
 1281208053@vip.qq.com
-200
+300
 
 ### Github
 
 qiaogaojian@vip.qq.com
-200
+300
 
 ## Rarely
 
 ### Huobi
 
-400
+500
 
 ### Jex
 
-321
+421
 
 ### Aex
 
-300
+400
 
 ### Biance
 
-300
-
-### Fcoin
-
-300
+400
 
 ### BigOne
 
-300
+400
