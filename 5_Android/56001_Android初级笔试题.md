@@ -185,13 +185,13 @@ D）1:1
 
     封装是为了隐藏内部实现细节,是保证软件具有良好模块性的基础. 封装的目标就是要实现软件模块"高内聚,低耦合",防止程序之间的互相依赖.
 
--   继承
+- 继承
 
     继承是指在定义和实现一个类的时候,可以在一个已经存在的类的基础上来进行,把这个已经存在的类定义的内容作为自己的内容,并可以加入若干新的内容,或者重写之前的方法使之更加符合需要.
 
     继承是子类自动共享父类数据和方法的机制,这是类的一种关系,提高了软件的可重用性和可扩展性.
 
--   多态
+- 多态
 
     多态是运行时刻接口匹配的对象相互替换的能力. 程序定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编译器不确定,而是在运行期间才确定, 因此这样就可以使得引用变量绑定到各种不同的类实现上,从而实现不同的行为. 多态性增强了软件的灵活性和扩展性.
 
@@ -223,7 +223,27 @@ public class SingletonTest
 ### 8、实现一个计数器，在n秒内每间隔m秒执行一次，一共执行了多少次。要求：1、间隔m秒执行一次；2、共n秒。注：m、n为动态参数。
 
 ```java
+public class CountNumber {
+    private int n;
+    private int m;
 
+    public CountNumber(int n, int m) {
+        this.n = n;
+        this.m = m;
+    }
+
+    public int GetCount(int n, int m) {
+        int countNum = 0;
+        countNum = n / m;
+        return countNum;
+    }
+
+    public int GetCount() {
+        int countNum = 0;
+        countNum = this.n / this.m;
+        return countNum;
+    }
+}
 ```
 
 
@@ -232,14 +252,52 @@ public class SingletonTest
 
 ### 1、Android四大组件都是什么？并简述其作用。
 
+-   Activity
+
+    ​	Activity是Android程序与用户交互的窗口, 是Android构造块中最基本的一种, 他需要保持各界面的状态, 做很多持久化的事情, 妥善管理生命周期以及一些跳转逻辑.
+
+    ​
+
+-   Service
+
+    ​	Service后台服务于Activity, 封装一个完整的功能逻辑实现, 接收上层指令, 完成相关的事物.
+
+    ​
+
+-   ContentProvider
+
+    ​	ContentProvider是Android提供的第三方应用数据的访问方案, 可以派生ContentProvider类,对外提供数据, 可以像数据库一样进行选择排序, 屏蔽内部数据的存储细节, 向外提供了统一的接口模型, 大大简化上层应用,对数据整合提供了更方便的途径.
+
+    ​
+
+-   BroadCast Receiver
+
+    ​	BroadCast Receiver接受一种或者多种Intent作为触发事件, 接收相关消息,做出一些简单处理,转换成一条Notification, 统一了Android的事件广播模型
+
+
+
 ### 2、Activity的生命周期。
+
+ 
+
+![](https://upload-images.jianshu.io/upload_images/3994917-019104c9fc5cb373.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/513/format/webp)
+
+
 
 ### 3、启动Activity不同模式的区别（standard、singleTop、singleTask、singleInstence）。
 
+
+
 ### 4、Android中的动画有哪些，简述其内容及优缺点。
+
+
 
 ### 5、Android序列化都有哪些，简述优缺点。
 
+
+
 ### 6、写出了解的第三方框架（如Glide、otto等）及其作用。
+
+
 
 ### 7、用RxJava1或者RxJava2实现“每隔1秒执行一次，一共执行5次”（可选）
