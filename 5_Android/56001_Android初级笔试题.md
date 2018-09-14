@@ -13,7 +13,7 @@ D）>
 
 -   ##### 解析:
 
-    口诀:  
+    口诀:
 
     **单目双目位关系 逻辑三目后赋值**
 
@@ -203,17 +203,17 @@ D）1:1
 public class SingletonTest
 {
   	private SingletonTest()
-    {        
+    {
     }
-  	
+
   	private static class Inner
     {
-    	static SingletonTest singletonTest = new SingletonTest();     
+    	static SingletonTest singletonTest = new SingletonTest();
     }
-    
+
   	public static SingletonTest GetInstance()
     {
-    	return Inner.singletonTest;    
+    	return Inner.singletonTest;
     }
 }
 ```
@@ -258,19 +258,19 @@ public class CountNumber {
 
     ​
 
--   Service
+- Service
 
     ​	Service后台服务于Activity, 封装一个完整的功能逻辑实现, 接收上层指令, 完成相关的事物.
 
     ​
 
--   ContentProvider
+- ContentProvider
 
     ​	ContentProvider是Android提供的第三方应用数据的访问方案, 可以派生ContentProvider类,对外提供数据, 可以像数据库一样进行选择排序, 屏蔽内部数据的存储细节, 向外提供了统一的接口模型, 大大简化上层应用,对数据整合提供了更方便的途径.
 
     ​
 
--   BroadCast Receiver
+- BroadCast Receiver
 
     ​	BroadCast Receiver接受一种或者多种Intent作为触发事件, 接收相关消息,做出一些简单处理,转换成一条Notification, 统一了Android的事件广播模型
 
@@ -278,26 +278,159 @@ public class CountNumber {
 
 ### 2、Activity的生命周期。
 
- 
+
 
 ![](https://upload-images.jianshu.io/upload_images/3994917-019104c9fc5cb373.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/513/format/webp)
+
+##### 完整生存期
+
+活动在onCreate( )方法和onDestroy( )方法之间所经历的,就是完整生存期,一般情况下,一个活动会在onCreate( )方法中完成各种初始化操作,而在onDestroy( )方法中完成释放内存的操作.
+
+##### 可见生存期
+
+活动在onStart( )方法和onStop方法之间所经历的,就是可见生存期.在可见生存期内,活动对于用户总是可见的,即便有可能无法和用户进行交互.我们可以通过这两个方法,合理地管理哪里对用户可见的资源.比如在onStart( )方法中对资源进行加载,而在onStop( )方法中对资源进行释放,从而保证处于停止状态的活动不会占用过多的内存.
+
+##### 前台生存期
+
+活动在onResume( )方法和onPause( )方法之间所经历的就是前台生存期.在前台生存期内,活动总是处于运行状态的,此时的活动是可以和用户进行交互的,我们平时看到的和接触最多的也就是这个状态下的活动.
+
+- onCreate( )
+
+  在活动第一次被创建的时候被调用,这个方法一般用来初始化操作,比如加载布局,绑定事件等.
+
+- onStart( )
+
+  在活动由不可见变为可见的时候调用.
+
+- onResume( )
+
+  在活动准备好和用户进行交互的时候调用,此时的活动一定位于返回栈的栈顶,并且处于运行状态.
+
+- onPause( )
+
+  在系统准备去启动或者恢复另一个活动的时候调用,通常会在这个方法种将一些消耗CPU的资源释放掉,以及保存一些关键数据,但这个方法的执行速度一定要快,不然会影响到新的栈顶活动的使用.
+
+- onStop( )
+
+  这个方法在活动完全不可见的时候调用,它和onPause( )方法的主要区别在于,如果启动的新活动是一个对话框式的活动,那么onPause( )方法会得到执行,而onStop( )方法并不会执行.
+
+- onRestart( )
+
+  在活动由停止状态变为运行状态之前调用,也就是活动被重新启动了.
+
+- onDestroy( )
+
+  在活动被销毁之前调用,之后活动的状态将变为销毁状态.
 
 
 
 ### 3、启动Activity不同模式的区别（standard、singleTop、singleTask、singleInstence）。
 
+活动的启动模式一共有4种,分别为 standard, singleTop, singleTask, singleInstance, 可以在AndroidMainfest.xml中通过给<activity>标签指定android:launchMode属性来选择启动模式.
 
+- standard
+
+  Android的默认启动模式,这种模式下,Activity可以有多个实例,每次启动Activity,无论任务栈中是否已经有这个Activity的实例,系统都会创建一个新的Activity实例.
+
+- singleTop
+
+  singleTop和standard模式非常相似,主要区别就是当一个singleTop模式的Activity已经位于任务栈的栈顶,再去启动它时,不会在创建新的实例,如果不位于栈顶,就会创建新的实例. 位于栈顶时启动会调用onNewIntent( )函数 .
+
+- singleTask
+
+  singleTask模式的Activity在同一Task内只有一个实例,如果Activity已经位于栈顶,系统不会创建新的Activity实例,和singleTop模式一样.但Activity已经存在但不位于栈顶时,系统就会把该Activity移动到栈顶,并把它上面的Activity出栈,singleTask是Task内单例的,需要单例才会设置这个模式.
+
+- singleInstance
+
+  也是单例,和singleTask不同的是,singleTask只是任务栈内单例,系统是可以有多个singleTask Activity实例的,而singleInstance Activity在整个系统中只有一个实例,启动singleInstance Activity时,系统会创建一个新的任务栈,并且这个任务栈只有他一个Activity.
 
 ### 4、Android中的动画有哪些，简述其内容及优缺点。
 
+- Tween Animation:
 
+  补间动画,通过对场景中的对象不断做图像变换(平移,旋转,缩放,透明度)产生的动画效果,是一种渐变动画.
+
+  - 支持4种类型:平移,旋转,缩放,不透明
+
+  - 只是显式的位置变动,View的实际位置未改变,表现为View移动到其他地方,点击事件仍在原处才可响应
+
+  - 组合使用步骤较复杂
+
+  - ViewAnimation也是指此动画
+
+    优点:相对于帧动画,补间动画更加连贯自然
+
+    缺点: 当平移动画执行完停止最后的位置,结果焦点还在原来的位置,控件属性未改变
+
+- Frame Animation:
+
+  帧动画,顺序播放事先做好的图像,是一种画面转换动画.
+
+  - 用于生成练习的gif动画
+
+  - Drawable Animation也是指此动画
+
+    优点:制作简单
+
+    缺点:效果单一,逐帧播放需要很多图片,占用空间较大.
+
+- Property Animation:
+
+  属性动画,通过动态的改变对象的属性从而达到的动画效果.Android(api11) 新特性.
+
+  - 支持对所有View能更新的属性的动画,需要属性的set/get方法
+
+  - 更改的是View的实际属性,不影响其动画执行后所在位置的正常使用
+
+  - Android3.0 (API11)及以后的功能
+
+    优点:易定制,效果强
+
+    缺点:向下兼容的问题
 
 ### 5、Android序列化都有哪些，简述优缺点。
 
+- Serializable(Java自带):
 
+  Serializable是序列化的意思,表示将一个对象转换成可存储或可传输的状态. 序列化后的对象可以在网络上进行传输,也可以存储到本地.
+
+- Parcelable(Android专用):
+
+  也可以实现相同的效果,不过不同于将对象进行序列化,Parcelable的实现原理是将一个完整的对象进行分解,而分解后的每一部分都是Intent所支持的数据类型,这样也就实现传递对象的功能了.
+
+  ##### 区别
+
+  Parcelable比Serializable性能高,所以应用内传递数据推荐使用Parcelable,但是Parcelable不能使用在要将数据存储在磁盘上的情况,因为在外界有变化的情况下,Parcelable不能很好的保证数据的持续性.
 
 ### 6、写出了解的第三方框架（如Glide、otto等）及其作用。
 
 
 
 ### 7、用RxJava1或者RxJava2实现“每隔1秒执行一次，一共执行5次”（可选）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
