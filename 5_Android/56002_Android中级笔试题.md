@@ -16,13 +16,152 @@
 
 ### 4、请写出一个快排
 
+``` Java
+public class Sorting
+{
+    public int[] QuickSorting(int[] temArray)
+    {
+        int left = 0;
+        int right = **temArray.length - 1**;
+        QuickSort(temArray,left,right);
+        return temArray;
+    }
+    private void QuickSort(int[] temArray,int left,int right)
+    {
+        if(right <= left)
+        {
+            return;
+        }
+        else
+        {
+            int pivot = PartitionArray(temArray,left,right);
+            QuickSort(**temArray**,left,pivot-1);
+            QuickSort(**temArray**,pivot+1,right);
+        }
+    }
+    private void PartitionArray(int[] temArray,int left,int right)
+    {
+        int leftPointer = left;
+        int rightPointer = right - 1;
+        int pivotValue = temArray[right];
+
+        while(true)
+        {
+            while(temArray[leftPointer]**<**pivotValue)
+            {
+                leftPointer++;
+            }
+            while(temArray[rightPointer]**>**pivotValue && rightPointer > 0)
+            {
+                rightPointer--;
+            }
+
+            if(rightPointer<=leftPointer)
+            {
+                break;
+            }
+            else
+            {
+                int temp = temArray[leftPointer];
+                temArray[leftPointer] = temArray[rightPointer];
+                temArray[rightPointer] = temp;
+            }
+        }
+
+        temArray[right] = temArray[leftPointer];
+        temArray[leftPointer] = pivotValue;
+        return leftPointer;
+    }
+}
+```
+
 
 
 ### 5、实现一个最优单例模式。
 
+```Java
+public class Singleton
+{
+    public **static** class Inner
+    {
+        public static Singleton singleton = new Singleton();
+    }
+
+    private Singleton()
+    {
+
+    }
+
+    public **static** Singleton GetInstance()
+    {
+        return Inner.singleton;
+    }
+}
+```
+
 
 
 ### 6、实现一个线程池（ThreadPoolExecutor）。
+
+``` java
+public class ThreadExcutor
+{
+    private static BlockingQueue<Runnable> queue = null;
+    private final HashSet<Worker> workers = new HashSet<Worker>();
+    private final List<Thread> threadList = new ArrayList<Thread>();
+
+    private volatile boolean RUNNING = true;
+    private boolean shutdown = false;
+    private int poolSize = 0;
+    private int coreSize = 0;
+
+    public ThreadExcutor(int poolSize)
+    {
+
+    }
+
+    public void exec(Runnable runnable)
+    {
+
+    }
+
+    public void addThread(Runnable runnable)
+    {
+
+    }
+
+    public void shutdown()
+    {
+
+    }
+
+    class Worker implements Runnable
+    {
+        public Worker(Runnable runnable)
+        {
+            queue.offer(runnable);
+        }
+
+        @Override
+        public void run()
+        {
+
+        }
+
+        public Runnable getTask() throws InterruptedException
+        {
+
+        }
+
+        public void interruptIfIdel()
+        {
+
+        }
+    }
+}
+```
+
+
 
 
 
