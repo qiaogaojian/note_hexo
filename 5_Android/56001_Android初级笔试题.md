@@ -126,6 +126,8 @@ D）1:1
 
     StringBuilder > StringBuffer > String
 
+- 执行效率
+
     StringBuilder 和 StringBuffer 是字符串变量, String 是字符串常量,一旦创建不可更改.
 
 - 线程安全
@@ -150,7 +152,7 @@ D）1:1
 | :List      | 实现方式 | 线程安全                   | 效率                             | 遍历        |
 | ---------- | ---- | ---------------------- | ------------------------------ | --------- |
 | ArrayList  | 数组   | 非线程安全                  | 遍历和随机访问效率高,查询快,在尾部添加效率高        | 选for      |
-| Vector     | 数组   | 线程安全, 方法加了synchronized |                                |           |
+| Vector     | 数组   | 线程安全, 方法加了synchronized | 查询遍历效果高                        |           |
 | LinkedList | 双向链表 | 非线程安全                  | 插入删除数据效率比较高,  在头部添加快很多,删除数据快很多 | 选Iterator |
 
 
@@ -159,17 +161,19 @@ D）1:1
 
 - 实现原理
 
-  java编程语言中,最基本的结构就两种,数组和模拟指针, 所有的数据结构都可以用这两个基本机构来构造, HashMap实际上是一个"链表散列"的数据结构, 即数组和链表的结合体.
+  HashMap实际上是一个"链表散列"的数据结构, 即数组和链表的结合体.
 
   HashMap底层就是一个数组结构,数组中每一项又是一个链表,新建一个HashMap时,就会初始化一个数组.
 
 - 特性
 
-  HashMap是基于Map接口的实现,存储的是键值对,可以接受null键和值,而hashtable不能
+  HashMap是基于Map接口的实现,存储的是键值对,
+
+  可以接受null键和值,
 
   HashMap是非线程安全的,单线程下HashMap的性能更高
 
-  put(key,value) 设置值  get(key) 取值
+  不保证有序, put(key,value) 设置值  get(key) 取值
 
   ​
 
@@ -183,17 +187,29 @@ D）1:1
 
 -   封装
 
-    封装是为了隐藏内部实现细节,是保证软件具有良好模块性的基础. 封装的目标就是要实现软件模块"高内聚,低耦合",防止程序之间的互相依赖.
+    封装是为了隐藏内部实现细节,是保证软件具有良好模块性的基础.
+
+    封装的目标就是要实现软件模块"高内聚,低耦合",防止程序之间的互相依赖.
 
 - 继承
 
-    继承是指在定义和实现一个类的时候,可以在一个已经存在的类的基础上来进行,把这个已经存在的类定义的内容作为自己的内容,并可以加入若干新的内容,或者重写之前的方法使之更加符合需要.
+    继承是指在定义和实现一个类的时候,可以在一个已经存在的类的基础上来进行,
+
+    把这个已经存在的类定义的内容作为自己的内容,
+
+    并可以加入若干新的内容,或者重写之前的方法使之更加符合需要.
 
     继承是子类自动共享父类数据和方法的机制,这是类的一种关系,提高了软件的可重用性和可扩展性.
 
 - 多态
 
-    多态是运行时刻接口匹配的对象相互替换的能力. 程序定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编译器不确定,而是在运行期间才确定, 因此这样就可以使得引用变量绑定到各种不同的类实现上,从而实现不同的行为. 多态性增强了软件的灵活性和扩展性.
+    多态是运行时刻接口匹配的对象相互替换的能力.
+
+    程序定义的引用变量所指向的具体类型或通过该引用变量发出的方法调用在编译期不确定,而是在运行期间才确定,
+
+    因此这样就可以使得引用变量绑定到各种不同的类实现上,从而实现不同的行为.
+
+    多态性增强了软件的灵活性和扩展性.
 
     ​
 
@@ -366,7 +382,7 @@ public class CountNumber {
 
   帧动画,顺序播放事先做好的图像,是一种画面转换动画.
 
-  - 用于生成练习的gif动画
+  - 用于生成连续的gif动画
 
   - Drawable Animation也是指此动画
 
@@ -408,29 +424,30 @@ public class CountNumber {
 
 ### 7、用RxJava1或者RxJava2实现“每隔1秒执行一次，一共执行5次”（可选）
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+``` java
+    Observable.interval(1,TimeUnit.SECONDS,Schedulers.trampoline())
+              .take(5)
+              .subscribe(new Observer<Long>()
+              {
+                  @Override
+                  public void onSubscribe(Disposable d)
+                  {
+                      System.out.println("OnSubscribe");
+                  }
+                  @Override
+                  public void onNext(Long value)
+                  {
+                      System.out.println("OnNext: " + value);
+                  }
+                  @Override
+                  public void onError(Throwable e)
+                  {
+                      System.out.println("OnError");
+                  }
+                  @Override
+                  public void onComplete()
+                  {
+                      System.out.println("OnComplete");
+                  }
+              });
+```
