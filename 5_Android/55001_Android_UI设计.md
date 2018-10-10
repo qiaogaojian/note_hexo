@@ -198,7 +198,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"        //设置占比例为1
-          android:text="Hello World!" 
+          android:text="Hello World!"
           android:background="#9c9292"/>
 
       <TextView
@@ -207,7 +207,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"        //设置占比例为1
-          android:text="Hello World!" 
+          android:text="Hello World!"
           android:background="#0d6074"/>
 
   </LinearLayout>
@@ -305,7 +305,7 @@
   android:layout_toRightOf //在某元素的右边
   android:layout_alignTop  //本元素的上边缘和某元素的的上边缘对齐
   android:layout_alignLeft //本元素的左边缘和某元素的的左边缘对齐
-  android:layout_alignBottom//本元素的下边缘和某元素的的下边缘对齐    
+  android:layout_alignBottom//本元素的下边缘和某元素的的下边缘对齐
   android:layout_alignRight //本元素的右边缘和某元素的的右边缘对齐
   ```
 
@@ -328,11 +328,11 @@
           android:textSize="30sp"
           android:layout_width="250dp"
           android:layout_height="wrap_content"
-          
+
           android:layout_alignStart="@+id/tx_three"
           android:layout_alignLeft="@+id/tx_three"
           android:layout_above="@+id/tx_three"
-          
+
           android:text="Hello World!"
           android:background="#9c9292" />
 
@@ -341,11 +341,11 @@
           android:textSize="30sp"
           android:layout_width="250dp"
           android:layout_height="wrap_content"
-          
+
           android:layout_below="@+id/tx_three"
           android:layout_alignEnd="@+id/tx_three"
           android:layout_alignRight="@+id/tx_three"
-          
+
           android:text="Hello World!"
           android:background="#0d6074" />
 
@@ -354,9 +354,9 @@
           android:textSize="30sp"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          
-          android:layout_centerInParent="true"       
-          
+
+          android:layout_centerInParent="true"
+
           android:text="Hello World!"
           android:background="#a73956" />
 
@@ -405,6 +405,8 @@
     ```
 
     ![添加margin](https://upload-images.jianshu.io/upload_images/5516419-4cd0de8ef465727c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/404/format/webp)
+
+### ConstraintLayout 
 
 ### FrameLayout
 
@@ -458,4 +460,4 @@ android:foregroundGravity     //设置前景图像显示的位置
 
 ### GridLayout
 
-### FlexboxLayout 
+### FlexboxLayout
