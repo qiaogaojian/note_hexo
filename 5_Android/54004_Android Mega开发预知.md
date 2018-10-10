@@ -12,6 +12,8 @@
 
 ## Rxjava2
 
+## RxBus
+
 ## RxBinding
 
 ## Rxlifecyle
