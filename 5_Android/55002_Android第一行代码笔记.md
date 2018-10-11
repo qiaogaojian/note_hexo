@@ -1170,6 +1170,276 @@ android:foregroundGravity     //设置前景图像显示的位置
 
 #### FlexboxLayout
 
+### 自定义控件
+
+#### 引入布局
+
+自定义标题栏布局
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/title_bg">
+
+    <Button
+        android:id="@+id/title_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/back_bg"
+        android:text="Back"
+        android:textColor="fff"
+    />
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Title Text"
+        android:textColor="#fff"
+        android:textSize="24sp"
+    />
+    <Button
+        android:id="@+id/title_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/edit_bg"
+        android:text="Edit"
+        android:textColor="#fff"
+    />
+</LinearLayout>
+```
+
+把自定义布局引入activity_main
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/title"/>
+<LinearLayout>
+```
+
+隐藏系统自带标题栏
+
+```java
+public class MainActivity extends AppCompatActivity
+{
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ActionBar actionbar = getSupportActionBar();
+        if(actionbar != null)
+        {
+            actionbar.hide();
+        }
+    }
+}
+```
+
+#### 创建自定义控件
+
+新建TitleLayout继承自LinearLayout,让它成为我们自动一的标题栏控件
+
+```java
+public class TitleLayout extends LinearLayout
+{
+    public TitleLayout(Context context, AttributeSet attrs)
+    {
+        super(context,attrs);
+        LayoutInflater.from(context).inflate(R.layout.title,this);
+    }
+}
+```
+
+现在自定义控件已经创建好了,然后我们需要在布局文件中添加这个自定义控件,修改activity_main.xml中的代码
+
+```xml
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.uicustomviews.TittleLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    />
+</LinearLayout>
+```
+
+添加自定义控件和添加普通控件的方式基本是一样的,只不过需要指明控件的完整类名,重新运行程序,此时的效果和使用引入布局的效果是一样的.
+下面未标题栏按钮注册点击事件,修改TitleLayout中的代码
+
+```java
+public TitleLayout(Context context,AttributeSet attrs)
+{
+    super(context,attrs);
+    LayoutInflater.from(context).inflate(R.layout.title,this);
+
+    Button titleBack = (Button) findViewById(R.id.title.title_back);
+    Button titleEdit = (Button) findViewById(R.id.title.title_edit);
+    titleBak.setOnClickListener(new OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            ((Activity) getContext()).finish();
+        }
+    });
+    titleEdit.setOnClickListener(new OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            Toast.makeText(getContext(),"You clicked Edit button",Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+```
+
+### ListView
+
+- Item数据模型
+
+    ```java
+    public class Fruit
+    {
+        private String name;
+        private int imageId;
+        public Fruit(String name,int imageId)
+        {
+            this.name = name;
+            this.imageId = iamgeId;
+        }
+        public String getName()
+        {
+            return name;
+        }
+        public int getImageId()
+        {
+
+        }
+    }
+    ```
+
+- Item布局
+
+    ```xml
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/fruit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/fruit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+    ```
+
+- ListView适配器
+
+    ```java
+    public class FruitAdapter extends ArrayAdapter<Fruit>
+    {
+        private int resourceId;
+
+        public FruitAdapter(Context context, int textViewResourceId, List<Fruit> objects)
+        {
+            super(context,textViewResourceId,objects);
+            resourceId = textViewResourceId;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            Fruit fruit = getItem(position);
+            // View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+            // 提升效率
+            View view;
+            ViewHolder viewHolder;
+            if(convertView == null)
+            {
+                view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+                viewHolder = new ViewHolder();
+                viewHolder.fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
+                viewHolder.fruitName = (TextView) view.findViewById(R.id.fruit_name);
+                view.setTag(viewHolder);
+            }
+            else
+            {
+                view = convertView;
+                viewHolder = (ViewHolder) view.getTag();
+            }
+
+            viewHolder.fruitImage.setImageResource(fruit.getImageId());
+            viewHolder.fruitNmae.setText(fruit.getName());
+
+            return view;
+        }
+        class ViewHolder
+        {
+            ImageView fruitImage;
+            TextView fruitName;
+        }
+    }
+    ```
+
+- MainActivity
+
+    ```java
+    public class MainActivity extends AppCompatActivity
+    {
+        private List<Fruit> fruitList = new ArrayList<>();
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState)
+        {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            initFruits();
+            FruitAdapter adapter = new FruitAdapter(MainActivity.this,R.layout.fruit_item,fruitList);
+
+            ListView listView = (ListView) findViewById(R.id.list_view);
+            listView.setAdapter(adapter);
+            // item点击事件
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent,View view,int position,long id)
+                {
+                    Fruit fruit = fruitList.get(position);
+                    Toast.makeText(MainActivity.this,fruit.getName(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        private void initFruits()
+        {
+            Fruit apple = new Fruit("Apple",R.drawable.apple_pic);
+            fruitList.add(apple);
+        }
+    }
+    ```
+
+### RecyleView
+
 ## 4.碎片
 
 ## 5.广播
