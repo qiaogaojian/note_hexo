@@ -406,7 +406,7 @@
 
     ![添加margin](https://upload-images.jianshu.io/upload_images/5516419-4cd0de8ef465727c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/404/format/webp)
 
-### ConstraintLayout 
+### ConstraintLayout
 
 ### FrameLayout
 

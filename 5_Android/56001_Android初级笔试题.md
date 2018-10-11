@@ -176,9 +176,9 @@ D）1:1
 ### 6、面向对象的三大要素是什么？简述其主要内容
 
 -   封装
-	
+
     也就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏.
-    
+
     封装是为了隐藏内部实现细节,是保证软件具有良好模块性的基础.
 
     封装的目标就是要实现软件模块"高内聚,低耦合",防止程序之间的互相依赖.
@@ -280,7 +280,7 @@ public class CountNumber {
 
 ### 2、Activity的生命周期。
 
-![](https://upload-images.jianshu.io/upload_images/3994917-019104c9fc5cb373.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/513/format/webp)
+![lifecycle](https://upload-images.jianshu.io/upload_images/3994917-019104c9fc5cb373.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/513/format/webp)
 
 ##### 完整生存期
 
