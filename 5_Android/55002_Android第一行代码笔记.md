@@ -1438,7 +1438,138 @@ public TitleLayout(Context context,AttributeSet attrs)
     }
     ```
 
-### RecyleView
+### RecylerView
+
+- 布局
+
+    ```xml
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="macthc_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    ```
+
+- Item数据模型
+
+    ```java
+    public class Fruit
+    {
+        private String name;
+        private int imageId;
+        public Fruit(String name,int imageId)
+        {
+            this.name = name;
+            this.imageId = iamgeId;
+        }
+        public String getName()
+        {
+            return name;
+        }
+        public int getImageId()
+        {
+
+        }
+    }
+    ```
+
+- Item布局
+
+    ```xml
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/fruit_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/fruit_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
+
+    </LinearLayout>
+    ```
+
+- RecyclerView适配器
+
+    ```java
+    public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.ViewHolder>
+    {
+        private List<Fruit> fruitList;
+        static class ViewHolder extends RecyclerView.ViewHolder
+        {
+            ImageView fruitImage;
+            TextView fruitName;
+            public ViewHolder(View view)
+            {
+                super(view);
+                fruitImage = (ImageView) view.findViewById(R.id.fruit_image);
+                fruitName = (TextView) view.findViewById(R.id.fruit_name);
+            }
+        }
+
+        public FruitAdapter(List<Fruit> fruitList)
+        {
+            this.fruitList = fruitList;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType)
+        {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fruit_item,parent,false);
+            ViewHolder holder = new ViewHolder(view);
+            return holder;
+        }
+        @Override
+        public void onBindViewHolder(ViewHolder holder,int position)
+        {
+            Fruit fruit = fruitList.get(position);
+            holder.fruitImage.setImageResource(fruit.getImageId());
+            holder.fruitName.setText(fruit.getName());
+        }
+        @Override
+        public int getItemCount()
+        {
+            return fruitList.size();
+        }
+    }
+    ```
+
+- MainActivity
+
+    ```java
+    public class MainActivity extends AppCompatActivity
+    {
+        private List<Fruit> fruitList = new ArrayList<>();
+        @Override
+        protected void onCreate(Bundle savedInstanceStage)
+        {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            initFruits();
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(layoutManager);
+            FruitAdapter adapter = new FruitAdapter(fruitList);
+            recyclerView.setAdapter(adaper);
+        }
+        private void initFruits()
+        {
+            Fruit apple = new Fruit("Apple",R.drawable.app_pic);
+            fruitList.add(apple);
+        }
+    }
+    ```
 
 ## 4.碎片
 
