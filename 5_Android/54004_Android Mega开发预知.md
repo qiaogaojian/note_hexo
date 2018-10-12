@@ -334,7 +334,6 @@ private void requestByRxJava()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Observer<PhoneResult>()
             {
-
                 @Override
                 public void onSubscribe(Disposable d)
                 {
@@ -370,7 +369,15 @@ private void requestByRxJava()
 
 ## Glide加载webp
 
+```java
+
+```
+
 ## Fresco加载动态webp
+
+```java
+
+```
 
 ## Rxjava2
 
