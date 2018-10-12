@@ -367,13 +367,13 @@ private void requestByRxJava()
 }
 ```
 
-## Glide加载webp
+## Glide4 加载 webp
 
 ```java
 
 ```
 
-## Fresco加载动态webp
+## Fresco 加载动态 webp
 
 ```java
 
