@@ -1440,6 +1440,15 @@ public TitleLayout(Context context,AttributeSet attrs)
 
 ### RecylerView
 
+- 引入依赖
+
+    ```xml
+    dependencies
+    {
+        implementation 'com.android.support:recyclerview-v7:26.1.0'
+    }
+    ```
+
 - 布局
 
     ```xml
