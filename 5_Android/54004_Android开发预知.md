@@ -1,4 +1,4 @@
-# Android Mega开发预知
+# Android 开发预知
 
 ## MVVM
 
@@ -369,14 +369,132 @@ private void requestByRxJava()
 
 ## Glide4 加载 webp
 
-```java
+### 引入依赖
 
+```java
+//glide 图片加载
+implementation 'com.github.bumptech.glide:glide:4.7.1'
+annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+implementation 'com.github.bumptech.glide:okhttp3-integration:4.7.1'
+//webpdecoder
+implementation 'com.zlc.glide:webpdecoder:1.2.4.7.1'
+```
+
+### 申请权限
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+### 代码示例
+
+```java
+public class MainActivity extends AppCompatActivity
+{
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+
+        Glide.with(this)
+                .load("http://asgard.image.mucang.cn/asgard/2017/12/28/10/45ab2f68a13546c1914b61d54160b8ae.webp")
+                .into(imageView);
+    }
+}
 ```
 
 ## Fresco 加载动态 webp
 
-```java
+### 引入依赖
 
+```java
+//加载webp专用插件
+implementation 'com.facebook.fresco:fresco:1.5.0'
+implementation 'com.facebook.fresco:animated-webp:1.5.0'
+implementation 'com.facebook.fresco:webpsupport:1.5.0'
+implementation 'com.facebook.fresco:animated-gif:1.5.0'
+```
+
+### Application 初始化
+
+```java
+public class MyApplication extends Application
+{
+    @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        Fresco.initialize(this);
+    }
+}
+```
+
+### 添加权限
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+```
+
+### 注册 Application name
+
+```xml
+<application
+    android:allowBackup="true"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:name=".MyApplication"  //这里注册
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/AppTheme">
+    <activity android:name=".MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+</application>
+```
+
+### 代码示例
+
+```java
+public class MainActivity extends AppCompatActivity
+{
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // 静态图
+        SimpleDraweeView sdv = (SimpleDraweeView) findViewById(R.id.sdv);
+        sdv.setImageURI("http://asgard.image.mucang.cn/asgard/2017/12/28/10/45ab2f68a13546c1914b61d54160b8ae.webp");
+
+        // 动态图
+        SimpleDraweeView sdva = (SimpleDraweeView) findViewById(R.id.sdva);
+        Uri              uri  = Uri.parse("http://asgard.image.mucang.cn/asgard/2017/12/28/10/45ab2f68a13546c1914b61d54160b8ae.webp");
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(uri)
+                .setAutoPlayAnimations(true)
+                .build();
+        sdva.setController(controller);
+
+    }
+}
 ```
 
 ## Rxjava2
