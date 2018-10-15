@@ -558,6 +558,304 @@ public class MainActivity extends AppCompatActivity
 
 ## Rxjava2
 
+### 代码示例
+
+```java
+public class MainActivity extends AppCompatActivity
+{
+
+    private static final String TAG = "MainActivity";
+    private String serverData;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        testRxjava1();
+        testRxJava2();
+    }
+
+    private void testRxjava1()
+    {
+        Observable.create(new ObservableOnSubscribe<String>()
+        {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception
+            {
+                emitter.onNext("TestRxJava1 => the string value passed");
+                emitter.onError(new Exception("Error occur"));
+            }
+        }).subscribe(new Observer<String>()
+        {
+            @Override
+            public void onSubscribe(Disposable d)
+            {
+
+            }
+
+            @Override
+            public void onNext(String s)
+            {
+                Log.d(TAG, "onNext: "+s);
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+
+            }
+
+            @Override
+            public void onComplete()
+            {
+
+            }
+        });
+    }
+
+    private void testRxJava2()
+    {
+        Observable.create(new ObservableOnSubscribe<String>()
+        {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception
+            {
+                getDataFromServer(emitter);
+            }
+        }).subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeWith(new Observer<String>()
+        {
+            @Override
+            public void onSubscribe(Disposable d)
+            {
+
+            }
+
+            @Override
+            public void onNext(String s)
+            {
+                TextView textView = (TextView) findViewById(R.id.textview);
+                textView.setText(s);
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+
+            }
+
+            @Override
+            public void onComplete()
+            {
+
+            }
+        });
+    }
+
+    private void getDataFromServer(final ObservableEmitter<String> emitter)
+    {
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        FormBody formBody = new FormBody.Builder()
+                 .add("number","15710579216")
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://cx.shouji.360.cn")
+                .post(formBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback()
+        {
+            @Override
+            public void onFailure(Call call, IOException e)
+            {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException
+            {
+                serverData = response.body().string();
+                Log.d(TAG, "onResponse: " + serverData);
+                emitter.onNext(serverData);
+            }
+        });
+    }
+}
+```
+
+### 常用操作符
+
+- map()
+
+    map()可以让你在最初的Observable和最终的Subscriber之间做任何转换
+
+    ```java
+    Observable.create(new Observable.OnSubscribe<Student>() {
+            @Override
+            public void call(Subscriber<? super Student> subscriber) {
+                subscriber.onNext(getStudentInfo(123456777));
+                subscriber.onCompleted();
+            }
+        }).map(new Func1<Student, String>() {
+
+            @Override
+            public String call(Student student) {
+                return student.getName();
+            }
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                mTvMsg.setText(s);
+            }
+        });
+    ```
+
+- flatmap()
+
+    假设软件开发公司A，有人数多于10名的项目经理，但是有同时进行的超过30个的项目，所以每个项目经理要同时负责不至1个软件项目，现在要打印出每个项目经理手下的开发人员的名字？怎么实现呢？先看看map的实现方式
+
+    ```java
+    String[] pm = new String[]{"PM1","PM2","PM3"};
+
+    Observable.from(pm)
+    .map(new Func1<String, List<String>>() {
+        @Override
+        public List<String> call(String s) {
+            //通过项目经理名字得到他负责的项目列表
+            List<String> projs = getProject(s);
+            return projs;
+        }
+    }).subscribe(new Action1<List<String>>() {
+        @Override
+        public void call(List<String> projs) {
+
+            Observable.from(projs)
+                    .map(new Func1<String, List<String>>() {
+                        @Override
+                        public List<String> call(String proj) {
+                            //通过项目名称得到项目组成员的名字
+                            List<String> names = getPersonNames(proj);
+                            return names;
+                        }
+                    }).subscribe(new Action1<List<String>>() {
+                @Override
+                public void call(List<String> names) {
+                    //打印项目组的人员的名字
+                    for (String name : names) {
+                        Log.d(TAG, "person name:" + name);
+                    }
+                }
+            });
+        }
+    });
+    ```
+
+    Observable传递过来的是一个数组，或者是集合。数组或者集合是没有办法直接转换成单一的类型对象的。这时候显示map()已经不太适应，而RxAndroid也提供了这种情况的解决方案。那就是flatmap().
+
+    ```java
+    Observable.from(pm)
+        .map(new Func1<String, List<String>>() {
+            @Override
+            public List<String> call(String s) {
+                //通过项目经理名字得到他负责的项目列表
+                List<String> projs = getProject(s);
+                return projs;
+            }
+        }).flatMap(new Func1<List<String>, Observable<List<String>>>() {
+            @Override
+            public Observable<List<String>> call(List<String> projs) {
+                List<List<String>> names = null;
+                for(String proj:projs){
+                    //通过项目名称得到项目组成员的名字
+                    names.add(getPersonNames(proj));
+                }
+                return  Observable.from(names);
+            }
+        })
+        .subscribe(new Action1<List<String>>() {
+            @Override
+            public void call(List<String> names) {
+
+                //打印项目组的人员的名字
+                for (String name : names) {
+                    Log.d(TAG, "person name:" + name);
+                }
+            }
+        });
+    ```
+
+    我们在中间的部分运行了flatmap()进行了一此变换，将原来的Observable对象替换了一个新的Observable对象，然后由这个新的Observable对象来对接Subscriber，而这一切都神不知鬼不觉的，所谓移花接木。
+
+- take()
+
+    只发射指定个数的数据项。
+
+    ```java
+    Observable.just(1, 2, 3, 4, 5, 6, 7, 8)
+          .take(4)
+          .subscribe(new Subscriber<Integer>() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println("Next: " + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println("Error: " + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println("Sequence complete.");
+        }
+    });
+    ```
+
+- filter()
+
+    这个也非常实用。可以过滤我们不需要处理的数据项，阻止它们的发射
+
+    ```java
+    Observable.just(1, 2, 3, 4, 5)
+          .filter(new Func1<Integer, Boolean>() {
+              @Override
+              public Boolean call(Integer item) {
+                return( item < 4 );
+              }
+          }).subscribe(new Subscriber<Integer>() {
+        @Override
+        public void onNext(Integer item) {
+            System.out.println("Next: " + item);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            System.err.println("Error: " + error.getMessage());
+        }
+
+        @Override
+        public void onCompleted() {
+            System.out.println("Sequence complete.");
+        }
+    });
+    ```
+
+    运行结果:
+    ```java
+    Next: 1
+    Next: 2
+    Next: 3
+    Sequence complete.
+    ```
+
 ## RxBus
 
 ## RxBinding
