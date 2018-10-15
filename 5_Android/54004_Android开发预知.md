@@ -558,6 +558,40 @@ public class MainActivity extends AppCompatActivity
 
 ## Rxjava2
 
+### 引入依赖
+
+```java
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+
+    // Because RxAndroid releases are few and far between, it is recommended you also
+
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+
+    // Lifecycle handling APIs for Android apps using RxJava
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+
+    // If you want to bind to Android-specific lifecycles
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
+
+    // If you want pre-written Activities and Fragments you can subclass as providers
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+
+    // If you want to use Navi for providers
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-navi:2.2.1'
+
+    //RxJava　adapter
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+
+    //RxBinding
+    implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.1.0'
+```
+
 ### 代码示例
 
 ```java
@@ -855,6 +889,35 @@ public class MainActivity extends AppCompatActivity
     Next: 3
     Sequence complete.
     ```
+
+### comsumer
+
+```java
+        /**
+         * Consumer是简易版的Observer，他有多重重载，可以自定义你需要处理的信息，我这里调用的是只接受onNext消息的方法，
+         * 他只提供一个回调接口accept，由于没有onError和onCompete，无法再 接受到onError或者onCompete之后，实现函数回调。
+         * 无法回调，并不代表不接收，他还是会接收到onCompete和onError之后做出默认操作，也就是监听者（Consumer）不在接收
+         * Observable发送的消息，下方的代码测试了该效果。
+         */
+        final Consumer<String> consumer = new Consumer<String>() {
+            @Override
+            public void accept(@NonNull String s) throws Exception {
+                Log.d("MainActivity", Thread.currentThread().getName() + " String:" + s);
+            }
+        };
+
+        Observable<String> observable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> e) throws Exception {
+                Log.d("MainActivity", Thread.currentThread().getName() + "emit Hello");
+                e.onNext("Hello");
+                Log.d("MainActivity", Thread.currentThread().getName() + "emit Complete");
+                e.onComplete();
+                Log.d("MainActivity", Thread.currentThread().getName() + "emit World");
+                e.onNext("World");
+            }
+        });
+```
 
 ## RxBus
 
