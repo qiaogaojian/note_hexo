@@ -497,6 +497,65 @@ public class MainActivity extends AppCompatActivity
 }
 ```
 
+## Agentweb
+
+### 引入依赖
+
+```java
+//webView
+implementation 'com.just.agentweb:agentweb:2.0.1'
+```
+
+### 申请权限
+
+```xml
+<uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
+
+### UI布局
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/container"
+    tools:context=".MainActivity">
+
+</android.support.constraint.ConstraintLayout>
+```
+
+### 代码示例
+
+```java
+public class MainActivity extends AppCompatActivity
+{
+    protected AgentWeb agentWeb;
+    private ConstraintLayout constraintLayout;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        constraintLayout = (ConstraintLayout) findViewById(R.id.container);
+
+
+        agentWeb = AgentWeb.with(this)
+                .setAgentWebParent(constraintLayout,new ConstraintLayout.LayoutParams(-1,-1))
+                .useDefaultIndicator()
+                .defaultProgressBarColor()
+                .createAgentWeb()
+                .ready()
+                .go("http://www.jd.com");
+    }
+}
+```
+
 ## Rxjava2
 
 ## RxBus
@@ -504,5 +563,3 @@ public class MainActivity extends AppCompatActivity
 ## RxBinding
 
 ## Rxlifecyle
-
-## Agentweb
