@@ -1,18 +1,58 @@
 # Android检测虚拟机的方法
 
-## 测试预览
+安卓模拟器检测的方法有很多,一些简单的信息能通过软件伪造,但是全方位多维度的伪造就相当难了,这里集合了几乎所有的安卓模拟器检测方法,为了测试检测效果,我下了 **7** 款市面常见的模拟器进行测试,经过测试,所有的模拟器都能被正确识别.
 
-### mumu模拟器
+## 性能测试
+
+### CPU
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-7f2c243be39c1d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 内存
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-85bf45b53924430b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+## 兼容性测试预览
+
+### 模拟器
+
+#### Android自带模拟器
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-cdf5ca5e36734544.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### mumu模拟器
 
 ![image.png](https://upload-images.jianshu.io/upload_images/3947109-d353fef34927df10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### Android自带模拟器
+#### 夜神模拟器
 
-![image.png](https://upload-images.jianshu.io/upload_images/3947109-0483e9d5edc8ae4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-b689be6022e3fee9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### oneplus
+#### 天天模拟器
+
+![tiantian](https://upload-images.jianshu.io/upload_images/3947109-1b1e909e648cfc78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 逍遥模拟器
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-25aa71c0259135cc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### Blue Stack
+
+![blue stacks.png](https://upload-images.jianshu.io/upload_images/3947109-e80189639f8eb5c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 海马玩
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-72d646519b39f1dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 非模拟器
+
+#### oneplus
 
 ![image.png](https://upload-images.jianshu.io/upload_images/3947109-998900e5742d5461.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### Horner
+
+![Horner](https://upload-images.jianshu.io/upload_images/3947109-ce1095ae2488b2e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## 检测模拟器的方法
 
@@ -693,3 +733,10 @@ public class MainActivity extends AppCompatActivity
 }
 
 ```
+
+## 参考链接
+
+[How can I detect when an Android application is running in the emulator?
+](https://stackoverflow.com/questions/2799097/how-can-i-detect-when-an-android-application-is-running-in-the-emulator)
+
+[检测Android虚拟机的方法和代码实现](https://bbs.pediy.com/thread-225717.htm)
