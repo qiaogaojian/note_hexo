@@ -4,9 +4,13 @@
 
 ## 性能测试
 
+### 运行时间
+
+    0.2秒左右
+
 ### CPU
 
-![image.png](https://upload-images.jianshu.io/upload_images/3947109-7f2c243be39c1d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-8ec857b457dc70b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### 内存
 
@@ -740,3 +744,5 @@ public class MainActivity extends AppCompatActivity
 ](https://stackoverflow.com/questions/2799097/how-can-i-detect-when-an-android-application-is-running-in-the-emulator)
 
 [检测Android虚拟机的方法和代码实现](https://bbs.pediy.com/thread-225717.htm)
+
+[Android判断模拟器还是真机的方法](https://blog.csdn.net/tianshuai4317618/article/details/78834683/)
