@@ -2,11 +2,68 @@
 
 安卓模拟器检测的方法有很多,一些简单的信息能通过软件伪造,但是全方位多维度的伪造就相当难了,这里集合了几乎所有的安卓模拟器检测方法,为了测试检测效果,我下了 **7** 款市面常见的模拟器进行测试,经过测试,所有的模拟器都能被正确识别. 通过 Leakcanary 测试,没有发现内存泄漏问题.
 
+## 使用方法
+
+把代码文件放入项目工具代码目录,代码如下:
+
+```java
+//简单检测 用到了3种核心的检测方法
+EmulatorDetector.with(this)
+        .detectSimple(new EmulatorDetector.OnEmulatorDetectorListener()
+        {
+            @Override
+            public void onResult(final boolean isEmulator)
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        if (isEmulator)
+                        {
+                            textTitle.setText("This device is emulator");
+                        } else
+                        {
+                            textTitle.setText("This device is not emulator");
+                        }
+                    }
+                });
+            }
+        });
+// 全面检测 用到了所有的检测方法
+EmulatorDetector.with(this)
+        .setDebug(false)
+        .setCheckQumeProps(false)  // 该属性控制的 getProps() 用到了反射 相对耗时 默认关闭
+        .detect(new EmulatorDetector.OnEmulatorDetectorListener()
+        {
+            @Override
+            public void onResult(final boolean isEmulator)
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        if (isEmulator)
+                        {
+                            textTitle.setText("This device is emulator");
+                            textView.setText(EmulatorDetector.getDeviceInfo());
+                        } else
+                        {
+                            textTitle.setText("This device is not emulator");
+                            textView.setText(EmulatorDetector.getDeviceInfo());
+                        }
+                    }
+                });
+            }
+        });
+```
+
 ## 性能测试
 
 ### 运行时间
 
-    0.2秒左右
+    ~= 0.2秒
 
 ### CPU
 
@@ -60,39 +117,281 @@
 
 ## 检测模拟器的方法
 
-### 包名检测
+### 检测设备信息
 
-### 默认电话
+Build 类用来从系统属性中提取设备硬件和版本信息 通过分析这些信息和市面已有模拟器的信息进行对比 就可以做出初步判断
 
-### 设备 Id
+```java
+private boolean checkDeviceInfo()
+{
+    boolean result = Build.FINGERPRINT.startsWith("generic")     // 唯一识别码
+            || Build.MODEL.contains("google_sdk")                // 版本 用户最终可以见的名称
+            || Build.MODEL.toLowerCase().contains("droid4x")
+            || Build.MODEL.contains("Emulator")
+            || Build.MODEL.contains("Android SDK built for x86")
+            || Build.MANUFACTURER.contains("Genymotion")         // 硬件制造商
+            || Build.HARDWARE.equals("goldfish")                 // 硬件名称
+            || Build.HARDWARE.equals("vbox86")
+            || Build.PRODUCT.equals("sdk")                       // 整个产品的名称
+            || Build.PRODUCT.equals("google_sdk")
+            || Build.PRODUCT.equals("sdk_x86")
+            || Build.PRODUCT.equals("vbox86p")
+            || Build.BOARD.toLowerCase().contains("nox")         // 主板
+            || Build.BOOTLOADER.toLowerCase().contains("nox")    // 系统启动程序版本号
+            || Build.HARDWARE.toLowerCase().contains("nox")
+            || Build.PRODUCT.toLowerCase().contains("nox")
+            || Build.SERIAL.toLowerCase().contains("nox");       // 硬件序列号
 
-### 国际移动用户识别码 IMSI
+    if (result) return true;
+    result |= Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic");
+    if (result) return true;
+    result |= "google_sdk".equals(Build.PRODUCT);
+    return result;
+}
+```
 
-### 光传感器
+### 检测包名
 
-### 运营商名
+根据常见模拟器包名 通过 PackageManager.getLaunchIntentForPackage(包名) 判断Intent能否被解析 从而判断当时是不是模拟器环境
 
-### 虚拟操作系统模拟器 (QEMU) 属性
+```java
+private boolean checkPackageName()
+{
+    if (!isCheckPackage || mListPackageName.isEmpty())
+    {
+        return false;
+    }
+    final PackageManager packageManager = mContext.getPackageManager();
+    for (final String pkgName : mListPackageName)
+    {
+        final Intent tryIntent = packageManager.getLaunchIntentForPackage(pkgName);
+        if (tryIntent != null)
+        {
+            final List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(tryIntent, PackageManager.MATCH_DEFAULT_ONLY);
+            if (!resolveInfos.isEmpty())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+```
 
-### QEMU驱动
+### 检测移动网络运营商
 
-### 网卡默认IP
+虚拟机的手机运营商一般都是 android
+
+```java
+private boolean checkOperatorNameAndroid()
+{
+    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE)
+            == PackageManager.PERMISSION_GRANTED && isSupportTelePhony())
+    {
+        TelephonyManager telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+        String           operatorName     = telephonyManager.getNetworkOperatorName();
+        if (operatorName.equalsIgnoreCase("android"))
+        {
+            log("Check operator name android is detected");
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+```
+
+### 检测模拟器上特有文件
+
+```java
+private boolean checkFiles(String[] targets, String type)
+{
+    for (String pipe : targets)
+    {
+        File qemu_file = new File(pipe);
+        if (qemu_file.exists())
+        {
+            log("Check " + type + " is detected");
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+### 检测模拟器属性
+
+通过尝试查询设备系统属性中是否包含模拟器属性 来检测模拟器环境
+
+```java
+private boolean checkQEmuProps()
+{
+    int found_props = 0;
+
+    for (Property property : PROPERTIES)
+    {
+        String property_value = getProp(mContext, property.name);
+        if ((property.seek_value == null) && (property_value != null))
+        {
+            found_props++;
+        }
+        if ((property.seek_value != null) && (property_value.contains(property.seek_value)))
+        {
+            found_props++;
+        }
+
+    }
+
+    if (found_props >= MIN_PROPERTIES_THRESHOLD)
+    {
+        log("Check QEmuProps is detected");
+        return true;
+    }
+    return false;
+}
+```
+
+### 检测虚拟机驱动
+
+读取驱动文件, 检查是否包含已知的qemu驱动
+
+```java
+private boolean checkQEmuDrivers()
+{
+    for (File drivers_file : new File[]{new File("/proc/tty/drivers"), new File("/proc/cpuinfo")})
+    {
+        if (drivers_file.exists() && drivers_file.canRead())
+        {
+            byte[] data = new byte[1024];
+            try
+            {
+                InputStream is = new FileInputStream(drivers_file);
+                is.read(data);
+                is.close();
+            } catch (Exception exception)
+            {
+                exception.printStackTrace();
+            }
+
+            String driver_data = new String(data);
+            for (String known_qemu_driver : QEMU_DRIVERS)
+            {
+                if (driver_data.contains(known_qemu_driver))
+                {
+                    log("Check QEmuDrivers is detected");
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+```
+
+### 检测网卡IP
+
+Android模拟器默认的地址是10.0.2.15
+
+```java
+private boolean checkIp()
+{
+    boolean ipDetected = false;
+    if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.INTERNET)
+            == PackageManager.PERMISSION_GRANTED)
+    {
+        String[]      args          = {"/system/bin/netcfg"};
+        StringBuilder stringBuilder = new StringBuilder();
+        try
+        {
+            ProcessBuilder builder = new ProcessBuilder(args);
+            builder.directory(new File("/system/bin/"));
+            builder.redirectErrorStream(true);
+            Process     process = builder.start();
+            InputStream in      = process.getInputStream();
+            byte[]      re      = new byte[1024];
+            while (in.read(re) != -1)
+            {
+                stringBuilder.append(new String(re));
+            }
+            in.close();
+
+        } catch (Exception ex)
+        {
+            log(ex.toString());
+        }
+
+        String netData = stringBuilder.toString();
+        log("netcfg data -> " + netData);
+
+        if (!TextUtils.isEmpty(netData))
+        {
+            String[] array = netData.split("\n");
+
+            for (String lan : array)
+            {
+                if ((lan.contains("wlan0") || lan.contains("tunl0") || lan.contains("eth0"))
+                        && lan.contains(IP))
+                {
+                    ipDetected = true;
+                    log("Check IP is detected");
+                    break;
+                }
+            }
+
+        }
+    }
+    return ipDetected;
+}
+```
+
+### 检测光传感器
+
+由于光传感器模拟器不容易伪造 在这里判断设备是否存在光传感器来判断是否为模拟器
+
+```java
+public static Boolean checkLightSensorManager(Context context)
+{
+    SensorManager sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
+    Sensor        sensor8       = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); //光
+    if (null == sensor8)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+```
 
 ## Build 类获取系统信息
 
-### Product
+### Product: 产品名称
 
-### Manufacturer
+### Manufacturer: 硬件制造商
 
-### Brand
+### Brand: 品牌
 
-### Device
+### Device: 设备名称
 
-### Model
+### Model: 系统版本
 
-### Hardware
+### Hardware: 硬件名称
 
-### FingerPrint
+### FingerPrint: 唯一识别码
+
+```java
+// 获取设备信息
+public static String getDeviceInfo()
+{
+    return "\tBuild.PRODUCT: \t" + Build.PRODUCT + "\n\n" +
+            "\tBuild.MANUFACTURER: \t" + Build.MANUFACTURER + "\n\n" +
+            "\tBuild.BRAND: \t" + Build.BRAND + "\n\n" +
+            "\tBuild.DEVICE: \t" + Build.DEVICE + "\n\n" +
+            "\tBuild.MODEL: \t" + Build.MODEL + "\n\n" +
+            "\tBuild.HARDWARE: \t" + Build.HARDWARE + "\n\n" +
+            "\tBuild.FINGERPRINT: \t" + Build.FINGERPRINT;
+}
+```
 
 ## 代码示例
 
@@ -132,34 +431,32 @@ public final class EmulatorDetector
         void onResult(boolean isEmulator);
     }
 
-    private static final String[] PHONE_NUMBERS = {
-            "15555215554", "15555215556", "15555215558", "15555215560", "15555215562", "15555215564",
-            "15555215566", "15555215568", "15555215570", "15555215572", "15555215574", "15555215576",
-            "15555215578", "15555215580", "15555215582", "15555215584"
-    };
-
-    private static final String[] DEVICE_IDS = {
-            "000000000000000",
-            "e21833235b6eef10",
-            "012345678912345"
-    };
-
-    private static final String[] IMSI_IDS = {
-            "310260000000000"
-    };
-
+    // Genymotion 模拟器特征文件
     private static final String[] GENY_FILES = {
             "/dev/socket/genyd",
             "/dev/socket/baseband_genyd"
     };
-
-    private static final String[] QEMU_DRIVERS = {"goldfish"};
-
-    private static final String[] PIPES = {
+    // Andy 模拟器特征文件
+    private static final String[] ANDY_FILES = {
+            "fstab.andy",
+            "ueventd.andy.rc"
+    };
+    //夜神模拟器特征文件
+    private static final String[] NOX_FILES  = {
+            "fstab.nox",
+            "init.nox.rc",
+            "ueventd.nox.rc"
+    };
+    // 模拟器特有文件
+    private static final String[] PIPES      = {
             "/dev/socket/qemud",
             "/dev/qemu_pipe"
     };
 
+    // Qemu模拟器环境驱动
+    private static final String[] QEMU_DRIVERS = {"goldfish"};
+
+    // 手机一般都是 arm 架构 如果存在 x86 相关文件 则是虚拟机
     private static final String[] X86_FILES = {
             "ueventd.android_x86.rc",
             "x86.prop",
@@ -171,18 +468,7 @@ public final class EmulatorDetector
             "ueventd.vbox86.rc"
     };
 
-    private static final String[] ANDY_FILES = {
-            "fstab.andy",
-            "ueventd.andy.rc"
-    };
-
-    private static final String[] NOX_FILES = {
-            "fstab.nox",
-            "init.nox.rc",
-            "ueventd.nox.rc"
-    };
-
-    // 虚拟操作系统模拟器 QEMU 属性
+    // 模拟器已知属性 格式为 [属性名,属性值] 用于校验当前是否为模拟器环境
     private static final Property[] PROPERTIES = {
             new Property("init.svc.qemud", null),
             new Property("init.svc.qemu-props", null),
@@ -201,14 +487,16 @@ public final class EmulatorDetector
             new Property("ro.serialno", null)
     };
 
+    // 模拟器默认 IP 地址
     private static final String IP = "10.0.2.15";
 
+    // 一个阈值，因为所谓“已知”的模拟器属性并不完全准确，因此保持一定的阈值能让检测效果更好
     private static final int MIN_PROPERTIES_THRESHOLD = 0x5;
 
     private final Context      mContext;
-    private       boolean      isDebug          = false;
-    private       boolean      isTelephony      = false;
-    private       boolean      isCheckPackage   = true;
+    private       boolean      isDebug          = false;  // 是否开启 Debug
+    private       boolean      isCheckPackage   = true;   // 是否检测包名
+    private       boolean      isCheckQemuProps = false; // 是否检测Qume属性
     private       List<String> mListPackageName = new ArrayList<>();
 
     @SuppressLint("StaticFieldLeak")
@@ -231,33 +519,6 @@ public final class EmulatorDetector
         mListPackageName.add("com.google.android.launcher.layouts.genymotion");
         mListPackageName.add("com.bluestacks");
         mListPackageName.add("com.bignox.app");
-    }
-
-    public EmulatorDetector setDebug(boolean isDebug)
-    {
-        this.isDebug = isDebug;
-        return this;
-    }
-
-    public boolean isDebug()
-    {
-        return isDebug;
-    }
-
-    public boolean isCheckTelephony()
-    {
-        return isTelephony;
-    }
-
-    public boolean isCheckPackage()
-    {
-        return isCheckPackage;
-    }
-
-    public EmulatorDetector setCheckTelephony(boolean telephony)
-    {
-        this.isTelephony = telephony;
-        return this;
     }
 
     public EmulatorDetector setCheckPackage(boolean chkPackage)
@@ -283,6 +544,27 @@ public final class EmulatorDetector
         return this.mListPackageName;
     }
 
+    public EmulatorDetector setDebug(boolean isDebug)
+    {
+        this.isDebug = isDebug;
+        return this;
+    }
+
+    public boolean isDebug()
+    {
+        return isDebug;
+    }
+
+    public EmulatorDetector setCheckQumeProps(boolean checkProps)
+    {
+        this.isCheckQemuProps = checkProps;
+        return this;
+    }
+
+    public boolean isCheckQemuProps()
+    {
+        return isCheckQemuProps;
+    }
 
     public void detect(final OnEmulatorDetectorListener pOnEmulatorDetectorListener)
     {
@@ -302,55 +584,84 @@ public final class EmulatorDetector
         }).start();
     }
 
+    public void detectSimple(final OnEmulatorDetectorListener pOnEmulatorDetectorListener)
+    {
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                boolean isEmulator = detectSimple();
+
+                log("This System is Emulator: " + isEmulator);
+                if (pOnEmulatorDetectorListener != null)
+                {
+                    pOnEmulatorDetectorListener.onResult(isEmulator);
+                }
+            }
+        }).start();
+    }
+
+    public boolean detectSimple()
+    {
+        boolean result = checkDeviceInfo()
+                ||checkOperatorNameAndroid()
+                ||checkLightSensorManager(mContext);
+
+        return result;
+    }
+
     private boolean detect()
     {
         boolean result = false;
 
         log(getDeviceInfo());
 
-        // 初步检测
+        result = checkDeviceInfo()
+                ||checkOperatorNameAndroid()
+                ||checkFiles(GENY_FILES, "Geny")
+                ||checkFiles(ANDY_FILES, "Andy")
+                ||checkFiles(NOX_FILES, "Nox")
+                ||checkFiles(PIPES, "Pipes")
+                ||checkQEmuDrivers()
+                ||checkIp()
+                ||checkLightSensorManager(mContext);
+
         if (!result)
         {
-            result = checkBasic();
-            log("Check basic " + result);
+            if (isCheckQemuProps)
+            {
+                result = (checkQEmuProps() && checkFiles(X86_FILES, "X86"));
+            }
+            if (isCheckPackage)
+            {
+                result = checkPackageName();
+            }
         }
-
-        // 深入检测
-        if (!result)
-        {
-            result = checkAdvanced();
-            log("Check Advanced " + result);
-        }
-
-        // 包名检测
-        if (!result)
-        {
-            result = checkPackageName();
-            log("Check Package Name " + result);
-        }
-
         return result;
     }
 
-    private boolean checkBasic()
+    // 设备信息检测: Build 类用来从系统属性中提取设备硬件和版本信息
+    // 通过分析这些信息和市面已有模拟器的信息进行对比 就可以做出初步判断
+    private boolean checkDeviceInfo()
     {
-        boolean result = Build.FINGERPRINT.startsWith("generic")
-                || Build.MODEL.contains("google_sdk")
+        boolean result = Build.FINGERPRINT.startsWith("generic")     // 唯一识别码
+                || Build.MODEL.contains("google_sdk")                // 版本 用户最终可以见的名称
                 || Build.MODEL.toLowerCase().contains("droid4x")
                 || Build.MODEL.contains("Emulator")
                 || Build.MODEL.contains("Android SDK built for x86")
-                || Build.MANUFACTURER.contains("Genymotion")
-                || Build.HARDWARE.equals("goldfish")
+                || Build.MANUFACTURER.contains("Genymotion")         // 硬件制造商
+                || Build.HARDWARE.equals("goldfish")                 // 硬件名称
                 || Build.HARDWARE.equals("vbox86")
-                || Build.PRODUCT.equals("sdk")
+                || Build.PRODUCT.equals("sdk")                       // 整个产品的名称
                 || Build.PRODUCT.equals("google_sdk")
                 || Build.PRODUCT.equals("sdk_x86")
                 || Build.PRODUCT.equals("vbox86p")
-                || Build.BOARD.toLowerCase().contains("nox")
-                || Build.BOOTLOADER.toLowerCase().contains("nox")
+                || Build.BOARD.toLowerCase().contains("nox")         // 主板
+                || Build.BOOTLOADER.toLowerCase().contains("nox")    // 系统启动程序版本号
                 || Build.HARDWARE.toLowerCase().contains("nox")
                 || Build.PRODUCT.toLowerCase().contains("nox")
-                || Build.SERIAL.toLowerCase().contains("nox");
+                || Build.SERIAL.toLowerCase().contains("nox");       // 硬件序列号
 
         if (result) return true;
         result |= Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic");
@@ -359,21 +670,8 @@ public final class EmulatorDetector
         return result;
     }
 
-    private boolean checkAdvanced()
-    {
-        boolean result = checkTelephony()
-                || checkFiles(GENY_FILES, "Geny")
-                || checkFiles(ANDY_FILES, "Andy")
-                || checkFiles(NOX_FILES, "Nox")
-                || checkQEmuDrivers()
-                || checkFiles(PIPES, "Pipes")
-                || checkIp()
-                || (checkQEmuProps() && checkFiles(X86_FILES, "X86"))
-                || checkHasLightSensorManager(mContext);
-        return result;
-    }
-
-    // 包名检测
+    // 包名检测: 根据常见模拟器包名 通过 PackageManager.getLaunchIntentForPackage(包名)
+    // 判断Intent能否被解析 从而判断当时是不是模拟器环境
     private boolean checkPackageName()
     {
         if (!isCheckPackage || mListPackageName.isEmpty())
@@ -396,107 +694,67 @@ public final class EmulatorDetector
         return false;
     }
 
-    // 手机基础信息检测
-    private boolean checkTelephony()
-    {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE)
-                == PackageManager.PERMISSION_GRANTED && this.isTelephony && isSupportTelePhony())
-        {
-            return checkPhoneNumber()
-                    || checkDeviceId()
-                    || checkImsi()
-                    || checkOperatorNameAndroid();
-        }
-        return false;
-    }
-
-    // 默认电话
-    private boolean checkPhoneNumber()
-    {
-        TelephonyManager telephonyManager =
-                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-
-        @SuppressLint("HardwareIds") String phoneNumber = telephonyManager.getLine1Number();
-
-        for (String number : PHONE_NUMBERS)
-        {
-            if (number.equalsIgnoreCase(phoneNumber))
-            {
-                log(" check phone number is detected");
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    // 设备id
-    private boolean checkDeviceId()
-    {
-        TelephonyManager telephonyManager =
-                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-
-        @SuppressLint("HardwareIds") String deviceId = telephonyManager.getDeviceId();
-
-        for (String known_deviceId : DEVICE_IDS)
-        {
-            if (known_deviceId.equalsIgnoreCase(deviceId))
-            {
-                log("Check device id is detected");
-                return true;
-            }
-
-        }
-        return false;
-    }
-
-    // Imsi
-    private boolean checkImsi()
-    {
-        TelephonyManager telephonyManager =
-                (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        @SuppressLint("HardwareIds") String imsi = telephonyManager.getSubscriberId();
-
-        for (String known_imsi : IMSI_IDS)
-        {
-            if (known_imsi.equalsIgnoreCase(imsi))
-            {
-                log("Check imsi is detected");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // 判断是否存在光传感器来判断是否为模拟器
-    public static Boolean checkHasLightSensorManager(Context context)
-    {
-        SensorManager sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
-        Sensor        sensor8       = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); //光
-        if (null == sensor8)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
-
-    // 检测运营商
+    // 检测移动网络运营商: 虚拟机的手机运营商一般都是 android
     private boolean checkOperatorNameAndroid()
     {
-        String operatorName = ((TelephonyManager)
-                mContext.getSystemService(Context.TELEPHONY_SERVICE)).getNetworkOperatorName();
-        if (operatorName.equalsIgnoreCase("android"))
+        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE)
+                == PackageManager.PERMISSION_GRANTED && isSupportTelePhony())
         {
-            log("Check operator name android is detected");
+            TelephonyManager telephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+            String           operatorName     = telephonyManager.getNetworkOperatorName();
+            if (operatorName.equalsIgnoreCase("android"))
+            {
+                log("Check operator name android is detected");
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    // 检测模拟器上特有文件
+    private boolean checkFiles(String[] targets, String type)
+    {
+        for (String pipe : targets)
+        {
+            File qemu_file = new File(pipe);
+            if (qemu_file.exists())
+            {
+                log("Check " + type + " is detected");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 检测模拟器属性: 通过尝试查询设备系统属性中是否包含模拟器属性 来检测模拟器环境
+    private boolean checkQEmuProps()
+    {
+        int found_props = 0;
+
+        for (Property property : PROPERTIES)
+        {
+            String property_value = getProp(mContext, property.name);
+            if ((property.seek_value == null) && (property_value != null))
+            {
+                found_props++;
+            }
+            if ((property.seek_value != null) && (property_value.contains(property.seek_value)))
+            {
+                found_props++;
+            }
+
+        }
+
+        if (found_props >= MIN_PROPERTIES_THRESHOLD)
+        {
+            log("Check QEmuProps is detected");
             return true;
         }
         return false;
     }
 
-
-    // 检测已知虚拟操作系统模拟器 (QEMU) 的驱动程序的列表
+    // 检测虚拟机驱动: 读取驱动文件, 检查是否包含已知的qemu驱动
     private boolean checkQEmuDrivers()
     {
         for (File drivers_file : new File[]{new File("/proc/tty/drivers"), new File("/proc/cpuinfo")})
@@ -525,54 +783,10 @@ public final class EmulatorDetector
                 }
             }
         }
-
         return false;
     }
 
-    // 检测模拟器上特有的几个文件
-    private boolean checkFiles(String[] targets, String type)
-    {
-        for (String pipe : targets)
-        {
-            File qemu_file = new File(pipe);
-            if (qemu_file.exists())
-            {
-                log("Check " + type + " is detected");
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // 检测虚拟操作系统模拟器 (QEMU) 属性
-    private boolean checkQEmuProps()
-    {
-        int found_props = 0;
-
-        for (Property property : PROPERTIES)
-        {
-            String property_value = getProp(mContext, property.name);
-            if ((property.seek_value == null) && (property_value != null))
-            {
-                found_props++;
-            }
-            if ((property.seek_value != null)
-                    && (property_value.contains(property.seek_value)))
-            {
-                found_props++;
-            }
-
-        }
-
-        if (found_props >= MIN_PROPERTIES_THRESHOLD)
-        {
-            log("Check QEmuProps is detected");
-            return true;
-        }
-        return false;
-    }
-
-    // 检测网卡IP
+    // 检测网卡IP: Android模拟器默认的地址是10.0.2.15
     private boolean checkIp()
     {
         boolean ipDetected = false;
@@ -607,8 +821,7 @@ public final class EmulatorDetector
             {
                 String[] array = netData.split("\n");
 
-                for (String lan :
-                        array)
+                for (String lan : array)
                 {
                     if ((lan.contains("wlan0") || lan.contains("tunl0") || lan.contains("eth0"))
                             && lan.contains(IP))
@@ -624,6 +837,21 @@ public final class EmulatorDetector
         return ipDetected;
     }
 
+    // 检测光传感器: 由于光传感器模拟器不容易伪造 在这里判断设备是否存在光传感器来判断是否为模拟器
+    public static Boolean checkLightSensorManager(Context context)
+    {
+        SensorManager sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
+        Sensor        sensor8       = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT); //光
+        if (null == sensor8)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    // 通过尝试查询指定的系统属性来检测模拟器环境 反射机制 谨慎使用
     private String getProp(Context context, String property)
     {
         try
@@ -644,6 +872,7 @@ public final class EmulatorDetector
         return null;
     }
 
+    // 检测系统是否支持 TelePhony
     private boolean isSupportTelePhony()
     {
         PackageManager packageManager = mContext.getPackageManager();
@@ -652,6 +881,7 @@ public final class EmulatorDetector
         return isSupport;
     }
 
+    // 获取设备信息
     public static String getDeviceInfo()
     {
         return "\tBuild.PRODUCT: \t" + Build.PRODUCT + "\n\n" +
@@ -663,6 +893,7 @@ public final class EmulatorDetector
                 "\tBuild.FINGERPRINT: \t" + Build.FINGERPRINT;
     }
 
+    // Log 类简单封装
     private void log(String str)
     {
         if (this.isDebug)
@@ -688,26 +919,42 @@ class Property
 ### 使用方法
 
 ```java
-public class MainActivity extends AppCompatActivity
+public class DetectActivity extends AppCompatActivity
 {
+
     private TextView textTitle;
     private TextView textView;
+    private Button   btnDetect2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detect);
 
-        textTitle = (TextView) findViewById(R.id.textTitle);
-        textView = (TextView) findViewById(R.id.textView);
+        textTitle = (TextView) findViewById(R.id.textTitle1);
+        textView = (TextView) findViewById(R.id.textView1);
+        btnDetect2 = (Button) findViewById(R.id.button2);
 
-        detectEmulator();
+        btnDetect2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                detectEmulatorSimple();
+            }
+        });
+        // 为确保准确性 detect() 是通过多维度的检测方法进行检测的
+        // 考虑性能可以使用 detectSimple() 方法 经测试效果一致
+        detectEmulatorSimple();
     }
 
+    // 全面检测
     private void detectEmulator()
     {
         EmulatorDetector.with(this)
-                .setDebug(true)
+                .setDebug(false)
+                .setCheckQumeProps(false)  // 该属性控制的 getProps() 用到了反射 相对耗时 默认关闭
                 .detect(new EmulatorDetector.OnEmulatorDetectorListener()
                 {
                     @Override
@@ -721,12 +968,10 @@ public class MainActivity extends AppCompatActivity
                                 if (isEmulator)
                                 {
                                     textTitle.setText("This device is emulator");
-
                                     textView.setText(EmulatorDetector.getDeviceInfo());
                                 } else
                                 {
                                     textTitle.setText("This device is not emulator");
-
                                     textView.setText(EmulatorDetector.getDeviceInfo());
                                 }
                             }
@@ -734,9 +979,49 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
     }
+    // 简单检测
+    private void detectEmulatorSimple()
+    {
+        EmulatorDetector.with(this)
+                .detectSimple(new EmulatorDetector.OnEmulatorDetectorListener()
+                {
+                    @Override
+                    public void onResult(final boolean isEmulator)
+                    {
+                        runOnUiThread(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                if (isEmulator)
+                                {
+                                    textTitle.setText("This device is emulator");
+                                    textView.setText(EmulatorDetector.getDeviceInfo());
+                                } else
+                                {
+                                    textTitle.setText("This device is not emulator");
+                                    textView.setText(EmulatorDetector.getDeviceInfo());
+                                }
+                            }
+                        });
+                    }
+                });
+    }
+
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        textTitle = null;
+        textView = null;
+        btnDetect2 = null;
+    }
 }
 
 ```
+
+## [Demo地址](https://gitee.com/qiaogaojian/android/tree/master/Demo/DetectEmulator)
 
 ## 参考链接
 
