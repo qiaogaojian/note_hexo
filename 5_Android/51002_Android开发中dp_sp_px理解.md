@@ -44,3 +44,21 @@ Android最近出的手机都几乎去掉了实体键，把功能键移到了屏�
 ## 字体
 
 字号采用12sp(small)、14sp(normal)、18sp(large)、22sp(larger),40sp(huge)等四个级别来设计
+
+## 对应关系
+
+### 1、安卓机型各种尺寸下的PX与DP、SP的对应关系
+
+![1](https://upload-images.jianshu.io/upload_images/3947109-2d302aef8242565c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 2、距离单位DP与PX的对应关系
+
+![2](https://upload-images.jianshu.io/upload_images/3947109-bbf61041ea078b69.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 3、字体单位SP与PX的对应关系
+
+![3](https://upload-images.jianshu.io/upload_images/3947109-885fd2ebd692e437.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+## 参考链接
+
+[一款APP设计的从0到1之：Android设计规范篇](http://www.sohu.com/a/215512768_114819)
