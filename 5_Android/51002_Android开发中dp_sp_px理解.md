@@ -62,3 +62,4 @@ Android最近出的手机都几乎去掉了实体键，把功能键移到了屏�
 ## 参考链接
 
 [一款APP设计的从0到1之：Android设计规范篇](http://www.sohu.com/a/215512768_114819)
+[Android hdpi ldpi mdpi xhdpi xxhdpi适配详解](https://blog.csdn.net/u010413574/article/details/52790253)
