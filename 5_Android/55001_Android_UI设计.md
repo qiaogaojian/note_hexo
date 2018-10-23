@@ -691,3 +691,12 @@ android:foregroundGravity     //设置前景图像显示的位置
 ## 参考链接
 
 [Android ConstraintLayout百分比布局使用详解](https://blog.csdn.net/Fy993912_chris/article/details/81909010)
+
+[ConstraintLayout —— 约束布局 知识点整理](https://blog.csdn.net/OneDeveloper/article/details/82021197?utm_source=blogxgwz2)
+
+[Android ConstraintLayout详解](https://www.jianshu.com/p/a8b49ff64cd3)
+
+[How to make ConstraintLayout work with percentage values?
+](https://stackoverflow.com/questions/37318228/how-to-make-constraintlayout-work-with-percentage-values)
+
+[Use ConstraintLayout to design your Android views](https://codelabs.developers.google.com/codelabs/constraint-layout/#0)
