@@ -700,3 +700,9 @@ android:foregroundGravity     //设置前景图像显示的位置
 ](https://stackoverflow.com/questions/37318228/how-to-make-constraintlayout-work-with-percentage-values)
 
 [Use ConstraintLayout to design your Android views](https://codelabs.developers.google.com/codelabs/constraint-layout/#0)
+
+[ConstraintLayout在项目中实践与总结](https://www.jianshu.com/p/f110b4fcfe93)
+
+[哲♂学三幻神带你学习ConstraintLayout(约束布局)](https://www.zybuluo.com/coder-pig/note/994739)
+
+[ConstraintLayout深入系列之代替常见布局](https://biaomingzhong.github.io/2017/constraintlayout-layouts-common/)
