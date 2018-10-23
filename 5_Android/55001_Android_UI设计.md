@@ -408,6 +408,232 @@
 
 ### ConstraintLayout
 
+#### 当作 RelativeLayout 使用
+
+```xml-dtd
+layout_constraintLeft_toLeftOf:   当前View左边在某个View的左边,可以是parent与某个View的ID
+```
+
+![1](https://upload-images.jianshu.io/upload_images/3947109-1049c2442913ad75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintLeft_toRightOf：当前View左边在某个View的右边，可以是parent与某个View的ID
+```
+
+![2](https://upload-images.jianshu.io/upload_images/3947109-4425a7d4535375ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+那如果这两种属性都加上，那么当前View就应该是父View左右居中的，看效果
+
+```xml-dtd
+layout_constraintLeft_toLeftOf：当前View左边在某个View的左边，可以是parent与某个View的ID
+layout_constraintLeft_toRightOf：当前View左边在某个View的右边，可以是parent与某个View的ID
+```
+
+![3](https://upload-images.jianshu.io/upload_images/3947109-9fc2bcd9a40e2d1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintRight_toRightOf：当前Viewr的右边在某个View的右边，可以是parent与某个View的ID
+```
+
+![4](https://upload-images.jianshu.io/upload_images/3947109-14370043499aa302.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintRight_toLeftOf：当前Viewr的右边在某个View的左边，可以是parent与某个View的ID
+```
+
+![5](https://upload-images.jianshu.io/upload_images/3947109-3f8d69e85030a806.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintBottom_toBottomOf：当前Viewr的下边在某个View的下边，可以是parent与某个View的ID
+```
+
+![6](https://upload-images.jianshu.io/upload_images/3947109-30b9ba65b73e7d63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintBottom_toTopOf：当前Viewr的下边在某个View的上边，可以是parent与某个View的ID
+```
+
+![7](https://upload-images.jianshu.io/upload_images/3947109-5fc8128cc47a7ea8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintTop_toTopOf：当前Viewr的上边在某个View的上边，可以是parent与某个View的ID
+```
+
+![8](https://upload-images.jianshu.io/upload_images/3947109-fa90c68007406362.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+layout_constraintTop_toBottomOf：当前Viewr的上边在某个View的下边，可以是parent与某个View的ID
+```
+
+![9](https://upload-images.jianshu.io/upload_images/3947109-fb5e417da0f6a584.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+    许多时候我们需要让子View与父View长度相同，只需要将layout_width或者layout_height设为0dp，让子View没有长度。这样便可以随着父View进入拉伸了
+
+##### 下面我们来实现一个常用的底部导航栏，5个导航栏
+
+![10](https://upload-images.jianshu.io/upload_images/3947109-8637b6569a1554f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tab0"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="tab1"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tab1" />
+
+    <TextView
+        android:id="@+id/tab1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="tab2"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tab0"
+        app:layout_constraintRight_toLeftOf="@+id/tab2"
+        app:layout_constraintTop_toTopOf="@+id/tab0" />
+
+    <TextView
+        android:id="@+id/tab2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="tab3"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tab1"
+        app:layout_constraintRight_toLeftOf="@id/tab3"
+        app:layout_constraintTop_toTopOf="@+id/tab0" />
+
+    <TextView
+        android:id="@+id/tab3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="tab4"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tab2"
+        app:layout_constraintRight_toLeftOf="@+id/tab4"
+        app:layout_constraintTop_toTopOf="@+id/tab0" />
+
+    <TextView
+        android:id="@+id/tab4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorHoloOrangeLight"
+        android:gravity="center"
+        android:text="tab5"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tab3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tab0" />
+</android.support.constraint.ConstraintLayout>
+```
+
+#### 当作 LinearLayout 使用
+
+```xml-dtd
+layout_constraintHorizontal_weight：横向的权重
+
+layout_constraintVertical_weight：纵向的权重
+```
+
+如果上文中的tab3要大于其他四个tab，只需要在tab3的View添加app:layout_constraintHorizontal_weight="2"，其他View设置为1，即可
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-5abaccf506af4f2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+ <TextView
+    android:id="@+id/tab2"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:text="tab3"
+    android:textColor="@color/colorWhite"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_weight="2"
+    app:layout_constraintLeft_toRightOf="@+id/tab1"
+    app:layout_constraintRight_toLeftOf="@id/tab3"
+    app:layout_constraintTop_toTopOf="@id/tab0" />
+
+<TextView
+    android:id="@+id/tab3"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:gravity="center"
+    android:text="tab4"
+    android:textSize="20sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_weight="1"
+    app:layout_constraintLeft_toRightOf="@+id/tab2"
+    app:layout_constraintRight_toLeftOf="@+id/tab4"
+    app:layout_constraintTop_toTopOf="@+id/tab0" />
+
+```
+
+#### 三、当作FrameLayout使用
+
+不建议如此使用，没有这样的需求吧，与frameLayout使用相同
+
+#### 四、百分比布局（重点超大号字体）
+
+百分比布局，意义非常重要，解决碎片化问题就是没有百分比的出现，现在我们来看一下，如何使用的：
+
+```xml-dtd
+layout_constraintVertical_bias：垂直乖离率（bias有道翻译为乖离率），也就是垂直偏移率。
+layout_constraintHorizontal_bias：水平乖离率（bias有道翻译为乖离率），也就是水平偏移率。
+layout_constraintHeight_percent：高度百分比，占父类高度的百分比
+layout_constraintWidth_percent：宽度百分比，占父类宽度的百分比
+```
+
+假设一下场景，我们需要展示一个Banner，占屏幕的30%。
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-5d2e5f839e6e3a08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+```xml-dtd
+<TextView
+    android:id="@+id/view0"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:text="这是一个Banner"
+    android:textColor="@color/colorWhite"
+    android:textSize="30sp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHeight_percent="0.3"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0" />
+
+```
+
+只需要添加属性app:layout_constraintHeight_percent="0.3"占父类的30%，如果仅仅设置这一个属性，你会发现Banner居中了，你还差一个属性，表示从垂直的偏移量： app:layout_constraintVertical_bias="0"偏移量为0，如果就可以了。
+
+使用百分比布局时，View必须要设置上下左右四个锚点，如果不设置就像射线一样，都不知道多大，如何百分比呢？
+
+当锚点是parent（也就是屏幕），因为分辨率不一样，使用百分比的view占的位置、大小肯定是不相同的，720的50%等于360，而1080的50%是等于590，仅仅是看起来位置相同，实际并不相同，所以当百分比与固定大小结合实现布局时，应当注意锚点不要给错了，还可以给到某个固定大小的View身上，如果View宽度是跟随父View，也应当注意。
+
 ### FrameLayout
 
 可能是最简单的一种布局，没有任何定位方式，当我们往里面添加控件的时候，会默认把他们放到这块区域的左上角，帧布局的大小由控件中最大的子控件决定，如果控件的大小一样大的话，那么同一时刻就只能看到最上面的那个组件，后续添加的控件会覆盖前一个。由于帧布局的特性，它的应用场景并不是很多，不过它经常配合Fragment使用。
@@ -461,3 +687,7 @@ android:foregroundGravity     //设置前景图像显示的位置
 ### GridLayout
 
 ### FlexboxLayout
+
+## 参考链接
+
+[Android ConstraintLayout百分比布局使用详解](https://blog.csdn.net/Fy993912_chris/article/details/81909010)
