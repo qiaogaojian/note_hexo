@@ -8,7 +8,7 @@
 
 ### Java se基础
 
-1. Java基本数据类型与表达式，分支循环。
+1. Java基本数据类型与表达式，分支循环。 Done
 2. String和StringBuffer的使用、正则表达式。
 3. 面向对象的抽象，封装，继承，多态，类与对象，对象初始化和回收；构造函数、this关键字、方法和方法的参数传递过程、static关键字、内部类。
 4. 对象实例化过程、方法的覆盖、final关键字、抽象类、接口、继承的优点和缺点剖析；对象的多态性：子类和父类之间的转换、抽象类和接口在多态中的应用、多态带来的好处。
@@ -26,53 +26,55 @@
 
 2. Android初级控件的使用：
 
-    - TextView控件的使用
-    - Button控件的使用方法
-    - EditText控件的使用方法
-    - ImageView的使用方法
-    - RadioButton的使用方法
-    - Checkbox的使用方法
-    - Menu的使用方法
+    - TextView Done
+    - Button Done
+    - EditText Done
+    - ImageView Done
+    - RadioButton
+    - Checkbox
+    - Menu
 
 3. Android高级控件的使用：
 
-    - ListView的使用方法
-    - GridView的使用方法
-    - Adapter的使用方法
-    - Spinner的使用方法
-    - Gallary的使用方法
-    - ScrollView的使用方法
     - RecyclerView
+    - Adapter
+    - ListView
+    - ScrollView
+    - GridView
+    - Spinner
+    - Gallary
 
 4. 对话框与菜单的使用：
 
-    - Dialog的基本概念
-    - BlockquoteAlertDialog的使用方法
-    - DatePickerDialog的使用方法
-    - Menu的使用方法
-    - 自定义Menu的实现方法
+    - Dialog
+    - FragmentDialog
+    - BlockquoteAlertDialog
+    - DatePickerDialog
+    - Menu
+    - 自定义Menu
 
 5. 控件的布局方法：
 
-    - 线性布局的使用方法
-    - 相对布局的使用方法
+    - 线性布局
+    - 相对布局
+    - 约束布局
 
 6. 多Acitivity管理：
 
-    - AndroidManifest.xml文件的作用
-    - Intent的使用方法
-    - 使用Intent传递数据的方法
-    - 启动Activity的方法
-    - IntentFilter的使用方法
-    - Activity Group的使用方法
+    - AndroidManifest.xml
+    - Intent
+    - 使用Intent传递数据
+    - 启动Activity
+    - IntentFilter
+    - Activity Group
 
 7. 自定义控件实现方法：
 
-    - 自定义ListView的实现方法
-    - 可折叠ListView的使用方法
-    - 自定义Adapter的实现方法
-    - 自定义View的实现方法
-    - 动态控件布局的上实现方法
+    - 自定义ListView
+    - 可折叠ListView
+    - 自定义Adapter
+    - 自定义View
+    - 动态控件布局
     - 上拉刷新下拉加载更多
 
 ### android网络编程与数据存储
@@ -106,10 +108,21 @@ Android入门的时候，需要有一本入门书，好好学习书中的内容�
 
 - 基本知识点
 
-    比如四大组件如何使用、如何创建Service、如何进行布局、简单的自定义View、动画等常见技术
+  - 比如四大组件如何使用、
+
+  - 如何创建Service、
+
+  - 如何进行布局、
+
+  - 简单的自定义View、
+
+  - 动画等常见技术
+
 - 书籍推荐
 
-    《第一行代码 Android》、《疯狂Android》
+  - 《第一行代码 Android》
+
+  - 《疯狂Android》
 
 #### 2、中级工程师
 
@@ -145,10 +158,26 @@ Android入门的时候，需要有一本入门书，好好学习书中的内容�
 
 - 稍微深入的知识点
 
-    AIDL、Messenger、Binder、多进程、动画、滑动冲突、自定义View、消息队列等
+  - AIDL、
+
+  - Messenger、
+
+  - Binder、
+
+  - 多进程、
+
+  - 动画、
+
+  - 滑动冲突、
+
+  - 自定义View、
+
+  - 消息队列等
+
 - 书籍推荐
 
-    《Android开发艺术探索》、《Android群英传》
+  - 《Android开发艺术探索》
+  - 《Android群英传》
 
 #### 3、高级工程师
 
@@ -157,6 +186,7 @@ Android入门的时候，需要有一本入门书，好好学习书中的内容�
 为了成为Android资深工程师，需要学习的东西就更多了，并且有些并不是那么具体了，如下所示：
 
 - 继续加深理解”稍微深入的知识点“中所定义的内容
+
 - 了解系统核心机制：
     1. 了解SystemServer的启动过程
     2. 了解主线程的消息循环模型
@@ -180,9 +210,15 @@ Android入门的时候，需要有一本入门书，好好学习书中的内容�
 ##### 技术要求：
 
 - 稍微深入的知识点
-- 系统核心机制
-- 基本知识点的细节
-- 设计模式和架构
+
+  - 系统核心机制
+
+  - 基本知识点的细节
+
+  - 设计模式和架构
+
 - 书籍推荐
 
-    《Android开发艺术探索》、《Android 源码设计模式解析与实战》、《Android内核剖析》
+  - 《Android开发艺术探索》、
+  - 《Android 源码设计模式解析与实战》、
+  - 《Android内核剖析》
