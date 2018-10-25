@@ -924,3 +924,17 @@ Observable<String> observable = Observable.create(new ObservableOnSubscribe<Stri
 ## RxBinding
 
 ## Rxlifecyle
+
+## 参考链接
+
+[学习Android Retrofit 2](https://windsuzu.github.io/learn-android-retrofit2/)
+
+[学习Android Data Binding](https://windsuzu.github.io/learn-android-databinding/)
+
+[棉花糖给 Android 带来的 Data Bindings](https://academy.realm.io/cn/posts/data-binding-android-boyar-mount/)
+
+[学习Android RxJava](https://windsuzu.github.io/learn-android-rxjava/)
+
+[Android Data Binding 系列(一) -- 详细介绍与使用](http://connorlin.github.io/2016/07/02/Android-Data-Binding-%E7%B3%BB%E5%88%97-%E4%B8%80-%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/)
+
+[谁来讲讲Rxjava、rxandroid中的操作符的作用?](https://www.zhihu.com/question/32209660)
