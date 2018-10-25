@@ -442,6 +442,24 @@ Presenter与Controller一样，接收View的命令，对Model进行操作；与C
 
 注意这里的“Model”指的是View的Model，跟MVVM中的一个Model不是一回事。所谓View的Model就是包含View的一些数据属性和操作的这么一个东东，这种模式的关键技术就是数据绑定（data binding），View的变化会直接影响ViewModel，ViewModel的变化或者内容也会直接体现在View上。这种模式实际上是框架替应用开发者做了一些工作，开发者只需要较少的代码就能实现比较复杂的交互。
 
+### 总结
+
+MVP和MVVM完全隔离了Model和View，但是在有些情况下，数据从Model到ViewModel或者Presenter的拷贝开销很大，可能也会结合MVC的方式，Model直接通知View进行变更。在实际的应用中很有可能你已经在不知不觉中将几种模式融合在一起，但是为了代码的可扩展、可测试性，必须做到模块的解耦，不相关的代码不要放在一起。网上有一个故事讲，一个人在一家公司做一个新产品时，一名外包公司的新员工直接在View中做了数据库持久化操作，而且一个hibernate代码展开后发现竟然有几百行的SQL语句，搞得他们惊讶不已，一时成为笑谈。
+
+个人理解，在广义地谈论MVC架构时，并非指本文中严格定义的MVC，而是指的MV*，也就是视图和模型的分离，只要一个框架提供了视图和模型分离的功能，我们就可以认为它是一个MVC框架。在开发深入之后，可以再体会用到的框架到底是MVC、MVP还是MVVM。
+
+## 干净架构
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-8f9ca5598cb0abf5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### 外圈依赖内圈,内圈不依赖外圈
+
+- M --> C --> V
+
+- M --> P --> V
+
+- M --> VM --> V
+
 ## 参考链接
 
 [練習在 Android 設計上的 MVC, MVP, MVVM 架構](https://windsuzu.github.io/learn-android-architecture-pattern/)
@@ -453,3 +471,5 @@ Presenter与Controller一样，接收View的命令，对Model进行操作；与C
 [Android App的设计架构：MVC,MVP,MVVM与架构经验谈](https://www.tianmaying.com/tutorial/AndroidMVC)
 
 [学习Android Data Binding](https://windsuzu.github.io/learn-android-databinding/)
+
+[瞎谈干净架构](https://blog.csdn.net/yangTal09/article/details/52974313?utm_source=blogxgwz0)
