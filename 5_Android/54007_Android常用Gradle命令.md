@@ -7,7 +7,7 @@
 每个基于gradle构建的工程都有一个gradle本地代理，叫做 gradle wrapper
 在 /gradle/wrapper/gralde-wrapper.properties 目录中声明了指向目录和版本
 
-官方的各个版本的代理下载地址 https://services.gradle.org/distributions/
+[官方的各个版本的代理下载地址](https://services.gradle.org/distributions/)
 如果 gradle 初次构建缓慢，可以手动下载代理放到${USER}/.gradle/wrapper/dists下
 
 本地建立文件 gradle.properties 或者在用户的 .gradle目录下建立 gradle.properties 文件作为全局设置，参数有
