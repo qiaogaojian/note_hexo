@@ -133,7 +133,7 @@ layout_constraintTop_toBottomOf：当前Viewr的上边在某个View的下边，�
 
 ## 当百分比布局用
 
-```
+```xml
 layout_constraintVertical_bias：垂直乖离率（bias有道翻译为乖离率），也就是垂直偏移率。
 layout_constraintHorizontal_bias：水平乖离率（bias有道翻译为乖离率），也就是水平偏移率。
 layout_constraintHeight_percent：高度百分比，占父类高度的百分比
