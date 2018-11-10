@@ -38,3 +38,15 @@ composer init
 ```sh
 composer config -g -- disable-tls true
 ```
+
+## 安装依赖
+
+```sh
+php composer.phar intall
+```
+
+## 更新依赖
+
+```sh
+php composer.phar update
+```
