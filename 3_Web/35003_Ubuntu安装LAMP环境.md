@@ -188,3 +188,9 @@ AddDefaultCharset UTF-8
 ```sh
 service apache2 restart
 ```
+
+## 参考链接
+
+[Ubuntu 16.04搭建LAMP开发环境](https://www.linuxidc.com/Linux/2016-10/136327.htm)
+
+[阿里云 Ubuntu 16.04 搭建LAMP环境](http://www.mamicode.com/info-detail-2073578.html)

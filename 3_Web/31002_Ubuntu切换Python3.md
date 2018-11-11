@@ -11,3 +11,9 @@ sudo apt-get install python3
 ```sh
 alias python=python3
 ```
+
+或者
+
+```sh
+sudo ln -s /usr/bin/python3.5 /usr/bin/python
+```
