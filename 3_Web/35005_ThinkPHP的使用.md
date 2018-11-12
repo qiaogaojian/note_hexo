@@ -81,3 +81,23 @@ class Index
     }
 }
 ```
+
+### 安装数据迁移插件
+
+更新国内源
+
+```sh
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+```
+
+安装
+
+```sh
+composer require topthink/think-migration
+```
+
+如果报错
+
+```sh
+composer config -g -- disable-tls true
+```
