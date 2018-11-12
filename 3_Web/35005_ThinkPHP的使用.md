@@ -1,5 +1,15 @@
 # ThinkPHP的使用
 
+## 打开debug模式
+
+找到config目录下的app.php文件 设置如下
+
+```sh
+ 'show_error_msg'         => true,
+```
+
+没正式上线之前打开debug模式,方便调试,上线后再关闭
+
 ## 新建 Controller 命令
 
 ### 普通控制器
