@@ -156,7 +156,7 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html
 sudo a2enmod rewrite
 ```
 
-开启rewrite模块后还要进入 etc/apache2/ 目录 打开 apache2.conf 文件
+- 开启rewrite模块后还要进入 etc/apache2/ 目录 打开 apache2.conf 文件
 
 ```sh
 <Directory /var/www/>
@@ -166,7 +166,18 @@ sudo a2enmod rewrite
 </Directory>
 ```
 
-把 AllowOverride 选项改为 All
+- 把 AllowOverride 选项改为 All
+
+- 把下面的内容保存为.htaccess文件放到应用入口文件的同级目录下
+
+```sh
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+</IfModule>
+```
 
 ### 重启服务
 
@@ -206,3 +217,5 @@ service apache2 restart
 [Ubuntu 16.04搭建LAMP开发环境](https://www.linuxidc.com/Linux/2016-10/136327.htm)
 
 [阿里云 Ubuntu 16.04 搭建LAMP环境](http://www.mamicode.com/info-detail-2073578.html)
+
+[Thinkphp隐藏index.php入口文件](http://www.edbiji.com/doccenter/showdoc/26/nav/1281.html)
