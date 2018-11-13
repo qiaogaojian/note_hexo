@@ -156,6 +156,18 @@ sudo ln -s /usr/share/phpmyadmin /var/www/html
 sudo a2enmod rewrite
 ```
 
+开启rewrite模块后还要进入 etc/apache2/ 目录 打开 apache2.conf 文件
+
+```sh
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
+```
+
+把 AllowOverride 选项改为 All
+
 ### 重启服务
 
 ```sh
