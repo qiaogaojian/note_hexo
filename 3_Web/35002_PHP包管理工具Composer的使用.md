@@ -50,3 +50,17 @@ php composer.phar intall
 ```sh
 php composer.phar update
 ```
+
+## Linux下安装
+
+### 安装Composer
+
+```sh
+sudo apt-get install composer
+```
+
+### 切换Composer源
+
+```sh
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+```
