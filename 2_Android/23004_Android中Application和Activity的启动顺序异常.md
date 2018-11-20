@@ -11,3 +11,5 @@
 application 创建以后就会调用onCreate()
 接下来才去查找对应的Activity并创建,并执行一列表的生命周期
 只要知道这两个类的生命周期即可
+
+[Application, Activity, ContentProvider启动顺序](https://blog.csdn.net/beyond702/article/details/49666809)
