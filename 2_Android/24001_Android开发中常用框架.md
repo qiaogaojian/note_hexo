@@ -1,5 +1,20 @@
 # Android开发中常用框架
 
+## 项目中用到的
+
+- RxJava: JVM上的响应式扩展
+- RxAndroid: Android上的响应式扩展，在RxJava基础上添加了Android线程调度
+- RxBinding: 提供用RxJava绑定Android UI的API
+- OkHttp: 一个Http与Http/2的客户端
+- Retrofit: 类型安全的Http客户端
+- Fresco: 一个用于管理图像和他们使用的内存的库
+- Glide: 一个图片加载和缓存的库
+- Logger: 简单，漂亮，强大的Android日志工具
+- Gson: 一个Java序列化/反序列化库，可以将JSON和java对象互相转换
+- Jackson: Jackson可以轻松地将Java对象转换成json对象和xml文档，同样也可以将json、xml转换成Java对象
+- OrmLite: JDBC和Android的轻量级ORM java包
+- LeakCanary: 内存泄漏检测工具
+
 ## 1.缓存
 
 - DiskLruCache: Java实现基于LRU的磁盘缓存
@@ -8,8 +23,6 @@
 
 - Android Universal Image Loader: 一个强大的加载，缓存，展示图片的库
 - Picasso: 一个强大的图片下载与缓存的库
-- Fresco: 一个用于管理图像和他们使用的内存的库
-- Glide: 一个图片加载和缓存的库
 
 ## 3. 图片处理
 
@@ -17,25 +30,14 @@
 - Glide-transformations: 一个为Glide提供多种图片变换的库
 - Android-gpuimage: 基于OpenGL的Android过滤器
 
-## 4. 网络请求
-
-- Android Async HTTP: Android异步HTTP库
-- AndroidAsync: 异步Socket，HTTP(客户端+服务器)，WebSocket，和socket.io库。基于NIO而不是线程。
-- OkHttp: 一个Http与Http/2的客户端
-- Retrofit: 类型安全的Http客户端
-- Volley: Google推出的Android异步网络请求框架和图片加载框架
-
 ## 5. 网络解析
 
-- Gson: 一个Java序列化/反序列化库，可以将JSON和java对象互相转换
-- Jackson: Jackson可以轻松地将Java对象转换成json对象和xml文档，同样也可以将json、xml转换成Java对象
 - Fastjson: Java上一个快速的JSON解析器/生成器
 - HtmlPaser: 一种用来解析单个独立html或嵌套html的方式
 - Jsoup: 一个以最好的DOM，CSS和jQuery解析html的库
 
 ## 6. 数据库
 
-- OrmLite: JDBC和Android的轻量级ORM java包
 - Sugar: 用超级简单的方法处理Android数据库
 - GreenDAO: 一种轻快地将对象映射到SQLite数据库的ORM解决方案
 - ActiveAndroid: 以活动记录方式为Android SQLite提供持久化
@@ -67,15 +69,11 @@
 
 ## 11. 响应式编程
 
-- RxJava: JVM上的响应式扩展
 - RxJavaJoins: 为RxJava提供Joins操作
-- RxAndroid: Android上的响应式扩展，在RxJava基础上添加了Android线程调度
-- RxBinding: 提供用RxJava绑定Android UI的API
 - Agera: Android上的响应式编程
 
 ## 12. Log框架
 
-- Logger: 简单，漂亮，强大的Android日志工具
 - Hugo: 在调试版本上注解的触发方法进行日志记录
 - Timber: 一个小的，可扩展的日志工具
 
@@ -92,5 +90,10 @@
 
 ## 15. 性能优化
 
-- LeakCanary: 内存泄漏检测工具
 - ACRA: Android应用程序崩溃报告
+
+## 参考链接
+
+[ARouter: 简单好用的Android页面路由框架](https://www.jianshu.com/p/7cb2cc9b726a?from=groupmessage)
+
+[Android 开发最佳实践](https://github.com/futurice/android-best-practices/blob/master/translations/Chinese/README.cn.md)
