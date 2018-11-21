@@ -70,3 +70,5 @@ android.useDeprecatedNdk=true
 ## 参考链接
 
 [Gradle Android-build 常用命令参数及解释](https://www.jianshu.com/p/a03f4f6ae31d)
+
+[一些关于加速Gradle构建的个人经验](https://droidyue.com/blog/2017/04/16/speedup-gradle-building/index.html)
