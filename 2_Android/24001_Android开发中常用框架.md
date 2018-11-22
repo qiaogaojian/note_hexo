@@ -5,15 +5,27 @@
 - RxJava: JVM上的响应式扩展
 - RxAndroid: Android上的响应式扩展，在RxJava基础上添加了Android线程调度
 - RxBinding: 提供用RxJava绑定Android UI的API
+- RxLifecycle: 生命周期控制
+
 - OkHttp: 一个Http与Http/2的客户端
 - Retrofit: 类型安全的Http客户端
+
 - Fresco: 一个用于管理图像和他们使用的内存的库
 - Glide: 一个图片加载和缓存的库
-- Logger: 简单，漂亮，强大的Android日志工具
+
 - Gson: 一个Java序列化/反序列化库，可以将JSON和java对象互相转换
 - Jackson: Jackson可以轻松地将Java对象转换成json对象和xml文档，同样也可以将json、xml转换成Java对象
-- OrmLite: JDBC和Android的轻量级ORM java包
+
+- Room: JDBC和Android的轻量级ORM java包
+- Realm: 移动数据库：一个SQLite和ORM的替换品
+
+- YouthBanner: Banner工具
+
+- Logger: 简单，漂亮，强大的Android日志工具
+
 - LeakCanary: 内存泄漏检测工具
+
+- Umeng: 统计工具
 
 ## 1.缓存
 
@@ -42,7 +54,6 @@
 - GreenDAO: 一种轻快地将对象映射到SQLite数据库的ORM解决方案
 - ActiveAndroid: 以活动记录方式为Android SQLite提供持久化
 - SQLBrite: SQLiteOpenHelper 和ContentResolver的轻量级包装
-- Realm: 移动数据库：一个SQLite和ORM的替换品
 
 ## 7. 依赖注入
 
@@ -95,3 +106,5 @@
 ## 参考链接
 
 [ARouter: 简单好用的Android页面路由框架](https://www.jianshu.com/p/7cb2cc9b726a?from=groupmessage)
+
+[Android开发日常工作梳理](https://www.jianshu.com/p/5155e1c4e3fe)
