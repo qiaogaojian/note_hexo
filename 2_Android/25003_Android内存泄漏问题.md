@@ -21,3 +21,5 @@ Android虚拟机的垃圾回收采用的是根搜索算法。GC会从根节点�
 - ### 资源未关闭造成的内存泄漏
 
 [Android内存泄漏总结和leakcanary使用](https://www.jianshu.com/p/f55c6187a1c0)
+
+[Detecting and fixing memory leaks in android](https://blog.mindorks.com/detecting-and-fixing-memory-leaks-in-android)

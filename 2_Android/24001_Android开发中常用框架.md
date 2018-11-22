@@ -95,5 +95,3 @@
 ## 参考链接
 
 [ARouter: 简单好用的Android页面路由框架](https://www.jianshu.com/p/7cb2cc9b726a?from=groupmessage)
-
-[Android 开发最佳实践](https://github.com/futurice/android-best-practices/blob/master/translations/Chinese/README.cn.md)
