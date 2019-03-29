@@ -15,3 +15,8 @@ git rm --cached app/build/UnusedFiles
 ```
 
 清除 UnusedFiles 缓存，现在该文件不会被track了。
+
+## 参考链接
+
+[Why doesn't Git ignore my specified file?
+](https://stackoverflow.com/questions/3833561/why-doesnt-git-ignore-my-specified-file)
