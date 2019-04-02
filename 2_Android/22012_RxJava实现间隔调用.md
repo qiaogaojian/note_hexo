@@ -27,3 +27,38 @@
         }
     });
 ```
+
+如果涉及到对UI的操作 需要设置好线程
+
+``` java
+ Observable.interval(1, TimeUnit.SECONDS, Schedulers.trampoline())
+                  .take(59)
+                  .subscribeOn(Schedulers.io())                 // io线程
+                  .observeOn(AndroidSchedulers.mainThread())    // 主线程
+                  .subscribe(new Observer<Long>()
+                  {
+                      @Override
+                      public void onCompleted()
+                      {
+                          if (activityRegBinding.etPhoneNumber.getText().length() == 11)
+                          {
+                              mainView.setSendBtnState(2);
+                          } else
+                          {
+                              mainView.setSendBtnState(1);
+                          }
+                      }
+
+                      @Override
+                      public void onError(Throwable e)
+                      {
+
+                      }
+
+                      @Override
+                      public void onNext(Long aLong)
+                      {
+                          activityRegBinding.tvSendCode.setText(String.format("(%ss)后重发", (59 - aLong) + ""));
+                      }
+                  });
+```
