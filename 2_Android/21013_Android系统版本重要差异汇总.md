@@ -91,6 +91,8 @@
 - Notification需要设置channel
 
     ``` java
+    final String CHANNEL_ID = "my_channel_01";
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
     {
         CharSequence name       = "My New Channel";
