@@ -120,6 +120,67 @@
     }
     ```
 
+- 安卓8.0版本时为了支持全面屏，增加了一个限制：如果是透明的Activity，则不能固定它的方向，因为它的方向其实是依赖其父Activity的（因为透明）。然而这个bug只有在8.0中有，8.1中已经修复。具体crash有两种：
+
+   1. Activity的风格为透明，在manifest文件中指定了一个方向，则在onCreate中crash
+
+   2. Activity的风格为透明，如果调用setRequestedOrientation方法固定方向，则crash
+
+   如果进onCreate的时候，如果判断是透明窗口风格，直接把屏幕朝向改为未指定类型即SCREEN_ORIENTATION_UNSPECIFIED就可以了
+
+   ``` java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O && isTranslucentOrFloating()) {
+            boolean result = fixOrientation();
+            XLog.i(XLog.BASE, "onCreate fixOrientation when Oreo, result = " + result);
+        }
+        super.onCreate(savedInstanceState);
+    }
+
+    private boolean isTranslucentOrFloating(){
+        boolean isTranslucentOrFloating = false;
+        try {
+            int [] styleableRes = (int[]) Class.forName("com.android.internal.R$styleable").getField("Window").get(null);
+            final TypedArray ta = obtainStyledAttributes(styleableRes);
+            Method m = ActivityInfo.class.getMethod("isTranslucentOrFloating", TypedArray.class);
+            m.setAccessible(true);
+            isTranslucentOrFloating = (boolean)m.invoke(null, ta);
+            m.setAccessible(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return isTranslucentOrFloating;
+    }
+
+    private boolean fixOrientation(){
+        try {
+            Field field = Activity.class.getDeclaredField("mActivityInfo");
+            field.setAccessible(true);
+            ActivityInfo o = (ActivityInfo)field.get(this);
+            o.screenOrientation = -1;
+            field.setAccessible(false);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+   ```
+
+   然后在设置方向的时候如果透明，直接不执行：
+
+    ``` java
+    @Override
+    public void setRequestedOrientation(int requestedOrientation) {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O && isTranslucentOrFloating()) {
+            XLog.i(XLog.BASE, "avoid calling setRequestedOrientation when Oreo.");
+            return;
+        }
+        super.setRequestedOrientation(requestedOrientation);
+    }
+    ```
+
 - 后台进程限制
 
     谷歌表示一直在优化安卓Android的后台应用限制策略，以最大程度减小后台应用对电池的消耗和对资源的占用。在Android O的更新中，当应用被置入后台后，Android O将自动智能限制后台应用活动，主要会限制应用的广播、后台运行和位置，但应用的整体进程并没有被杀掉。不过，部分层级比较重要的应用可以不受限制，但总的来说，Android O将严格限制后台进程对手机资源的调用。
@@ -129,3 +190,5 @@
 [Sharing files through Intents: are you ready for Nougat?](https://proandroiddev.com/sharing-files-though-intents-are-you-ready-for-nougat-70f7e9294a0b)
 
 [android各个版本的新特性](https://www.jianshu.com/p/88409d6f5795)
+
+[Only fullscreen activities can request orientation终极解决方法](https://blog.csdn.net/starry_eve/article/details/82777160)
