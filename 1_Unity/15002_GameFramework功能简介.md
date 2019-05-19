@@ -140,3 +140,9 @@
 3. 引用集合（ReferenceCollection）维护一个IReference的队列，并提供该对象的各种信息或相关操作
 
 4. 引用池（ReferencePool）维护一个ReferenceCollection的字典，并提供各种相关的操作
+
+[资源](http://gameframework.cn/resource)
+
+[GameFramework篇：个人笔记汇总](https://www.lfzxb.top/gameframework_all/)
+
+[GameFramework框架个人笔记汇总](https://blog.csdn.net/qq_15020543/article/details/86766583)
