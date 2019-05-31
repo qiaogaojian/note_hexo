@@ -18,7 +18,7 @@
 - 新增运行时权限概念
     Android6.0或以上版本，用户可以完全控制应用权限。
 
-    最佳实践是使用tedpermission插件
+    最佳实践是使用tedpermission插件mango
 
     ``` gradle
     compile 'gun0912.ted:tedpermission:2.2.2'
