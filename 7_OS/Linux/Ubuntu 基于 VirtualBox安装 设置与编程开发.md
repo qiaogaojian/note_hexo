@@ -63,7 +63,7 @@ mount -t vboxsf hdshare /mnt/hdshare/
 
 ### 3.设置Ubuntu外观
 
-3.1设置Launcher到底部
+#### 3.1设置Launcher到底部
 
 按下 ctrl + alt + t 打开终端输入以下命令
 
@@ -71,7 +71,7 @@ mount -t vboxsf hdshare /mnt/hdshare/
 gsettings set com.canonical.Unity.Launcher launcher-position Bottom
 ```
 
-3.2设置主题
+#### 3.2设置主题
 
 - 更新
 
@@ -105,3 +105,142 @@ sudo apt-get install ultra-flat-icons
 按Windows键，输入unity，打开unity-tweak-tool 打开主题设置选择flatabulous  打开icon设置选择ultraflat
 
 ## 三.编程开发
+
+### 1.以太坊Dapp开发环境
+
+#### 1.1 安装Node.js
+
+进入/home/username/downloads目录下载安装包
+
+```sh
+sudo wget https://nodejs.org/dist/v8.10.0/node-v8.10.0-linux-x64.tar.gz
+```
+
+解压
+
+```sh
+tar zxvf node-v8.10.0-linux-x64.tar.gz
+```
+
+/home目录下新建dev文件夹 移动解压后的node到dev目录
+
+```sh
+mv node-v8.10.0-linux-x64 ../../dev/node8
+```
+
+设置node环境变量
+
+```sh
+echo "export NODE_HOME=/home/dev/node8" >> .bashrc
+echo "export NODE_PATH=$NODE_HOME/lib/node_modules" >> .bashrc
+echo "export PATH=$NODE_HOME/bin:$PATH" >> .bashrc
+```
+
+设置永久环境变量
+
+> /etc/profile和/etc/profile.d都是常用的设置环境的地方。其中/etc/profile.d文件夹来源于/etc/profile，在该目录下的*.sh，即以sh为后缀的文件都会被加载。
+类似地，不推荐使用/etc/bash.bashrc，因为在图形界面环境下启动程序时，不会加载它里边的环境变量设置。
+
+```sh
+gedit /etc/profile
+```
+
+在打开的文件后面添加下面代码
+
+```sh
+export NODE_HOME=/home/dev/node8
+export NODE_PATH=$NODE_HOME/lib/node_modules
+export PATH=$NODE_HOME/bin:$PATH
+```
+
+更新并查看环境变量
+
+```sh
+source /etc/profile
+export
+```
+
+验证：
+
+```sh
+~$ node –v
+v8.10.0
+```
+
+#### 1.2 安装节点仿真器
+
+```sh
+npm install –g ganache-cli
+```
+
+验证：
+
+```sh
+~$ ganache-cli --version
+Ganache CLI v6.0.3 (ganache-core: 2.0.2)
+```
+
+#### 1.3 安装solidity编译器
+
+```sh
+npm install –g solc
+```
+
+如果提示没有权限,修改相应文件夹的权限
+
+```sh
+chmod 777 * -R
+```
+
+验证：
+
+```sh
+~$ solcjs -–version
+0.40.2+commit.3155dd80.Emscripten.clang
+```
+
+#### 1.4 安装web3
+
+```sh
+# 如果没有git 要先安装git
+sudo apt-get install git
+npm install –g web3@0.20.2
+```
+
+验证：
+
+```sh
+~$ node –p 'require("web3")'
+{[Function: Web3]
+  providers:{…}}
+```
+
+#### 1.5 安装truffle框架
+
+```sh
+npm install –g truffle
+```
+
+验证：
+
+```sh
+~$ truffle version
+Truffle v4.1.3 (core 4.1.3)
+```
+
+#### 1.6 安装webpack
+
+```sh
+npm install –g webpack@3.11.0
+```
+
+验证：
+
+```sh
+~$ webpack –v
+3.11.0
+```
+
+#### 新建Dapp项目
+
+
