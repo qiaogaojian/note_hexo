@@ -184,6 +184,8 @@ Ganache CLI v6.0.3 (ganache-core: 2.0.2)
 
 ```sh
 npm install –g solc
+# 如果需要安装特定版本solc 需要在项目目录下安装 然后再设置vscode solidity插件的编译器版本
+npm install solc@0.4.18
 ```
 
 如果提示没有权限,修改相应文件夹的权限
@@ -242,5 +244,3 @@ npm install –g webpack@3.11.0
 ```
 
 #### 新建Dapp项目
-
-
