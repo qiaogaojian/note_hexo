@@ -8,9 +8,9 @@
 
     - HTTP协议
 
-    - 注入漏洞
+    - **注入漏洞**
 
-    - XSS漏洞
+    - **XSS漏洞**
 
     - SSRF漏洞
 
@@ -24,9 +24,9 @@
 
 2. 中间件安全基础
 
-    - Apache
+    - **Apache**
 
-    - ISS
+    - **ISS**
 
     - Tomcat
 
@@ -44,9 +44,9 @@
 
 4. 数据库安全基础
 
-    - Mssql 数据库
+    - **Mssql 数据库**
 
-    - Mysql 数据库
+    - **Mysql 数据库**
 
     - Oracle 数据库
 
