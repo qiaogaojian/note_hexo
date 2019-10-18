@@ -12,7 +12,7 @@
 
     ``` go
     "go.goroot": "C:\\Program Files\\Go",
-    "go.gopath": "C:\\Users\\PC-QGJ",
+    "go.gopath": "C:\\Users\\PC-QGJ\\go",
     ```
 
     如果不确定路径是多少 命令行输入go env把对应的路径输入
