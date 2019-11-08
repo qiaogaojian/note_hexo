@@ -2,6 +2,8 @@
 
 ## Activity
 
+![activity](img/2019-11-04-14-58-21.png)
+
 ## Fragment
 
 ![fragment](https://upload-images.jianshu.io/upload_images/6433394-2905902a1331235f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/317/format/webp)
