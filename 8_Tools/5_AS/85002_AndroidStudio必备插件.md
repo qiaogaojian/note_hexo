@@ -2,9 +2,9 @@
 
 ## GsonFormat
 
-## ADB Idea
+## Jrebel 2018.1.5
 
-## Android wifi adb
+## ADB Idea
 
 ## Android Studio Prettify
 
