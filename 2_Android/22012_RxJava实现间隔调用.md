@@ -5,6 +5,8 @@
 ``` java
     Observable.interval(1, TimeUnit.SECONDS, Schedulers.trampoline())
     .take(6)
+    .subscribeOn(Schedulers.io())
+    .observeOn(AndroidSchedulers.mainThread())
     .subscribe(new Observer<Long>() {
         @Override
         public void onSubscribe(Disposable d) {
