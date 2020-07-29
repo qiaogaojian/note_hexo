@@ -8,21 +8,7 @@
     (html += '导入<input type="file" id="fileInput">'),
     (html += "</button>");
 
-  $(".editor-title").append(html);
-
-  $(".diy").css({
-    // 'height': '30px',
-    // 'line-height': '30px',
-    "margin-top": "0px",
-    float: "right",
-    "background-color": "#fff",
-    "min-width": "60px",
-    "text-decoration": "none",
-    color: "#999",
-    padding: "0 10px",
-    border: "none",
-    "border-right": "1px solid #ccc"
-  });
+  //   $(".editor-title").append(html);
 
   $(".input")
     .css({
@@ -97,6 +83,18 @@
         event.preventDefault();
       }
     });
+
+  $(document).on("click", "#settings", function(event) {
+    $(".diy").css("visibility", "visible");
+    $("#opciones").slideToggle();
+    $(this).toggleClass("cerrar");
+  });
+
+  //   $("#settings").click(function() {
+  //     $("#opciones").slideToggle();
+  //     $(this).toggleClass("cerrar");
+  //     $(".diy").show();
+  //   });
 
   // 导入
   window.onload = function() {
