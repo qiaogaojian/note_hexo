@@ -1,0 +1,63 @@
+#opciones {
+  z-index: 7000;
+  position: fixed;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  width: 120px;
+  padding-right: 10px;
+  font: 12px/140% Arial, Helvetica, sans-serif;
+  background: #e7e7e7;
+  color: #999;
+  top: 0px;
+  right: 0px;
+  padding-top: 10px;
+}
+#opciones h2 {
+  border-bottom: #fff 1px solid;
+  padding-bottom: 3px;
+  margin: 0px 0px 3px;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #666;
+  font-size: 16px;
+  padding-top: 0px;
+}
+#opciones h3 {
+  padding-bottom: 0px;
+  text-indent: 0px;
+  margin: 3px 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  height: 15px;
+  color: #666666;
+  padding-top: 0px;
+}
+#opciones p {
+  font-size: 12px;
+}
+#opciones a {
+  color: #999;
+  text-decoration: none;
+}
+#opciones a:hover {
+  background: #666666;
+  color: #fff;
+}
+#settings {
+  z-index: 8000;
+  position: fixed;
+  text-indent: -99999px;
+  width: 43px;
+  display: block;
+  background: url(../images/opciones.gif) no-repeat 0px 0px;
+  height: 43px;
+  top: 0px;
+  cursor: pointer;
+  right: 0px;
+}
+#settings:hover {
+  background: url(../images/opciones.gif) no-repeat 0px -86px;
+}
+.cerrar {
+  background: url(../images/opciones.gif) no-repeat 0px -43px !important;
+}
