@@ -1,7 +1,12 @@
 # PureMVC
 
 [PureMVC](https://www.gameres.com/822910.html)
-![image.png](https://upload-images.jianshu.io/upload_images/3947109-f980cba2d1842753.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](2020-08-24-13-33-15.png)
+
+![](2020-08-24-13-37-46.png)
+
+![](2020-08-24-14-49-51.png)
 
 ## Pattern
 
