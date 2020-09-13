@@ -1,20 +1,26 @@
+/* .cerrar:hover {
+  background: url(./images/opciones.png) no-repeat 0px 0px !important;
+} */
+
+.cerrar {
+  background: url(./images/opciones.png) no-repeat 0px -32px !important;
+}
+
+/* #settings:hover {
+  background: url(./images/opciones.png) no-repeat 0px -64px;
+} */
+
 #settings {
   z-index: 8000;
   position: fixed;
   text-indent: -99999px;
-  width: 43px;
+  width: 32px;
   display: block;
-  background: url(./images/opciones.gif) no-repeat 0px 0px;
-  height: 43px;
+  background: url(./images/opciones.png) no-repeat 0px -96px;
+  height: 32px;
   top: 0px;
   cursor: pointer;
   right: 0px;
-}
-#settings:hover {
-  background: url(./images/opciones.gif) no-repeat 0px -86px;
-}
-.cerrar {
-  background: url(./images/opciones.gif) no-repeat 0px -43px !important;
 }
 
 .diy {
@@ -36,6 +42,6 @@
   position: relative;
 }
 
-.diy:hover{
-    text-decoration: none;
+.diy:hover {
+  text-decoration: none;
 }
