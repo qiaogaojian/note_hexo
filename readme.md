@@ -30,27 +30,27 @@
 
 ## 技能境界
 
-### Tips
+### 1.Tips
 
     小知识
 
-### Trick
+### 2.Trick
 
     小技巧
 
-### Bug
+### 3.Bug
 
     错误记录
 
-### BestPratice
+### 4.BestPratice
 
     最佳实践
 
-### Tutorial
+### 5.Tutorial
 
     知识总结
 
-### Tao​
+### 6.Tao​
 
     心得体会
 
