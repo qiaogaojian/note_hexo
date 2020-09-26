@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "D:\\Program\\Anaconda\\python.exe",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "files.associations": {
-        "iostream": "cpp"
-    }
-}

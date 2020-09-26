@@ -3,12 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: 行则将至
+subtitle: 'Keep going and you can go anywhere'
 description: ''
-keywords:
-author: John Doe
-language: en
+keywords: HTML, JavaScript, Hexo
+tags: Android, Java, Unity, C#, ML, Shader, Math, Golang, React, Vue
+author: qiaogaojian
+language: cn
 timezone: ''
 
 # URL
@@ -98,7 +99,8 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
+#landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
