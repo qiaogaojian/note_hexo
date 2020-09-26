@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\PC-QGJ\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "python.pythonPath": "D:\\Program\\Anaconda\\python.exe",
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "files.associations": {
