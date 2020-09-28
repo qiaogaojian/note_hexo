@@ -1,10 +1,6 @@
-# AndroidStudio Log颜色配置
+# AndroidStudio Log 颜色配置
 
-
-
-## 配置1
-
-
+## 配置 1
 
 | **Type** | **Color** |
 | -------- | --------- |
@@ -15,11 +11,7 @@
 | Verbose: | #FFFFFF   |
 | Warning: | #FFBB33   |
 
-
-
-## 配置2
-
-
+## 配置 2
 
 | Type     | Color       |
 | -------- | ----------- |
@@ -30,3 +22,6 @@
 | error:   | **#F44**    |
 | warning: | **#FB3**    |
 
+## 备份
+
+[AndroidStudioSettings.jar](/download/AndroidStudioSettings.jar)

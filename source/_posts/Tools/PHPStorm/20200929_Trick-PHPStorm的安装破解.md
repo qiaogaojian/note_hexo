@@ -20,3 +20,7 @@ ThisCrackLicenseId-{ "licenseId":"ThisCrackLicenseId", "licenseeName":"idea", "a
 ```
 
 ## 重新启动
+
+## 设置备份
+
+[PHPStormSettings.jar](/download/PHPStormSettings.jar)

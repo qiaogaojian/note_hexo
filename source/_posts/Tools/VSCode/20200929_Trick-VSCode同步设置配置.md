@@ -1,3 +1,7 @@
+---
+description: VSCode同步设置配置
+---
+
 # VSCode同步设置配置
 
 ## Token Gist
