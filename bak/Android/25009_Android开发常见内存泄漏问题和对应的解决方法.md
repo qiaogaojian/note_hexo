@@ -76,7 +76,7 @@ Activity 是重量级对象，应该让 Android 系统来处理它。然而，�
     });
 ```
 
-![](img/2020-01-15-16-49-50.png)
+![](/images/2020-01-15-16-49-50.png)
 
 #### 解决方法
 
@@ -126,7 +126,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
     });
 ```
 
-![](img/2020-01-15-16-50-19.png)
+![](/images/2020-01-15-16-50-19.png)
 
 #### 解决方法
 
@@ -173,7 +173,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
     });
 ```
 
-![](img/2020-01-15-16-50-44.png)
+![](/images/2020-01-15-16-50-44.png)
 
 #### 解决方法
 
@@ -221,7 +221,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
 
 ```
 
-![](img/2020-01-15-16-51-05.png)
+![](/images/2020-01-15-16-51-05.png)
 
 #### 解决方法
 
@@ -271,7 +271,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
     });
 ```
 
-![](img/2020-01-15-16-51-25.png)
+![](/images/2020-01-15-16-51-25.png)
 
 #### 解决方法
 
@@ -319,7 +319,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
     });
 ```
 
-![](img/2020-01-15-16-51-52.png)
+![](/images/2020-01-15-16-51-52.png)
 
 #### 解决方法
 
@@ -372,7 +372,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
     });
 ```
 
-![](img/2020-01-15-16-52-09.png)
+![](/images/2020-01-15-16-52-09.png)
 
 #### 解决方法
 
@@ -412,7 +412,7 @@ https://developer.android.com/reference/java/lang/ref/WeakReference.html.
     });
 ```
 
-![](img/2020-01-15-16-52-28.png)
+![](/images/2020-01-15-16-52-28.png)
 
 #### 解决方法
 

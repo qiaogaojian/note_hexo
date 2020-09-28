@@ -9,3 +9,7 @@
 7. -p 终止程序
 8. -q 退出debug
 9. -g 段地址:偏移地址 命令直接跳到地址
+
+## 下载
+
+[asm.rar](/download/asm.rar)

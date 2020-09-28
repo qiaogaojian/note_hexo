@@ -2,7 +2,7 @@
 
 ## Activity
 
-![activity](img/2019-11-04-14-58-21.png)
+![activity](/images/2019-11-04-14-58-21.png)
 
 ## Fragment
 
