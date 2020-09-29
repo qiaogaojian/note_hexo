@@ -139,7 +139,7 @@ live2d:
     width: 210
     height: 360
   mobile:
-    show: true
+    show: false
 
 search:
   path: search.xml
