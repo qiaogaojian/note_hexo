@@ -64,7 +64,23 @@ prismjs:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ""
-  per_page: 30
+  per_page: 6
+  order_by: -date
+
+archive_generator:
+  enabled: true
+  per_page: 0
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
+
+tag_generator:
+  per_page: 0
+  order_by: -date
+
+category_generator:
+  per_page: 0
   order_by: -date
 
 # Category & Tag
