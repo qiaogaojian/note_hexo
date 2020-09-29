@@ -86,14 +86,14 @@
     {%- endfor %}
   </div>
 {%- endif %}
-
+<!--
 {%- if theme.creative_commons.license and theme.creative_commons.sidebar %}
   <div class="cc-license site-overview-item animated" itemprop="license">
   {%- set ccImage = '<img src="' + url_for(theme.images + '/cc-' + theme.creative_commons.license + '.svg') + '" alt="Creative Commons">' %}
     {{ next_url(ccURL, ccImage, {class: 'cc-opacity'}) }}
   </div>
 {%- endif %}
-
+-->
 {# Blogroll #}
 {%- if theme.links %}
   <div class="links-of-blogroll site-overview-item animated">
