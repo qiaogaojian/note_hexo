@@ -393,6 +393,10 @@ hexo g
 hexo d
 ```
 
+#### 调整字体大小
+
+![调整字体大小](/images/2020-09-29-17-43-34.png)
+
 #### 关闭动画
 
 打开_config.next.yml
@@ -445,3 +449,9 @@ motion:
 description: Title
 ---
 ```
+
+## 参考
+
+[hexo主题安装以及next8.0主题美化](https://zhuanlan.zhihu.com/p/251383216)
+
+[hexo的next主题个性化配置](https://zhuanlan.zhihu.com/p/60424755)
