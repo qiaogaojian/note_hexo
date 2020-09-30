@@ -24,4 +24,4 @@
 
 ## 备份
 
-[AndroidStudioSettings.jar](/download/AndroidStudioSettings.jar)
+[setting.androidstudio.zip](/download/setting.androidstudio.zip)
