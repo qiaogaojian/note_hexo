@@ -229,7 +229,7 @@ Alpha合成:
 
 这个 PorterDuffColorFilter 的作用是使用一个指定的颜色和一种指定的 PorterDuff.Mode 来与绘制对象进行合成。它的构造方法是 PorterDuffColorFilter(int color, PorterDuff.Mode mode) 其中的 color 参数是指定的颜色， mode 参数是指定的 Mode。同样也是 PorterDuff.Mode ，不过和 ComposeShader 不同的是，PorterDuffColorFilter 作为一个 ColorFilter，只能指定一种颜色作为源，而不是一个 Bitmap。
 
-#########  ColorMatrixColorFilter(colorMatrix)
+######### ColorMatrixColorFilter(colorMatrix)
 
 ``` java
 // 使用 setColorFilter() 设置一个 ColorMatrixColorFilter
@@ -442,7 +442,213 @@ OUTER: 内部不绘制，外部模糊
 
 ###### drawText() 相关
 
-####### Paint.setTextSize(float textSize)
+####### Canvas绘制文字的方式
+
+######## drawText(String text, float x, float y, Paint paint)
+
+方法的参数很简单： text 是文字内容，x 和 y 是文字的坐标。但需要注意：这个坐标并不是文字的左上角，而是一个与左下角比较接近的位置。大概在这里：
+
+![](http://wx3.sinaimg.cn/large/52eb2279ly1fig60bobb0j20ek04dwex.jpg)
+
+######## drawTextRun(CharSequence text, int start, int end, int contextStart, int contextEnd, float x, float y, boolean isRtl, Paint paint)
+
+text：要绘制的文字
+start：从那个字开始绘制
+end：绘制到哪个字结束
+contextStart：上下文的起始位置。contextStart 需要小于等于 start
+contextEnd：上下文的结束位置。contextEnd 需要大于等于 end
+x：文字左边的坐标
+y：文字的基线坐标
+isRtl：是否是 RTL（Right-To-Left，从右向左）
+
+######## drawTextOnPath(String text, Path path, float hOffset, float vOffset, Paint paint)
+
+参数里，需要解释的只有两个： hOffset 和 vOffset。它们是文字相对于 Path 的水平偏移量和竖直偏移量，利用它们可以调整文字的位置。例如你设置 hOffset 为 5， vOffset 为 10，文字就会右移 5 像素和下移 10 像素。
+
+记住一条原则： drawTextOnPath() 使用的 Path ，拐弯处全用圆角，别用尖角。
+
+######## StaticLayout(CharSequence source, TextPaint paint, int width, Layout.Alignment align, float spacingmult, float spacingadd, boolean includepad)
+
+width 是文字区域的宽度，文字到达这个宽度后就会自动换行；
+align 是文字的对齐方向；
+spacingmult 是行间距的倍数，通常情况下填 1 就好；
+spacingadd 是行间距的额外增加值，通常情况下填 0 就好；
+includepad 是指是否在文字上下添加额外的空间，来避免某些过高的字符的绘制出现越界。
+
+####### Paint对文字绘制的辅助
+
+######## 显示效果类
+
+######### setTextSize(float textSize)
+
+######### setTypeface(Typeface typeface)
+
+```java
+paint.setTypeface(Typeface.DEFAULT);
+canvas.drawText(text, 100, 150, paint);
+paint.setTypeface(Typeface.SERIF);
+canvas.drawText(text, 100, 300, paint);
+paint.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Satisfy-Regular.ttf"));
+canvas.drawText(text, 100, 450, paint);
+```
+
+######### setFakeBoldText(boolean fakeBoldText)
+
+是否使用伪粗体。
+
+之所以叫伪粗体（ fake bold ），因为它并不是通过选用更高 weight 的字体让文字变粗，而是通过程序在运行时把文字给「描粗」了。
+
+######### setStrikeThruText(boolean strikeThruText)
+
+是否加删除线。
+
+######### setUnderlineText(boolean underlineText)
+
+######### setTextSkewX(float skewX)
+
+######### setTextScaleX(float scaleX)
+
+######### setLetterSpacing(float letterSpacing)
+
+设置字符间距。默认值是 0。
+
+######### setFontFeatureSettings(String settings)
+
+用 CSS 的 font-feature-settings 的方式来设置文字。
+
+```java
+paint.setFontFeatureSettings("smcp"); // 设置 "small caps"
+canvas.drawText("Hello HenCoder", 100, 150, paint);
+```
+
+######### setTextAlign(Paint.Align align)
+
+######### setTextLocale(Locale locale) / setTextLocales(LocaleList locales)
+
+Locale 直译是「地域」，其实就是你在系统里设置的「语言」或「语言区域」（具体名称取决于你用的是什么手机），比如「简体中文（中国）」「English (US)」「English (UK)」。有些同源的语言，在文化发展过程中对一些相同的字衍生出了不同的写法（比如中国大陆和日本对于某些汉字的写法就有细微差别。注意，不是繁体和简体这种同音同义不同字，而真的是同样的一个字有两种写法）。系统语言不同，同样的一个字的显示就有可能不同。你可以试一下把自己手机的语言改成日文，然后打开微信看看聊天记录，你会明显发现文字的显示发生了很多细微的变化，这就是由于系统的 Locale 改变所导致的。
+
+Canvas 绘制的时候，默认使用的是系统设置里的 Locale。而通过 Paint.setTextLocale(Locale locale) 就可以在不改变系统设置的情况下，直接修改绘制时的 Locale。
+
+######### setHinting(int mode)
+
+现在的 Android 设备大多数都是是用的矢量字体。矢量字体的原理是对每个字体给出一个字形的矢量描述，然后使用这一个矢量来对所有的尺寸的字体来生成对应的字形。由于不必为所有字号都设计它们的字体形状，所以在字号较大的时候，矢量字体也能够保持字体的圆润，这是矢量字体的优势。不过当文字的尺寸过小（比如高度小于 16 像素），有些文字会由于失去过多细节而变得不太好看。 hinting 技术就是为了解决这种问题的：通过向字体中加入 hinting 信息，让矢量字体在尺寸过小的时候得到针对性的修正，从而提高显示效果。
+![hinting](http://wx3.sinaimg.cn/large/52eb2279ly1fig65wwv1yj20ki0bywje.jpg)
+功能很强，效果很赞。不过在现在（ 2017 年），手机屏幕的像素密度已经非常高，几乎不会再出现字体尺寸小到需要靠 hinting 来修正的情况，所以这个方法其实……没啥用了。可以忽略。
+
+######### setElegantTextHeight(boolean elegant)
+
+把「大高个」文字的高度恢复为原始高度；
+增大每行文字的上下边界，来容纳被加高了的文字。
+
+不过就像前面说的，由于中国人常用的汉语和英语的文字并不会达到这种高度，所以这个方法对于中国人基本上是没用的。
+
+######### setSubpixelText(boolean subpixelText)
+
+是否开启次像素级的抗锯齿（ sub-pixel anti-aliasing ）。
+
+次像素级抗锯齿这个功能解释起来很麻烦，简单说就是根据程序所运行的设备的屏幕类型，来进行针对性的次像素级的抗锯齿计算，从而达到更好的抗锯齿效果。更详细的解释可以看这篇文章。
+
+不过，和前面讲的字体 hinting 一样，由于现在手机屏幕像素密度已经很高，所以默认抗锯齿效果就已经足够好了，一般没必要开启次像素级抗锯齿，所以这个方法基本上没有必要使用。
+
+######### setLinearText(boolean linearText)
+
+######## 测量文字尺寸类
+
+######### float getFontSpacing()
+
+获取推荐的行距。
+
+即推荐的两行文字的 baseline 的距离。这个值是系统根据文字的字体和字号自动计算的。它的作用是当你要手动绘制多行文字（而不是使用 StaticLayout）的时候，可以在换行的时候给 y 坐标加上这个值来下移文字。
+
+######### FontMetircs getFontMetrics()
+
+FontMetrics 是个相对专业的工具类，它提供了几个文字排印方面的数值：ascent, descent, top, bottom, leading。
+
+![FontMetrics](http://wx3.sinaimg.cn/large/52eb2279ly1fig66iud3gj20ik0bn41l.jpg)
+
+- baseline: 上图中黑色的线。前面已经讲过了，它的作用是作为文字显示的基准线。
+
+- ascent / descent: 上图中**绿色和橙色**的线，它们的作用是限制普通字符的顶部和底部范围。
+普通的字符，上不会高过 ascent ，下不会低过 descent ，例如上图中大部分的字形都显示在 ascent 和 descent 两条线的范围内。具体到 Android 的绘制中， ascent 的值是图中绿线和 baseline 的相对位移，它的值为负（因为它在 baseline 的上方）； descent 的值是图中橙线和 baseline 相对位移，值为正（因为它在 baseline 的下方）。
+
+- top / bottom: 上图中**蓝色和红色**的线，它们的作用是限制所有字形（ glyph ）的顶部和底部范围。
+除了普通字符，有些字形的显示范围是会超过 ascent 和 descent 的，而 top 和 bottom 则限制的是所有字形的显示范围，包括这些特殊字形。例如上图的第二行文字里，就有两个泰文的字形分别超过了 ascent 和 descent 的限制，但它们都在 top 和 bottom 两条线的范围内。具体到 Android 的绘制中， top 的值是图中蓝线和 baseline 的相对位移，它的值为负（因为它在 baseline 的上方）； bottom 的值是图中红线和 baseline 相对位移，值为正（因为它在 baseline 的下方）。
+
+- leading: 这个词在上图中没有标记出来，因为它并不是指的某条线和 baseline 的相对位移。 leading 指的是行的额外间距，即对于上下相邻的两行，上行的 bottom 线和下行的 top 线的距离，也就是上图中**第一行的红线和第二行的蓝线**的距离（对，就是那个小细缝）。
+
+######### getTextBounds(String text, int start, int end, Rect bounds)
+
+参数里，text 是要测量的文字，start 和 end 分别是文字的起始和结束位置，bounds 是存储文字显示范围的对象，方法在测算完成之后会把结果写进 bounds。
+
+```java
+paint.setStyle(Paint.Style.FILL);
+canvas.drawText(text, offsetX, offsetY, paint);
+
+paint.getTextBounds(text, 0, text.length(), bounds);
+bounds.left += offsetX;
+bounds.top += offsetY;
+bounds.right += offsetX;
+bounds.bottom += offsetY;
+paint.setStyle(Paint.Style.STROKE);
+canvas.drawRect(bounds, paint);
+```
+
+![Bounds](http://wx3.sinaimg.cn/large/52eb2279ly1fig66pdyg4j20ct02tmxf.jpg)
+
+######### float measureText(String text)
+
+测量文字的宽度并返回。
+
+![Measure](http://wx3.sinaimg.cn/large/52eb2279ly1fig671on56j20or04a0te.jpg)
+
+如果你用代码分别使用 getTextBounds() 和 measureText() 来测量文字的宽度，你会发现 measureText() 测出来的宽度总是比 getTextBounds() 大一点点。这是因为这两个方法其实测量的是两个不一样的东西。
+
+- getTextBounds: 它测量的是文字的显示范围（关键词：显示）。形象点来说，你这段文字外放置一个可变的矩形，然后把矩形尽可能地缩小，一直小到这个矩形恰好紧紧包裹住文字，那么这个矩形的范围，就是这段文字的 bounds。
+
+-measureText(): 它测量的是文字绘制时所占用的宽度（关键词：占用）。前面已经讲过，一个文字在界面中，往往需要占用比他的实际显示宽度更多一点的宽度，以此来让文字和文字之间保留一些间距，不会显得过于拥挤。上面的这幅图，我并没有设置 setLetterSpacing() ，这里的 letter spacing 是默认值 0，但你可以看到，图中每两个字母之间都是有空隙的。另外，下方那条用于表示文字宽度的横线，在左边超出了第一个字母 H 一段距离的，在右边也超出了最后一个字母 r（虽然右边这里用肉眼不太容易分辨），而就是两边的这两个「超出」，导致了 measureText() 比 getTextBounds() 测量出的宽度要大一些。
+
+######### getTextWidths(String text, float[] widths)
+
+######### int breakText(String text, boolean measureForwards, float maxWidth, float[] measuredWidth)
+
+这个方法也是用来测量文字宽度的。但和 measureText() 的区别是， breakText() 是在给出宽度上限的前提下测量文字的宽度。如果文字的宽度超出了上限，那么在临近超限的位置截断文字。
+
+![breakText](http://wx3.sinaimg.cn/large/52eb2279ly1fig67950cnj21080m4grf.jpg)
+
+breakText() 的返回值是截取的文字个数（如果宽度没有超限，则是文字的总个数）。参数中， text 是要测量的文字；measureForwards 表示文字的测量方向，true 表示由左往右测量；maxWidth 是给出的宽度上限；measuredWidth 是用于接受数据，而不是用于提供数据的：方法测量完成后会把截取的文字宽度（如果宽度没有超限，则为文字总宽度）赋值给 measuredWidth[0]。
+
+这个方法可以用于多行文字的折行计算。
+
+######## 光标相关
+
+######### getRunAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, int offset)
+
+对于一段文字，计算出某个字符处光标的 x 坐标。 start end 是文字的起始和结束坐标；contextStart contextEnd 是上下文的起始和结束坐标；isRtl 是文字的方向；offset 是字数的偏移，即计算第几个字符处的光标。
+
+```java
+int length = text.length();
+float advance = paint.getRunAdvance(text, 0, length, 0, length, false, length);
+canvas.drawText(text, offsetX, offsetY, paint);
+canvas.drawLine(offsetX + advance, offsetY - 50, offsetX + advance, offsetY + 10, paint);
+```
+
+![RunAdvance](http://wx3.sinaimg.cn/large/52eb2279ly1fig67hkga6j20cx0373ys.jpg)
+
+其实，说是测量光标位置的，本质上这也是一个测量文字宽度的方法。上面这个例子中，start 和 contextStart 都是 0， end contextEnd 和 offset 都等于 text.length()。在这种情况下，它是等价于 measureText(text) 的，即完整测量一段文字的宽度。而对于更复杂的需求，getRunAdvance() 能做的事就比 measureText() 多了。
+
+#########  getOffsetForAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, float advance)
+
+给出一个位置的像素值，计算出文字中最接近这个位置的字符偏移量（即第几个字符最接近这个坐标）。
+
+方法的参数很简单： text 是要测量的文字；start end 是文字的起始和结束坐标；contextStart contextEnd 是上下文的起始和结束坐标；isRtl 是文字方向；advance 是给出的位置的像素值。填入参数，对应的字符偏移量将作为返回值返回。
+
+getOffsetForAdvance() 配合上 getRunAdvance() 一起使用，就可以实现「获取用户点击处的文字坐标」的需求。
+
+######### hasGlyph(String string)
+
+![alone](http://wx1.sinaimg.cn/large/006tNc79ly1flgaf31rskj31120damyn.jpg)
+
+###### 文字效果
 
 ###### 初始化类
 
