@@ -1100,6 +1100,106 @@ withStartAction() / withEndAction() 是一次性的，在动画执行结束后�
 
 withEndAction() 设置的回调只有在动画正常结束时才会被调用，而在动画被取消时不会被执行。这点和 AnimatorListener.onAnimationEnd() 的行为是不一致的。
 
+#### 针对特殊类型的属性来做属性动画
+
+##### TypeEvaluator
+
+它的作用是让你可以对同样的属性有不同的解析方式，对本来无法解析的属性也可以打造出你需要的解析方式。有了 TypeEvaluator，你的属性动画就有了更大的灵活性，从而有了无限的可能。
+
+```java
+ObjectAnimator animator = ObjectAnimator.ofInt(view, "color", 0xffff0000, 0xff00ff00);
+animator.setEvaluator(new ArgbEvaluator());
+animator.start();
+```
+
+##### ofObject()
+
+借助于 TypeEvaluator，属性动画就可以通过 ofObject() 来对不限定类型的属性做动画了。方式很简单：
+
+为目标属性写一个自定义的 TypeEvaluator
+使用 ofObject() 来创建 Animator，并把自定义的 TypeEvaluator 作为参数填入
+
+```java
+private class PointFEvaluator implements TypeEvaluator<PointF> {
+   PointF newPoint = new PointF();
+
+   @Override
+   public PointF evaluate(float fraction, PointF startValue, PointF endValue) {
+       float x = startValue.x + (fraction * (endValue.x - startValue.x));
+       float y = startValue.y + (fraction * (endValue.y - startValue.y));
+
+       newPoint.set(x, y);
+
+       return newPoint;
+   }
+}
+
+ObjectAnimator animator = ObjectAnimator.ofObject(view, "position",
+        new PointFEvaluator(), new PointF(0, 0), new PointF(1, 1));
+animator.start();
+```
+
+#### 针对复杂的属性关系来做属性动画
+
+##### PropertyValuesHolder 同一个动画中改变多个属性
+
+```java
+PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("scaleX", 1);
+PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("scaleY", 1);
+PropertyValuesHolder holder3 = PropertyValuesHolder.ofFloat("alpha", 1);
+ 
+ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, holder1, holder2, holder3)
+animator.start();
+```
+
+##### AnimatorSet 多个动画配合执行
+
+有的时候，你不止需要在一个动画中改变多个属性，还会需要多个动画配合工作，比如，在内容的大小从 0 放大到 100% 大小后开始移动。这种情况使用 PropertyValuesHolder 是不行的，因为这些属性如果放在同一个动画中，需要共享动画的开始时间、结束时间、Interpolator 等等一系列的设定，这样就不能有先后次序地执行动画了。
+
+这就需要用到 AnimatorSet 了。
+
+```java
+ObjectAnimator animator1 = ObjectAnimator.ofFloat(...);
+animator1.setInterpolator(new LinearInterpolator());
+ObjectAnimator animator2 = ObjectAnimator.ofInt(...);
+animator2.setInterpolator(new DecelerateInterpolator());
+ 
+AnimatorSet animatorSet = new AnimatorSet();
+// 两个动画依次执行
+animatorSet.playSequentially(animator1, animator2);
+animatorSet.start();
+
+// 两个动画同时执行
+animatorSet.playTogether(animator1, animator2);
+animatorSet.start();
+
+// 使用 AnimatorSet.play(animatorA).with/before/after(animatorB)
+// 的方式来精确配置各个 Animator 之间的关系
+animatorSet.play(animator1).with(animator2);
+animatorSet.play(animator1).before(animator2);
+animatorSet.play(animator1).after(animator2);
+animatorSet.start();
+```
+
+##### PropertyValuesHolders.ofKeyframe() 把同一个属性拆分
+
+除了合并多个属性和调配多个动画，你还可以在 PropertyValuesHolder 的基础上更进一步，通过设置 Keyframe （关键帧），把同一个动画属性拆分成多个阶段。例如，你可以让一个进度增加到 100% 后再「反弹」回来。
+
+```java
+// 在 0% 处开始
+Keyframe keyframe1 = Keyframe.ofFloat(0, 0);
+// 时间经过 50% 的时候，动画完成度 100%
+Keyframe keyframe2 = Keyframe.ofFloat(0.5f, 100);
+// 时间见过 100% 的时候，动画完成度倒退到 80%，即反弹 20%
+Keyframe keyframe3 = Keyframe.ofFloat(1, 80);
+PropertyValuesHolder holder = PropertyValuesHolder.ofKeyframe("progress", keyframe1, keyframe2, keyframe3);
+
+ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, holder);
+animator.start();
+```
+
+![img](http://wx4.sinaimg.cn/large/006tNc79ly1fjfig8edhmg30ck07046i.gif)
+
 ## 布局
 
 ## 触摸反馈
