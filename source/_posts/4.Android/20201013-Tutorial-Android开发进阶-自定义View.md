@@ -648,8 +648,6 @@ getOffsetForAdvance() 配合上 getRunAdvance() 一起使用，就可以实现�
 
 ![alone](http://wx1.sinaimg.cn/large/006tNc79ly1flgaf31rskj31120damyn.jpg)
 
-###### 文字效果
-
 ###### 初始化类
 
 ####### reset()
@@ -664,11 +662,133 @@ getOffsetForAdvance() 配合上 getRunAdvance() 一起使用，就可以实现�
 
 ###### 范围裁切
 
-####### clipXXX()
+####### canvas.clipRect(left, top, right, bottom);
+
+记得要加上 Canvas.save() 和 Canvas.restore() 来及时恢复绘制范围，所以完整代码是这样的:
+
+```java
+canvas.save();
+canvas.clipRect(left, top, right, bottom);
+canvas.drawBitmap(bitmap, x, y, paint);
+canvas.restore();
+```
+
+####### canvas.clipPath(path1);
 
 ###### 几何变换
 
-####### Matrix
+####### 使用 Canvas 来做常见的二维变换
+
+######## Canvas.translate(float dx, float dy) 平移
+
+######## Canvas.rotate(float degrees, float px, float py) 旋转
+
+参数里的 degrees 是旋转角度，单位是度（也就是一周有 360° 的那个单位），方向是顺时针为正向； px 和 py 是轴心的位置。
+
+######## Canvas.scale(float sx, float sy, float px, float py) 放缩
+
+参数里的 sx sy 是横向和纵向的放缩倍数； px py 是放缩的轴心。
+
+```java
+canvas.save();
+canvas.scale(1.3f, 1.3f, x + bitmapWidth / 2, y + bitmapHeight / 2);
+canvas.drawBitmap(bitmap, x, y, paint);
+canvas.restore();
+```
+
+######## skew(float sx, float sy) 错切
+
+####### 使用 Matrix 来做常见和不常见的二维变换
+
+######## 使用 Matrix 来做常见变换
+
+Matrix 做常见变换的方式：
+
+创建 Matrix 对象；
+调用 Matrix 的 pre/postTranslate/Rotate/Scale/Skew() 方法来设置几何变换；
+使用 Canvas.setMatrix(matrix) 或 Canvas.concat(matrix) 来把几何变换应用到 Canvas。
+
+```java
+Matrix matrix = new Matrix();
+
+...
+
+matrix.reset();
+matrix.postTranslate();
+matrix.postRotate();
+
+canvas.save();
+canvas.concat(matrix);
+canvas.drawBitmap(bitmap, x, y, paint);
+canvas.restore();
+```
+
+把 Matrix 应用到 Canvas 有两个方法： Canvas.setMatrix(matrix) 和 Canvas.concat(matrix)。
+
+- Canvas.setMatrix(matrix)：用 Matrix 直接替换 Canvas 当前的变换矩阵，即抛弃 Canvas 当前的变换，改用 Matrix 的变换（注：根据下面评论里以及我在微信公众号中收到的反馈，不同的系统中 setMatrix(matrix) 的行为可能不一致，所以还是尽量用 concat(matrix) 吧）；
+- Canvas.concat(matrix)：用 Canvas 当前的变换矩阵和 Matrix 相乘，即基于 Canvas 当前的变换，叠加上 Matrix 中的变换。
+
+######## Matrix.setPolyToPoly(float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) 用点对点映射的方式设置变换
+
+参数里，src 和 dst 是源点集合目标点集；srcIndex 和 dstIndex 是第一个点的偏移；pointCount 是采集的点的个数（个数不能大于 4，因为大于 4 个点就无法计算变换了）。
+
+poly 就是「多」的意思。setPolyToPoly() 的作用是通过多点的映射的方式来直接设置变换。「多点映射」的意思就是把指定的点移动到给出的位置，从而发生形变。例如：(0, 0) -> (100, 100) 表示把 (0, 0) 位置的像素移动到 (100, 100) 的位置，这个是单点的映射，单点映射可以实现平移。而多点的映射，就可以让绘制内容任意地扭曲。
+
+```java
+Matrix matrix = new Matrix();
+float pointsSrc = {left, top, right, top, left, bottom, right, bottom};
+float pointsDst = {left - 10, top + 50, right + 120, top - 90, left + 20, bottom + 30, right + 20, bottom + 60};
+
+...
+
+matrix.reset();
+matrix.setPolyToPoly(pointsSrc, 0, pointsDst, 0, 4);
+
+canvas.save();
+canvas.concat(matrix);
+canvas.drawBitmap(bitmap, x, y, paint);
+canvas.restore();
+```
+
+####### 使用 Camera 来做三维变换
+
+######## Camera.rotate*() 三维旋转
+
+Camera.rotate*() 一共有四个方法： rotateX(deg) rotateY(deg) rotateZ(deg) rotate(x, y, z)。
+
+Camera 和 Canvas 一样也需要保存和恢复状态才能正常绘制，不然在界面刷新之后绘制就会出现问题。
+
+如果你需要图形左右对称，需要配合上 Canvas.translate()，在三维旋转之前把绘制内容的中心点移动到原点，即旋转的轴心，然后在三维旋转后再把投影移动回来：
+
+```java
+canvas.save();
+
+camera.save(); // 保存 Camera 的状态
+camera.rotateX(30); // 旋转 Camera 的三维空间
+canvas.translate(centerX, centerY); // 旋转之后把投影移动回来
+camera.applyToCanvas(canvas); // 把旋转投影到 Canvas
+canvas.translate(-centerX, -centerY); // 旋转之前把绘制内容移动到轴心（原点）
+camera.restore(); // 恢复 Camera 的状态
+
+canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+canvas.restore();
+```
+
+> Canvas 的几何变换顺序是反的，所以要把移动到中心的代码写在下面，把从中心移动回来的代码写在上面。
+
+![Android Camera坐标系](https://upload-images.jianshu.io/upload_images/3947109-232cbcea7fdfe9b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+######## Camera.translate(float x, float y, float z) 移动
+
+它的使用方式和 Camera.rotate*() 相同，不常用
+
+######## Camera.setLocation(x, y, z) 设置虚拟相机的位置
+
+这个方法有点奇葩，它的参数的单位不是像素，而是 inch，英寸。
+
+在 Camera 中，相机的默认位置是 (0, 0, -8)（英寸）。8 x 72 = 576，所以它的默认位置是 (0, 0, -576)（像素）。
+
+如果绘制的内容过大，当它翻转起来的时候，就有可能出现图像投影过大的「糊脸」效果。而且由于换算单位被写死成了 72 像素，而不是和设备 dpi 相关的，所以在像素越大的手机上，这种「糊脸」效果会越明显。
 
 #### 使用不同的绘制方法来控制遮挡关系
 
