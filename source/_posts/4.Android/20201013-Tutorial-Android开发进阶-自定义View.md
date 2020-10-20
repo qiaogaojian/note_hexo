@@ -636,7 +636,7 @@ canvas.drawLine(offsetX + advance, offsetY - 50, offsetX + advance, offsetY + 10
 
 其实，说是测量光标位置的，本质上这也是一个测量文字宽度的方法。上面这个例子中，start 和 contextStart 都是 0， end contextEnd 和 offset 都等于 text.length()。在这种情况下，它是等价于 measureText(text) 的，即完整测量一段文字的宽度。而对于更复杂的需求，getRunAdvance() 能做的事就比 measureText() 多了。
 
-#########  getOffsetForAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, float advance)
+######### getOffsetForAdvance(CharSequence text, int start, int end, int contextStart, int contextEnd, boolean isRtl, float advance)
 
 给出一个位置的像素值，计算出文字中最接近这个位置的字符偏移量（即第几个字符最接近这个坐标）。
 
@@ -790,7 +790,315 @@ canvas.restore();
 
 如果绘制的内容过大，当它翻转起来的时候，就有可能出现图像投影过大的「糊脸」效果。而且由于换算单位被写死成了 72 像素，而不是和设备 dpi 相关的，所以在像素越大的手机上，这种「糊脸」效果会越明显。
 
-#### 使用不同的绘制方法来控制遮挡关系
+#### 绘制顺序
+
+绘制过程中最典型的两个部分是上面讲到的主体和子 View，但它们并不是绘制过程的全部。除此之外，绘制过程还包含一些其他内容的绘制。具体来讲，一个完整的绘制过程会依次绘制以下几个内容：
+
+- 背景
+- 主体（onDraw()）
+- 子 View（dispatchDraw()）
+- 滑动边缘渐变和滑动条
+- 前景
+
+一般来说，一个 View（或 ViewGroup）的绘制不会这几项全都包含，但必然逃不出这几项，并且一定会严格遵守这个顺序。例如通常一个 LinearLayout 只有背景和子 View，那么它会先绘制背景再绘制子 View；一个 ImageView 有主体，有可能会再加上一层半透明的前景作为遮罩，那么它的前景也会在主体之后进行绘制。需要注意，前景的支持是在 Android 6.0（也就是 API 23）才加入的；之前其实也有，不过只支持 FrameLayout，而直到 6.0 才把这个支持放进了 View 类里。
+
+这其中的第 2、3 两步，前面已经讲过了；第 1 步——背景，它的绘制发生在一个叫 drawBackground() 的方法里，但这个方法是 private 的，不能重写，你如果要设置背景，只能用自带的 API 去设置（xml 布局文件的 android:background 属性以及 Java 代码的 View.setBackgroundXxx() 方法，这个每个人都用得很 6 了），而不能自定义绘制；而第 4、5 两步——滑动边缘渐变和滑动条以及前景，这两部分被合在一起放在了 onDrawForeground() 方法里，这个方法是可以重写的。
+
+![绘制顺序](http://wx4.sinaimg.cn/large/006tKfTcly1fiiwb2nr63j30ga0bddgg.jpg)
+
+滑动边缘渐变和滑动条可以通过 xml 的 android:scrollbarXXX 系列属性或 Java 代码的 View.setXXXScrollbarXXX() 系列方法来设置；前景可以通过 xml 的 android:foreground 属性或 Java 代码的 View.setForeground() 方法来设置。而重写 onDrawForeground() 方法，并在它的 super.onDrawForeground() 方法的上面或下面插入绘制代码，则可以控制绘制内容和滑动边缘渐变、滑动条以及前景的遮盖关系。
+
+关于绘制方法，有两点需要注意一下：
+
+出于效率的考虑，ViewGroup 默认会绕过 draw() 方法，换而直接执行 dispatchDraw()，以此来简化绘制流程。所以如果你自定义了某个 ViewGroup 的子类（比如 LinearLayout）并且需要在它的除 dispatchDraw() 以外的任何一个绘制方法内绘制内容，你可能会需要调用 View.setWillNotDraw(false) 这行代码来切换到完整的绘制流程（是「可能」而不是「必须」的原因是，有些 ViewGroup 是已经调用过 setWillNotDraw(false) 了的，例如 ScrollView）。
+有的时候，一段绘制代码写在不同的绘制方法中效果是一样的，这时你可以选一个自己喜欢或者习惯的绘制方法来重写。但有一个例外：如果绘制代码既可以写在 onDraw() 里，也可以写在其他绘制方法里，那么优先写在 onDraw() ，因为 Android 有相关的优化，可以在不需要重绘的时候自动跳过 onDraw() 的重复执行，以提升开发效率。享受这种优化的只有 onDraw() 一个方法。
+
+![draw](http://wx3.sinaimg.cn/large/006tKfTcly1fii5jk7l19j30q70e0di5.jpg)
+
+##### super.onDraw() 前 or 后？
+
+###### 写在 super.onDraw() 的下面
+
+把绘制代码写在 super.onDraw() 的下面，由于绘制代码会在原有内容绘制结束之后才执行，所以绘制内容就会盖住控件原来的内容。
+
+###### 写在 super.onDraw() 的上面
+
+如果把绘制代码写在 super.onDraw() 的上面，由于绘制代码会执行在原有内容的绘制之前，所以绘制的内容会被控件的原内容盖住。
+
+相对来说，这种用法的场景就会少一些。不过只是少一些而不是没有，比如你可以通过在文字的下层绘制纯色矩形来作为「强调色」
+
+##### dispatchDraw()：绘制子 View
+
+###### 写在 super.dispatchDraw() 的下面
+
+只要重写 dispatchDraw()，并在 super.dispatchDraw() 的下面写上你的绘制代码，这段绘制代码就会发生在子 View 的绘制之后，从而让绘制内容盖住子 View 了。
+
+###### 写在 super.dispatchDraw() 的上面
+
+同理，把绘制代码写在 super.dispatchDraw() 的上面，这段绘制就会在 onDraw() 之后、 super.dispatchDraw() 之前发生，也就是绘制内容会出现在主体内容和子 View 之间。
+
+##### onDrawForeground()
+
+######  写在 super.onDrawForeground() 的下面
+
+如果你把绘制代码写在了 super.onDrawForeground() 的下面，绘制代码会在滑动边缘渐变、滑动条和前景之后被执行，那么绘制内容将会盖住滑动边缘渐变、滑动条和前景。
+
+###### 写在 super.onDrawForeground() 的上面
+
+如果你把绘制代码写在了 super.onDrawForeground() 的上面，绘制内容就会在 dispatchDraw() 和 super.onDrawForeground() 之间执行，那么绘制内容会盖住子 View，但被滑动边缘渐变、滑动条以及前景盖住
+
+##### draw() 总调度方法
+
+```java
+// View.java 的 draw() 方法的简化版大致结构（是大致结构，不是源码哦）：
+
+public void draw(Canvas canvas) {
+    ...
+    
+    drawBackground(Canvas); // 绘制背景（不能重写）
+    onDraw(Canvas); // 绘制主体
+    dispatchDraw(Canvas); // 绘制子 View
+    onDrawForeground(Canvas); // 绘制滑动相关和前景
+    
+    ...
+}
+```
+从上面的代码可以看出，onDraw() dispatchDraw() onDrawForeground() 这三个方法在 draw() 中被依次调用，因此它们的遮盖关系也就像前面所说的——dispatchDraw() 绘制的内容盖住 onDraw() 绘制的内容；onDrawForeground() 绘制的内容盖住 dispatchDraw() 绘制的内容。而在它们的外部，则是由 draw() 这个方法作为总的调度。所以，你也可以重写 draw() 方法来做自定义的绘制。
+
+![draw()](http://wx2.sinaimg.cn/large/006tKfTcly1fiix28rb6mj30ru0c8jsb.jpg)
+
+###### 写在 super.draw() 的下面
+
+由于 draw() 是总调度方法，所以如果把绘制代码写在 super.draw() 的下面，那么这段代码会在其他所有绘制完成之后再执行，也就是说，它的绘制内容会盖住其他的所有绘制内容。
+
+###### 写在 super.draw() 的上面
+
+同理，由于 draw() 是总调度方法，所以如果把绘制代码写在 super.draw() 的上面，那么这段代码会在其他所有绘制之前被执行，所以这部分绘制内容会被其他所有的内容盖住，包括背景。是的，背景也会盖住它。
+
+### 属性动画
+
+使用方式：
+
+- 如果是自定义控件，需要添加 setter / getter 方法；
+- 用 ObjectAnimator.ofXXX() 创建 ObjectAnimator 对象；
+-用 start() 方法执行动画。
+
+#### ViewPropertyAnimator
+
+使用方式：
+
+- 如果是自定义控件，需要添加 setter / getter 方法；
+- 用 ObjectAnimator.ofXXX() 创建 ObjectAnimator 对象；
+- 用 start() 方法执行动画。
+
+```java
+public class SportsView extends View {
+    float progress = 0;
+    
+    ......
+    
+    // 创建 getter 方法
+    public float getProgress() {
+        return progress;
+    }
+
+    // 创建 setter 方法
+    public void setProgress(float progress) {
+        this.progress = progress;
+        invalidate();
+    }
+    
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        
+        ......
+        
+        canvas.drawArc(arcRectF, 135, progress * 2.7f, false, paint);
+        
+        ......
+    }
+}
+
+......
+
+// 创建 ObjectAnimator 对象
+ObjectAnimator animator = ObjectAnimator.ofFloat(view, "progress", 0, 65);
+// 执行动画
+animator.start();
+```
+
+#### ObjectAnimator
+
+使用方式：
+
+- 如果是自定义控件，需要添加 setter / getter 方法；
+- 用 ObjectAnimator.ofXXX() 创建 ObjectAnimator 对象；
+- 用 start() 方法执行动画。
+
+```java
+public class SportsView extends View {
+    float progress = 0;
+    
+    ......
+    
+    // 创建 getter 方法
+    public float getProgress() {
+        return progress;
+    }
+
+    // 创建 setter 方法
+    public void setProgress(float progress) {
+        this.progress = progress;
+        invalidate();
+    }
+    
+    @Override
+    public void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        
+        ......
+        
+        canvas.drawArc(arcRectF, 135, progress * 2.7f, false, paint);
+        
+        ......
+    }
+}
+
+......
+
+// 创建 ObjectAnimator 对象
+ObjectAnimator animator = ObjectAnimator.ofFloat(view, "progress", 0, 65);
+// 执行动画
+animator.start();
+```
+
+![img](http://wx3.sinaimg.cn/large/006tKfTcgy1fj7y2vnw5jg30ek0dijwq.gif)
+
+##### setDuration(int duration) 设置动画时长
+
+##### setInterpolator(Interpolator interpolator) 设置 Interpolator
+
+###### AccelerateDecelerateInterpolator
+
+先加速再减速。这是默认的 Interpolator
+
+###### LinearInterpolator
+
+匀速
+
+###### AccelerateInterpolator
+
+持续加速
+
+它主要用在离场效果中，比如某个物体从界面中飞离，就可以用这种效果。
+
+###### DecelerateInterpolator
+
+持续减速直到 0
+
+它的效果和上面这个 AccelerateInterpolator 相反，适用场景也和它相反：它主要用于入场效果，比如某个物体从界面的外部飞入界面后停在某处。
+
+###### AnticipateInterpolator
+
+先回拉一下再进行正常动画轨迹。
+
+###### OvershootInterpolator
+
+动画会超过目标值一些，然后再弹回来。
+
+###### AnticipateOvershootInterpolator
+
+开始前回拉，最后超过一些然后回弹。
+
+###### BounceInterpolator
+
+在目标值处弹跳。有点像玻璃球掉在地板上的效果。
+
+###### CycleInterpolator
+
+这个也是一个正弦 / 余弦曲线，不过它和 AccelerateDecelerateInterpolator 的区别是，它可以自定义曲线的周期，所以动画可以不到终点就结束，也可以到达终点后回弹，回弹的次数由曲线的周期决定，曲线的周期由 CycleInterpolator() 构造方法的参数决定。
+
+参数为0.5f
+
+![img](http://wx3.sinaimg.cn/large/006tKfTcly1fj8in23hktg30lg0bu197.gif)
+
+###### PathInterpolator
+
+用这个 Interpolator 你可以定制出任何你想要的速度模型。定制的方式是使用一个 Path 对象来绘制出你要的动画完成度 / 时间完成度曲线。例如：
+
+```java
+Path interpolatorPath = new Path();
+
+...
+
+// 先以「动画完成度 : 时间完成度 = 1 : 1」的速度匀速运行 25%
+interpolatorPath.lineTo(0.25f, 0.25f);
+// 然后瞬间跳跃到 150% 的动画完成度
+interpolatorPath.moveTo(0.25f, 1.5f);
+// 再匀速倒车，返回到目标点
+interpolatorPath.lineTo(1, 1);
+```
+![img](http://wx4.sinaimg.cn/large/006tKfTcly1fj8jmom7kaj30cd0ay74f.jpg)
+
+![img](http://wx4.sinaimg.cn/large/006tKfTcly1fj8jsmxr3eg30lg0buto5.gif)
+
+不过要注意，这条 Path 描述的其实是一个 y = f(x) (0 ≤ x ≤ 1) （y 为动画完成度，x 为时间完成度）的曲线，所以同一段时间完成度上不能有两段不同的动画完成度（这个好理解吧？因为内容不能出现分身术呀），而且每一个时间完成度的点上都必须要有对应的动画完成度（因为内容不能在某段时间段内消失呀）。所以，下面这样的 Path 是非法的，会导致程序 FC
+
+出现重复的动画完成度，即动画内容出现「分身」——程序 FC
+![img](http://wx4.sinaimg.cn/large/006tKfTcly1fj8lidbk4gj30c909jq34.jpg)
+
+有一段时间完成度没有对应的动画完成度，即动画出现「中断」——程序 FC
+
+![img](http://wx3.sinaimg.cn/large/006tKfTcly1fj8lk0do93j30c109baa6.jpg)
+
+###### FastOutLinearInInterpolator
+
+和 AccelerateInterpolator 一样，都是一个持续加速的运动路线。只不过 FastOutLinearInInterpolator 的曲线公式是用的贝塞尔曲线，而 AccelerateInterpolator 用的是指数曲线。具体来说，它俩最主要的区别是 FastOutLinearInInterpolator 的初始阶段加速度比 AccelerateInterpolator 要快一些。
+
+###### FastOutSlowInInterpolator
+
+同样也是先加速再减速的还有前面说过的 AccelerateDecelerateInterpolator，不过它们的效果是明显不一样的。FastOutSlowInInterpolator 用的是贝塞尔曲线，AccelerateDecelerateInterpolator 用的是正弦 / 余弦曲线。具体来讲， FastOutSlowInInterpolator 的前期加速度要快得多。
+
+用更直观一点的表达就是，AccelerateDecelerateInterpolator 像是物体的自我移动，而 FastOutSlowInInterpolator 则看起来像有一股强大的外力「推」着它加速，在接近目标值之后又「拽」着它减速。总之，FastOutSlowInterpolator 看起来有一点「着急」的感觉。
+
+###### LinearOutSlowInInterpolator
+
+它和 DecelerateInterpolator 比起来，同为减速曲线，主要区别在于 LinearOutSlowInInterpolator 的初始速度更高。
+
+#### 设置监听器
+
+##### ViewPropertyAnimator.setListener() / ObjectAnimator.addListener()
+
+这两个方法的名称不一样，可以设置的监听器数量也不一样，但它们的参数类型都是 AnimatorListener，所以本质上其实都是一样的。 AnimatorListener 共有 4 个回调方法：
+
+3.1.1 onAnimationStart(Animator animation)
+当动画开始执行时，这个方法被调用。
+
+3.1.2 onAnimationEnd(Animator animation)
+当动画结束时，这个方法被调用。
+
+3.1.3 onAnimationCancel(Animator animation)
+当动画被通过 cancel() 方法取消时，这个方法被调用。
+
+需要说明一下的是，就算动画被取消，onAnimationEnd() 也会被调用。所以当动画被取消时，如果设置了 AnimatorListener，那么 onAnimationCancel() 和 onAnimationEnd() 都会被调用。onAnimationCancel() 会先于 onAnimationEnd() 被调用。
+
+3.1.4 onAnimationRepeat(Animator animation)
+当动画通过 setRepeatMode() / setRepeatCount() 或 repeat() 方法重复执行时，这个方法被调用。
+
+由于 ViewPropertyAnimator 不支持重复，所以这个方法对 ViewPropertyAnimator 相当于无效。
+
+##### ViewPropertyAnimator.setUpdateListener() / ObjectAnimator.addUpdateListener()
+
+当动画的属性更新时（不严谨的说，即每过 10 毫秒，动画的完成度更新时），这个方法被调用。
+
+##### ViewPropertyAnimator.withStartAction/EndAction()
+
+这两个方法是 ViewPropertyAnimator 的独有方法。它们和 set/addListener() 中回调的 onAnimationStart() / onAnimationEnd() 相比起来的不同主要有两点：
+
+withStartAction() / withEndAction() 是一次性的，在动画执行结束后就自动弃掉了，就算之后再重用 ViewPropertyAnimator 来做别的动画，用它们设置的回调也不会再被调用。而 set/addListener() 所设置的 AnimatorListener 是持续有效的，当动画重复执行时，回调总会被调用。
+
+withEndAction() 设置的回调只有在动画正常结束时才会被调用，而在动画被取消时不会被执行。这点和 AnimatorListener.onAnimationEnd() 的行为是不一致的。
 
 ## 布局
 
