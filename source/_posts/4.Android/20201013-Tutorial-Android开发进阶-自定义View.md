@@ -839,7 +839,7 @@ canvas.restore();
 
 ##### onDrawForeground()
 
-######  写在 super.onDrawForeground() 的下面
+###### 写在 super.onDrawForeground() 的下面
 
 如果你把绘制代码写在了 super.onDrawForeground() 的下面，绘制代码会在滑动边缘渐变、滑动条和前景之后被执行，那么绘制内容将会盖住滑动边缘渐变、滑动条和前景。
 
@@ -1200,6 +1200,155 @@ animator.start();
 
 ![img](http://wx4.sinaimg.cn/large/006tNc79ly1fjfig8edhmg30ck07046i.gif)
 
+### 硬件加速
+
+硬件加速指的是使用 GPU 来完成绘制的计算工作，代替 CPU。它从工作分摊和绘制机制优化这两个角度提升了绘制的速度。
+
+硬件加速可以使用 setLayerType() 来关闭硬件加速，但这个方法其实是用来设置 View Layer 的：
+
+- 参数为 LAYER_TYPE_SOFTWARE 时，使用软件来绘制 View Layer，绘制到一个 Bitmap，并顺便关闭硬件加速；
+- 参数为 LAYER_TYPE_HARDWARE 时，使用 GPU 来绘制 View Layer，绘制到一个 OpenGL texture（如果硬件加速关闭，那么行为和 VIEW_TYPE_SOFTWARE 一致）；
+- 参数为 LAYER_TYPE_NONE 时，关闭 View Layer。
+
+View Layer 可以加速无 invalidate() 时的刷新效率，但对于需要调用 invalidate() 的刷新无法加速。
+
+View Layer 绘制所消耗的实际时间是比不使用 View Layer 时要高的，所以要慎重使用。
+
+#### 概念
+
+所谓硬件加速，指的是把某些计算工作交给专门的硬件来做，而不是和普通的计算工作一样交给 CPU 来处理。这样不仅减轻了 CPU 的压力，而且由于有了「专人」的处理，这份计算工作的速度也被加快了。这就是「硬件加速」。
+
+而对于 Android 来说，硬件加速有它专属的意思：在 Android 里，硬件加速专指把 View 中绘制的计算工作交给 GPU 来处理。进一步地再明确一下，这个「绘制的计算工作」指的就是把绘制方法中的那些 Canvas.drawx3X() 变成实际的像素这件事。
+
+#### 原理
+
+在硬件加速关闭的时候，Canvas 绘制的工作方式是：把要绘制的内容写进一个 Bitmap，然后在之后的渲染过程中，这个 Bitmap 的像素内容被直接用于渲染到屏幕。这种绘制方式的主要计算工作在于把绘制操作转换为像素的过程（例如由一句 Canvas.drawCircle() 来获得一个具体的圆的像素信息），这个过程的计算是由 CPU 来完成的。
+
+而在硬件加速开启时，Canvas 的工作方式改变了：它只是把绘制的内容转换为 GPU 的操作保存了下来，然后就把它交给 GPU，最终由 GPU 来完成实际的显示工作。
+
+硬件加速能够让绘制变快，主要有三个原因：
+
+- 本来由 CPU 自己来做的事，分摊给了 GPU 一部分，自然可以提高效率；
+- 相对于 CPU 来说，GPU 自身的设计本来就对于很多常见类型内容的计算（例如简单的圆形、简单的方形）具有优势；
+- 由于绘制流程的不同，硬件加速在界面内容发生重绘的时候绘制流程可以得到优化，避免了一些重复操作，从而大幅提升绘制效率。
+
+在硬件加速关闭时，绘制内容会被 CPU 转换成实际的像素，然后直接渲染到屏幕。具体来说，这个「实际的像素」，它是由 Bitmap 来承载的。在界面中的某个 View 由于内容发生改变而调用 invalidate() 方法时，如果没有开启硬件加速，那么为了正确计算 Bitmap 的像素，这个 View 的父 View、父 View 的父 View 乃至一直向上直到最顶级 View，以及所有和它相交的兄弟 View，都需要被调用 invalidate()来重绘。一个 View 的改变使得大半个界面甚至整个界面都重绘一遍，这个工作量是非常大的。
+
+而在硬件加速开启时，前面说过，绘制的内容会被转换成 GPU 的操作保存下来（承载的形式称为 display list，对应的类也叫做 DisplayList），再转交给 GPU。由于所有的绘制内容都没有变成最终的像素，所以它们之间是相互独立的，那么在界面内容发生改变的时候，只要把发生了改变的 View 调用 invalidate() 方法以更新它所对应的 GPU 操作就好，至于它的父 View 和兄弟 View，只需要保持原样。那么这个工作量就很小了。
+
+#### 限制
+
+硬件加速不只是好处，也有它的限制：受到 GPU 绘制方式的限制，Canvas 的有些方法在硬件加速开启式会失效或无法正常工作。比如，在硬件加速开启时， clipPath() 在 API 18 及以上的系统中才有效。具体的 API 限制和 API 版本的关系如下图：
+
+![img](http://wx2.sinaimg.cn/large/006tKfTcly1fjn0huxdm5j30lr0q0n25.jpg)
+
+所以，如果你的自定义控件中有自定义绘制的内容，最好参照一下这份表格，确保你的绘制操作可以正确地在所有用户的手机里能够正常显示，而不是只在你的运行了最新版本 Android 系统的 Nexus 或 Pixel 里测试一遍没问题就发布了。
+
+不过有一点可以放心的是，所有的原生自带控件，都没有用到 API 版本不兼容的绘制操作，可以放心使用。所以你只要检查你写的自定义绘制就好。
+
+#### View Layer
+
+如果你的绘制操作不支持硬件加速，你需要手动关闭硬件加速来绘制界面，关闭的方式是通过这行代码：
+
+```java
+view.setLayerType(LAYER_TYPE_SOFTWARE, null);
+```
+
+事实上，这个方法的本来作用并不是用来开关硬件加速的，只是当它的参数为 LAYER_TYPE_SOFTWARE 的时候，可以「顺便」把硬件加速关掉而已；并且除了这个方法之外，Android 并没有提供专门的 View 级别的硬件加速开关，所以它就「顺便」成了一个开关硬件加速的方法。
+
+setLayerType() 这个方法，它的作用其实就是名字里的意思：设置 View Layer 的类型。所谓 View Layer，又称为离屏缓冲（Off-screen Buffer），它的作用是单独启用一块地方来绘制这个 View ，而不是使用软件绘制的 Bitmap 或者通过硬件加速的 GPU。这块「地方」可能是一块单独的 Bitmap，也可能是一块 OpenGL 的纹理（texture，OpenGL 的纹理可以简单理解为图像的意思），具体取决于硬件加速是否开启。采用什么来绘制 View 不是关键，关键在于当设置了 View Layer 的时候，它的绘制会被缓存下来，而且缓存的是最终的绘制结果，而不是像硬件加速那样只是把 GPU 的操作保存下来再交给 GPU 去计算。通过这样更进一步的缓存方式，View 的重绘效率进一步提高了：只要绘制的内容没有变，那么不论是 CPU 绘制还是 GPU 绘制，它们都不用重新计算，而只要只用之前缓存的绘制结果就可以了。
+
+基于这样的原理，在进行移动、旋转等（无需调用 invalidate()）的属性动画的时候开启 Hardware Layer 将会极大地提升动画的效率，因为在动画过程中 View 本身并没有发生改变，只是它的位置或角度改变了，而这种改变是可以由 GPU 通过简单计算就完成的，并不需要重绘整个 View。所以在这种动画的过程中开启 Hardware Layer，可以让本来就依靠硬件加速而变流畅了的动画变得更加流畅。实现方式大概是这样：
+
+```java
+view.setLayerType(LAYER_TYPE_HARDWARE, null);
+ObjectAnimator animator = ObjectAnimator.ofFloat(view, "rotationY", 180);
+
+animator.addListener(new AnimatorListenerAdapter() {
+    @Override
+    public void onAnimationEnd(Animator animation) {
+        view.setLayerType(LAYER_TYPE_NONE, null);
+    }
+});
+
+animator.start();
+```
+
+或者如果是使用 ViewPropertyAnimator，那么更简单：
+
+```
+view.animate()
+        .rotationY(90)
+        .withLayer(); // withLayer() 可以自动完成上面这段代码的复杂操作
+```
+
+不过一定要注意，只有你在对 translationX translationY rotation alpha 等无需调用 invalidate() 的属性做动画的时候，这种方法才适用，因为这种方法本身利用的就是当界面不发生时，缓存未更新所带来的时间的节省。所以简单地说——
+
+**这种方式不适用于基于自定义属性绘制的动画。**一定记得这句话。
+
+另外，除了用于关闭硬件加速和辅助属性动画这两项功能外，Layer 还可以用于给 View 增加一些绘制效果，例如设置一个 ColorMatrixColorFilter 来让 View 变成黑白的：
+
+```java
+ColorMatrix colorMatrix = new ColorMatrix();
+colorMatrix.setSaturation(0);
+
+Paint paint = new Paint();
+paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+
+view.setLayerType(LAYER_TYPE_HARDWARE, paint);
+```
+
 ## 布局
+
+布局的过程，就是程序在运行时利用布局文件的代码来计算出实际尺寸的过程。
+
+![image](https://upload-images.jianshu.io/upload_images/3947109-fe8da0a2b47b8aee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+### View 或 ViewGroup 的布局过程
+
+#### 测量阶段
+
+从上到下递归地调用每个 View 或者 ViewGroup 的 measure() 方法，测量他们的尺寸并计算它们的位置；
+
+测量阶段，measure() 方法被父 View 调用，在 measure() 中做一些准备和优化工作后，调用 onMeasure() 来进行实际的自我测量。 onMeasure() 做的事，View 和 ViewGroup 不一样：
+
+View：View 在 onMeasure() 中会计算出自己的尺寸然后保存；
+ViewGroup：ViewGroup 在 onMeasure() 中会调用所有子 View 的 measure() 让它们进行自我测量，并根据子 View 计算出的期望尺寸来计算出它们的实际尺寸和位置（实际上 99.99% 的父 View 都会使用子 View 给出的期望尺寸来作为实际尺寸，原因在下期或下下期会讲到）然后保存。同时，它也会根据子 View 的尺寸和位置来计算出自己的尺寸然后保存；
+
+#### 布局阶段
+
+从上到下递归地调用每个 View 或者 ViewGroup 的 layout() 方法，把测得的它们的尺寸和位置赋值给它们。
+
+布局阶段，layout() 方法被父 View 调用，在 layout() 中它会保存父 View 传进来的自己的位置和尺寸，并且调用 onLayout() 来进行实际的内部布局。onLayout() 做的事， View 和 ViewGroup 也不一样：
+
+View：由于没有子 View，所以 View 的 onLayout() 什么也不做。
+ViewGroup：ViewGroup 在 onLayout() 中会调用自己的所有子 View 的 layout() 方法，把它们的尺寸和位置传给它们，让它们完成自我的内部布局。
+
+### 布局过程自定义的方式
+
+#### 重写 onMeasure() 来修改已有的 View 的尺寸；
+
+重写 onMeasure() 来修改已有的 View 的尺寸的具体做法：
+
+- 重写 onMeasure() 方法，并在里面调用 super.onMeasure()，触发原有的自我测量；
+- 在 super.onMeasure() 的下面用 getMeasuredWidth() 和 getMeasuredHeight() 来获取到之前的测量结果，并使用自己的算法，根据测量结果计算出新的结果；
+- 调用 setMeasuredDimension() 来保存新的结果。
+
+#### 重写 onMeasure() 来全新定制自定义 View 的尺寸；
+
+全新定制尺寸和修改尺寸的最重要区别是需要在计算的同时，保证计算结果满足父 View 给出的的尺寸限制
+
+父 View 的尺寸限制
+1. 由来：开发者的要求（布局文件中 layout_ 打头的属性）经过父 View 处理计算后的更精确的要求；
+2. 限制的分类：
+- UNSPECIFIED：不限制
+- AT_MOST：限制上限
+- EXACTLY：限制固定值
+
+全新定义自定义 View 尺寸的方式:
+1. 重新 onMeasure()，并计算出 View 的尺寸；
+2. 使用 resolveSize() 来让子 View 的计算结果符合父 View 的限制（当然，如果你想用自己的方式来满足父 View 的限制也行）。
+
+#### 重写 onMeasure() 和 onLayout() 来全新定制自定义 ViewGroup 的内部布局。
 
 ## 触摸反馈
