@@ -1341,9 +1341,9 @@ ViewGroup：ViewGroup 在 onLayout() 中会调用自己的所有子 View 的 lay
 父 View 的尺寸限制
 1. 由来：开发者的要求（布局文件中 layout_ 打头的属性）经过父 View 处理计算后的更精确的要求；
 2. 限制的分类：
-- UNSPECIFIED：不限制
-- AT_MOST：限制上限
-- EXACTLY：限制固定值
+- UNSPECIFIED：不限制 (resolve不处理)
+- AT_MOST：限制上限 (resolve判断和上限大小,返回小的)
+- EXACTLY：限制固定值 (返回)
 
 全新定义自定义 View 尺寸的方式:
 1. 重新 onMeasure()，并计算出 View 的尺寸；
@@ -1374,3 +1374,15 @@ ViewGroup：ViewGroup 在 onLayout() 中会调用自己的所有子 View 的 lay
 在 onLayout() 里调用每个子 View 的 layout() ，让它们保存自己的位置和尺寸。
 
 ## 触摸反馈
+
+### onTouchEvent()
+
+重写 onTouchEvent()，在里面写上你的触摸反馈算法，并返回 true（关键是 ACTION_DOWN 事件时返回 true）。
+
+### onInterceptTouchEvent()
+
+如果是会发生触摸冲突的 ViewGroup，还需要重写 onInterceptTouchEvent()，在事件流开始时返回 false，并在确认接管事件流时返回一次 true，以实现对事件的拦截。
+
+### requestDisallowInterceptTouchEvent()
+
+当子 View 临时需要阻止父 View 拦截事件流时，可以调用父 View 的 requestDisallowInterceptTouchEvent() ，通知父 View 在当前事件流中不再尝试通过 onInterceptTouchEvent() 来拦截。
