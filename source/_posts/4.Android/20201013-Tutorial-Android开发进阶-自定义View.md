@@ -22,7 +22,7 @@
 
 ###### 点
 
-####### drawPoint(float x, float y, Paint paint)
+####### drawPoint(float x, float y, Paint paint) 
 
 ####### drawPoints(float[] pts, Paint paint)
 
@@ -34,7 +34,7 @@
 
 由于直线不是封闭图形，所以 setStyle(style) 对直线没有影响。
 
-####### drawLines(float[] pts, Paint paint)
+####### drawLines(float[] pts, Paint paint) 
 
 ####### drawLines(float[] pts, int offset, int count, Paint paint) 
 
@@ -42,7 +42,7 @@
 
 ####### drawCircle(float centerX, float centerY, float radius, Paint paint) 
 
-####### drawRect(float left, float top, float right, float bottom, Paint paint)
+####### drawRect(float left, float top, float right, float bottom, Paint paint) 
 
 ####### drawOval(float left, float top, float right, float bottom, Paint paint) 画椭圆
 
@@ -56,7 +56,7 @@ drawArc() 是使用一个椭圆来描述弧形的。left, top, right, bottom 描
 
 ###### Path
 
-####### drawPath(Path path, Paint paint)
+####### drawPath(Path path, Paint paint) 
 
 画心形
 
@@ -65,9 +65,9 @@ public class PathView extends View {
 
     Paint paint = new Paint();
     Path path = new Path(); // 初始化 Path 对象
-
+    
     ......
-
+    
     {
       // 使用 path 对图形进行描述（这段描述代码不必看懂）
       path.addArc(200, 200, 400, 400, -225, 225);
@@ -78,7 +78,7 @@ public class PathView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
       super.onDraw(canvas);
-
+      
       canvas.drawPath(path, paint); // 绘制出 path 描述的图形（心形），大功告成
     }
 }
@@ -132,7 +132,7 @@ close() 和 lineTo(起点坐标) 是完全等价的。
 
 其中后面的两个带有 INVERSE_ 前缀的，只是前两个的反色版本，所以只要把前两个，即 EVEN_ODD 和 WINDING，搞明白就可以了。
 
-![](/images/2020-10-22-09-45-47.png)
+![FillType](https://wx2.sinaimg.cn/large/006tNc79ly1fig820pdt3j30kw0ummzx.jpg)
 
 ########## WINDING （默认值）
 
@@ -145,7 +145,7 @@ non-zero winding rule （非零环绕数原则）：首先，它需要你图形�
 even-odd rule （奇偶原则）：对于平面中的任意一点，向任意方向射出一条射线，这条射线和图形相交的次数（相交才算，相切不算哦）如果是奇数，则这个点被认为在图形内部，是要被涂色的区域；如果是偶数，则这个点被认为在图形外部，是不被涂色的区域。
 
 射线的方向无所谓，同一个点射向任何方向的射线，结果都是一样的。
-
+ 
 射线每穿过图形中的一条线，内外状态就发生一次切换，这就是为什么 EVEN_ODD 是一个「交叉填充」的模式。
 
 ########## INVERSE_WINDING
@@ -190,26 +190,26 @@ tile：端点范围之外的着色规则，类型是 TileMode。TileMode 一共�
 
 PorterDuff.Mode 是用来指定两个图像共同绘制时的颜色策略的。它是一个 enum，不同的 Mode 可以指定不同的策略。「颜色策略」的意思，就是说把源图像绘制到目标图像处时应该怎样确定二者结合后的颜色，而对于 ComposeShader(shaderA, shaderB, mode) 这个具体的方法，就是指应该怎样把 shaderB 绘制在 shaderA 上来得到一个结合后的 Shader。
 
-SRC 是上层
-DST 是下层
-IN  是交集
+SRC 是上层 
+DST 是下层 
+IN  是交集 
 OUT 是不想交的
 
 ######### Alpha 合成 (Alpha Compositing)
 
 源图像和目标图像：
 
-![](/images/2020-10-22-09-48-12.png)
+![源图像和目标图像](https://wx3.sinaimg.cn/large/52eb2279ly1fig6ia1twgj20ds07tdgs.jpg)
 
 Alpha合成:
 
-![](/images/2020-10-22-09-48-40.png)
+![Alpha合成](https://wx3.sinaimg.cn/large/52eb2279ly1fig6im3hhcj20o50zt7bj.jpg)
 
 ######### 混合 (Blending)
 
 混合，也就是 Photoshop 等制图软件里都有的那些混合模式（multiply darken lighten 之类的）。这一类操作的是颜色本身而不是 Alpha 通道，并不属于 Alpha 合成，所以和 Porter 与 Duff 这两个人也没什么关系，不过为了使用的方便，它们同样也被 Google 加进了 PorterDuff.Mode 里。
 
-![](/images/2020-10-22-09-49-22.png)
+![颜色混合](https://wx3.sinaimg.cn/large/52eb2279ly1fig6iw04v0j20ny0hzmzj.jpg)
 
 ####### ColorFilter
 
@@ -309,7 +309,7 @@ View.setLayerType() 是直接把整个 View 都绘制在离屏缓冲中。 setLa
 
 ######## paint.setStrokeCap(cap)
 
-![](/images/2020-10-22-09-49-57.png)
+![Cap](https://wx4.sinaimg.cn/large/006tNc79ly1fig74qv8rij30ct05rglp.jpg)
 
 ######### Paint.Cap.ROUND
 
@@ -319,13 +319,13 @@ View.setLayerType() 是直接把整个 View 都绘制在离屏缓冲中。 setLa
 
 ######## setStrokeJoin(Paint.Join join)
 
-![](/images/2020-10-22-09-50-26.png)
+![Join](https://wx1.sinaimg.cn/large/006tNc79ly1fig75e27w6j30cp05ewem.jpg)
 
 ######## setStrokeMiter(float miter)
 
 这个方法虽然名叫 setStrokeMiter(miter) ，但它其实设置的是「 线条在 Join 类型为 MITER 时对于 MITER 的长度限制」。它的这个名字虽然短，但却存在一定的迷惑性，如果叫 setStrokeJoinMiterLimit(limit) 就更准确了。
 
-![](/images/2020-10-22-09-50-49.png)
+![长度限制](https://wx3.sinaimg.cn/large/006tNc79ly1fig7btolhij30e706dglp.jpg)
 
 ####### 色彩优化
 
@@ -333,13 +333,13 @@ View.setLayerType() 是直接把整个 View 都绘制在离屏缓冲中。 setLa
 
 在实际的应用场景中，抖动更多的作用是在图像降低色彩深度绘制时，避免出现大片的色带与色块。
 
-![](/images/2020-10-22-09-51-12.png)
+![抖动](https://wx4.sinaimg.cn/large/006tNc79ly1fig7d34s0jj30lf07t75x.jpg)
 
 ######## setFilterBitmap(boolean filter)
 
 图像在放大绘制的时候，默认使用的是最近邻插值过滤，这种算法简单，但会出现马赛克现象；而如果开启了双线性过滤，就可以让结果图像显得更加平滑。
 
-![](/images/2020-10-22-09-51-36.png)
+![双线性过滤](https://wx2.sinaimg.cn/large/006tNc79ly1fig7dbga6ij30jb0a00tr.jpg)
 
 ####### setPathEffect(PathEffect effect)
 
@@ -347,7 +347,7 @@ View.setLayerType() 是直接把整个 View 都绘制在离屏缓冲中。 setLa
 
 ######### CornerPathEffect
 
-![](/images/2020-10-22-09-52-03.png)
+![](https://wx1.sinaimg.cn/large/006tNc79ly1fig7dobrizj30iv0agt8z.jpg)
 
 它的构造方法 CornerPathEffect(float radius) 的参数 radius 是圆角的半径。
 
@@ -367,7 +367,7 @@ DiscretePathEffect 具体的做法是，把绘制改为使用定长的线段来�
 ROTATE：旋转
 MORPH：变体
 
-![](/images/2020-10-22-09-52-41.png)
+![dash path](https://wx1.sinaimg.cn/large/006tNc79ly1fig7efqw9qj30kn0h3dh5.jpg)
 
 ######## 组合效果
 
@@ -377,7 +377,7 @@ MORPH：变体
 
 ``` java
 PathEffect dashEffect = new DashPathEffect(new float[]{20, 10}, 0);
-PathEffect discreteEffect = new DiscretePathEffect(20, 5);
+PathEffect discreteEffect = new DiscretePathEffect(20, 5); 
 pathEffect = new SumPathEffect(dashEffect, discreteEffect);
 
 ...
@@ -385,7 +385,7 @@ pathEffect = new SumPathEffect(dashEffect, discreteEffect);
 canvas.drawPath(path, paint);
 ```
 
-![](/images/2020-10-22-09-53-00.png)
+![1](https://wx1.sinaimg.cn/large/006tNc79ly1fig7ekjh7lj30dw05jq2z.jpg)
 
 ######### ComposePathEffect
 
@@ -393,7 +393,7 @@ canvas.drawPath(path, paint);
 
 ``` java
 PathEffect dashEffect = new DashPathEffect(new float[]{20, 10}, 0);
-PathEffect discreteEffect = new DiscretePathEffect(20, 5);
+PathEffect discreteEffect = new DiscretePathEffect(20, 5); 
 pathEffect = new ComposePathEffect(dashEffect, discreteEffect);
 
 ...
@@ -401,7 +401,7 @@ pathEffect = new ComposePathEffect(dashEffect, discreteEffect);
 canvas.drawPath(path, paint);
 ```
 
-![](/images/2020-10-22-09-53-19.png)
+![2](https://wx3.sinaimg.cn/large/006tNc79ly1fig7epf94aj30dr05eq2x.jpg)
 
 ####### setShadowLayer()
 
@@ -436,7 +436,7 @@ OUTER: 内部不绘制，外部模糊
 
 ######## getFillPath(Path src, Path dst)
 
-![](/images/2020-10-22-09-53-40.png)
+![path](https://wx3.sinaimg.cn/large/006tNc79ly1fig7ggbut0j30rw0me76k.jpg)
 
 ######## getTextPath(String text, int start, int end, float x, float y, Path path) / getTextPath(char[] text, int index, int count, float x, float y, Path path)
 
@@ -448,7 +448,7 @@ OUTER: 内部不绘制，外部模糊
 
 方法的参数很简单： text 是文字内容，x 和 y 是文字的坐标。但需要注意：这个坐标并不是文字的左上角，而是一个与左下角比较接近的位置。大概在这里：
 
-![](/images/2020-10-22-09-53-58.png)
+![](http://wx3.sinaimg.cn/large/52eb2279ly1fig60bobb0j20ek04dwex.jpg)
 
 ######## drawTextRun(CharSequence text, int start, int end, int contextStart, int contextEnd, float x, float y, boolean isRtl, Paint paint)
 
@@ -532,7 +532,7 @@ Canvas 绘制的时候，默认使用的是系统设置里的 Locale。而通过
 ######### setHinting(int mode)
 
 现在的 Android 设备大多数都是是用的矢量字体。矢量字体的原理是对每个字体给出一个字形的矢量描述，然后使用这一个矢量来对所有的尺寸的字体来生成对应的字形。由于不必为所有字号都设计它们的字体形状，所以在字号较大的时候，矢量字体也能够保持字体的圆润，这是矢量字体的优势。不过当文字的尺寸过小（比如高度小于 16 像素），有些文字会由于失去过多细节而变得不太好看。 hinting 技术就是为了解决这种问题的：通过向字体中加入 hinting 信息，让矢量字体在尺寸过小的时候得到针对性的修正，从而提高显示效果。
-![](/images/2020-10-22-09-54-19.png)
+![hinting](http://wx3.sinaimg.cn/large/52eb2279ly1fig65wwv1yj20ki0bywje.jpg)
 功能很强，效果很赞。不过在现在（ 2017 年），手机屏幕的像素密度已经非常高，几乎不会再出现字体尺寸小到需要靠 hinting 来修正的情况，所以这个方法其实……没啥用了。可以忽略。
 
 ######### setElegantTextHeight(boolean elegant)
@@ -564,7 +564,7 @@ Canvas 绘制的时候，默认使用的是系统设置里的 Locale。而通过
 
 FontMetrics 是个相对专业的工具类，它提供了几个文字排印方面的数值：ascent, descent, top, bottom, leading。
 
-![](/images/2020-10-22-09-54-39.png)
+![FontMetrics](http://wx3.sinaimg.cn/large/52eb2279ly1fig66iud3gj20ik0bn41l.jpg)
 
 - baseline: 上图中黑色的线。前面已经讲过了，它的作用是作为文字显示的基准线。
 
@@ -593,13 +593,13 @@ paint.setStyle(Paint.Style.STROKE);
 canvas.drawRect(bounds, paint);
 ```
 
-![](/images/2020-10-22-09-55-00.png)
+![Bounds](http://wx3.sinaimg.cn/large/52eb2279ly1fig66pdyg4j20ct02tmxf.jpg)
 
 ######### float measureText(String text)
 
 测量文字的宽度并返回。
 
-![](/images/2020-10-22-09-55-17.png)
+![Measure](http://wx3.sinaimg.cn/large/52eb2279ly1fig671on56j20or04a0te.jpg)
 
 如果你用代码分别使用 getTextBounds() 和 measureText() 来测量文字的宽度，你会发现 measureText() 测出来的宽度总是比 getTextBounds() 大一点点。这是因为这两个方法其实测量的是两个不一样的东西。
 
@@ -613,7 +613,7 @@ canvas.drawRect(bounds, paint);
 
 这个方法也是用来测量文字宽度的。但和 measureText() 的区别是， breakText() 是在给出宽度上限的前提下测量文字的宽度。如果文字的宽度超出了上限，那么在临近超限的位置截断文字。
 
-![](/images/2020-10-22-09-55-47.png)
+![breakText](http://wx3.sinaimg.cn/large/52eb2279ly1fig67950cnj21080m4grf.jpg)
 
 breakText() 的返回值是截取的文字个数（如果宽度没有超限，则是文字的总个数）。参数中， text 是要测量的文字；measureForwards 表示文字的测量方向，true 表示由左往右测量；maxWidth 是给出的宽度上限；measuredWidth 是用于接受数据，而不是用于提供数据的：方法测量完成后会把截取的文字宽度（如果宽度没有超限，则为文字总宽度）赋值给 measuredWidth[0]。
 
@@ -632,7 +632,7 @@ canvas.drawText(text, offsetX, offsetY, paint);
 canvas.drawLine(offsetX + advance, offsetY - 50, offsetX + advance, offsetY + 10, paint);
 ```
 
-![](/images/2020-10-22-09-56-06.png)
+![RunAdvance](http://wx3.sinaimg.cn/large/52eb2279ly1fig67hkga6j20cx0373ys.jpg)
 
 其实，说是测量光标位置的，本质上这也是一个测量文字宽度的方法。上面这个例子中，start 和 contextStart 都是 0， end contextEnd 和 offset 都等于 text.length()。在这种情况下，它是等价于 measureText(text) 的，即完整测量一段文字的宽度。而对于更复杂的需求，getRunAdvance() 能做的事就比 measureText() 多了。
 
@@ -646,7 +646,7 @@ getOffsetForAdvance() 配合上 getRunAdvance() 一起使用，就可以实现�
 
 ######### hasGlyph(String string)
 
-![](/images/2020-10-22-09-56-24.png)
+![alone](http://wx1.sinaimg.cn/large/006tNc79ly1flgaf31rskj31120damyn.jpg)
 
 ###### 初始化类
 
@@ -776,7 +776,7 @@ canvas.restore();
 
 > Canvas 的几何变换顺序是反的，所以要把移动到中心的代码写在下面，把从中心移动回来的代码写在上面。
 
-![](/images/2020-10-22-09-57-00.png)
+![Android Camera坐标系](https://upload-images.jianshu.io/upload_images/3947109-232cbcea7fdfe9b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ######## Camera.translate(float x, float y, float z) 移动
 
@@ -804,7 +804,7 @@ canvas.restore();
 
 这其中的第 2、3 两步，前面已经讲过了；第 1 步——背景，它的绘制发生在一个叫 drawBackground() 的方法里，但这个方法是 private 的，不能重写，你如果要设置背景，只能用自带的 API 去设置（xml 布局文件的 android:background 属性以及 Java 代码的 View.setBackgroundXxx() 方法，这个每个人都用得很 6 了），而不能自定义绘制；而第 4、5 两步——滑动边缘渐变和滑动条以及前景，这两部分被合在一起放在了 onDrawForeground() 方法里，这个方法是可以重写的。
 
-![](/images/2020-10-22-09-57-19.png)
+![绘制顺序](http://wx4.sinaimg.cn/large/006tKfTcly1fiiwb2nr63j30ga0bddgg.jpg)
 
 滑动边缘渐变和滑动条可以通过 xml 的 android:scrollbarXXX 系列属性或 Java 代码的 View.setXXXScrollbarXXX() 系列方法来设置；前景可以通过 xml 的 android:foreground 属性或 Java 代码的 View.setForeground() 方法来设置。而重写 onDrawForeground() 方法，并在它的 super.onDrawForeground() 方法的上面或下面插入绘制代码，则可以控制绘制内容和滑动边缘渐变、滑动条以及前景的遮盖关系。
 
@@ -813,7 +813,7 @@ canvas.restore();
 出于效率的考虑，ViewGroup 默认会绕过 draw() 方法，换而直接执行 dispatchDraw()，以此来简化绘制流程。所以如果你自定义了某个 ViewGroup 的子类（比如 LinearLayout）并且需要在它的除 dispatchDraw() 以外的任何一个绘制方法内绘制内容，你可能会需要调用 View.setWillNotDraw(false) 这行代码来切换到完整的绘制流程（是「可能」而不是「必须」的原因是，有些 ViewGroup 是已经调用过 setWillNotDraw(false) 了的，例如 ScrollView）。
 有的时候，一段绘制代码写在不同的绘制方法中效果是一样的，这时你可以选一个自己喜欢或者习惯的绘制方法来重写。但有一个例外：如果绘制代码既可以写在 onDraw() 里，也可以写在其他绘制方法里，那么优先写在 onDraw() ，因为 Android 有相关的优化，可以在不需要重绘的时候自动跳过 onDraw() 的重复执行，以提升开发效率。享受这种优化的只有 onDraw() 一个方法。
 
-![](/images/2020-10-22-09-57-39.png)
+![draw](http://wx3.sinaimg.cn/large/006tKfTcly1fii5jk7l19j30q70e0di5.jpg)
 
 ##### super.onDraw() 前 or 后？
 
@@ -854,18 +854,18 @@ canvas.restore();
 
 public void draw(Canvas canvas) {
     ...
-
+    
     drawBackground(Canvas); // 绘制背景（不能重写）
     onDraw(Canvas); // 绘制主体
     dispatchDraw(Canvas); // 绘制子 View
     onDrawForeground(Canvas); // 绘制滑动相关和前景
-
+    
     ...
 }
 ```
 从上面的代码可以看出，onDraw() dispatchDraw() onDrawForeground() 这三个方法在 draw() 中被依次调用，因此它们的遮盖关系也就像前面所说的——dispatchDraw() 绘制的内容盖住 onDraw() 绘制的内容；onDrawForeground() 绘制的内容盖住 dispatchDraw() 绘制的内容。而在它们的外部，则是由 draw() 这个方法作为总的调度。所以，你也可以重写 draw() 方法来做自定义的绘制。
 
-![](/images/2020-10-22-09-57-56.png)
+![draw()](http://wx2.sinaimg.cn/large/006tKfTcly1fiix28rb6mj30ru0c8jsb.jpg)
 
 ###### 写在 super.draw() 的下面
 
@@ -894,9 +894,9 @@ public void draw(Canvas canvas) {
 ```java
 public class SportsView extends View {
     float progress = 0;
-
+    
     ......
-
+    
     // 创建 getter 方法
     public float getProgress() {
         return progress;
@@ -907,15 +907,15 @@ public class SportsView extends View {
         this.progress = progress;
         invalidate();
     }
-
+    
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        
         ......
-
+        
         canvas.drawArc(arcRectF, 135, progress * 2.7f, false, paint);
-
+        
         ......
     }
 }
@@ -939,9 +939,9 @@ animator.start();
 ```java
 public class SportsView extends View {
     float progress = 0;
-
+    
     ......
-
+    
     // 创建 getter 方法
     public float getProgress() {
         return progress;
@@ -952,15 +952,15 @@ public class SportsView extends View {
         this.progress = progress;
         invalidate();
     }
-
+    
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        
         ......
-
+        
         canvas.drawArc(arcRectF, 135, progress * 2.7f, false, paint);
-
+        
         ......
     }
 }
@@ -973,7 +973,7 @@ ObjectAnimator animator = ObjectAnimator.ofFloat(view, "progress", 0, 65);
 animator.start();
 ```
 
-![](/images/2020-10-22-09-58-31.gif)
+![img](http://wx3.sinaimg.cn/large/006tKfTcgy1fj7y2vnw5jg30ek0dijwq.gif)
 
 ##### setDuration(int duration) 设置动画时长
 
@@ -1021,7 +1021,7 @@ animator.start();
 
 参数为0.5f
 
-![img](/images/006tKfTcly1fj8in23hktg30lg0bu197.gif)
+![img](http://wx3.sinaimg.cn/large/006tKfTcly1fj8in23hktg30lg0bu197.gif)
 
 ###### PathInterpolator
 
@@ -1039,19 +1039,18 @@ interpolatorPath.moveTo(0.25f, 1.5f);
 // 再匀速倒车，返回到目标点
 interpolatorPath.lineTo(1, 1);
 ```
-![](/images/2020-10-22-10-01-53.png)
+![img](http://wx4.sinaimg.cn/large/006tKfTcly1fj8jmom7kaj30cd0ay74f.jpg)
 
-![img](/images/006tKfTcly1fj8jsmxr3eg30lg0buto5.gif)
+![img](http://wx4.sinaimg.cn/large/006tKfTcly1fj8jsmxr3eg30lg0buto5.gif)
 
 不过要注意，这条 Path 描述的其实是一个 y = f(x) (0 ≤ x ≤ 1) （y 为动画完成度，x 为时间完成度）的曲线，所以同一段时间完成度上不能有两段不同的动画完成度（这个好理解吧？因为内容不能出现分身术呀），而且每一个时间完成度的点上都必须要有对应的动画完成度（因为内容不能在某段时间段内消失呀）。所以，下面这样的 Path 是非法的，会导致程序 FC
 
 出现重复的动画完成度，即动画内容出现「分身」——程序 FC
-
-![](/images/2020-10-22-10-02-45.png)
+![img](http://wx4.sinaimg.cn/large/006tKfTcly1fj8lidbk4gj30c909jq34.jpg)
 
 有一段时间完成度没有对应的动画完成度，即动画出现「中断」——程序 FC
 
-![](/images/2020-10-22-10-03-10.png)
+![img](http://wx3.sinaimg.cn/large/006tKfTcly1fj8lk0do93j30c109baa6.jpg)
 
 ###### FastOutLinearInInterpolator
 
@@ -1148,7 +1147,7 @@ animator.start();
 PropertyValuesHolder holder1 = PropertyValuesHolder.ofFloat("scaleX", 1);
 PropertyValuesHolder holder2 = PropertyValuesHolder.ofFloat("scaleY", 1);
 PropertyValuesHolder holder3 = PropertyValuesHolder.ofFloat("alpha", 1);
-
+ 
 ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, holder1, holder2, holder3)
 animator.start();
 ```
@@ -1164,7 +1163,7 @@ ObjectAnimator animator1 = ObjectAnimator.ofFloat(...);
 animator1.setInterpolator(new LinearInterpolator());
 ObjectAnimator animator2 = ObjectAnimator.ofInt(...);
 animator2.setInterpolator(new DecelerateInterpolator());
-
+ 
 AnimatorSet animatorSet = new AnimatorSet();
 // 两个动画依次执行
 animatorSet.playSequentially(animator1, animator2);
@@ -1199,7 +1198,7 @@ ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, holder);
 animator.start();
 ```
 
-![img](/images/006tNc79ly1fjfig8edhmg30ck07046i.gif)
+![img](http://wx4.sinaimg.cn/large/006tNc79ly1fjfig8edhmg30ck07046i.gif)
 
 ### 硬件加速
 
@@ -1241,7 +1240,7 @@ View Layer 绘制所消耗的实际时间是比不使用 View Layer 时要高的
 
 硬件加速不只是好处，也有它的限制：受到 GPU 绘制方式的限制，Canvas 的有些方法在硬件加速开启式会失效或无法正常工作。比如，在硬件加速开启时， clipPath() 在 API 18 及以上的系统中才有效。具体的 API 限制和 API 版本的关系如下图：
 
-![](/images/2020-10-22-10-04-09.png)
+![img](http://wx2.sinaimg.cn/large/006tKfTcly1fjn0huxdm5j30lr0q0n25.jpg)
 
 所以，如果你的自定义控件中有自定义绘制的内容，最好参照一下这份表格，确保你的绘制操作可以正确地在所有用户的手机里能够正常显示，而不是只在你的运行了最新版本 Android 系统的 Nexus 或 Pixel 里测试一遍没问题就发布了。
 
@@ -1303,7 +1302,7 @@ view.setLayerType(LAYER_TYPE_HARDWARE, paint);
 
 布局的过程，就是程序在运行时利用布局文件的代码来计算出实际尺寸的过程。
 
-![](/images/2020-10-22-10-04-30.png)
+![image](https://upload-images.jianshu.io/upload_images/3947109-fe8da0a2b47b8aee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### View 或 ViewGroup 的布局过程
 
@@ -1351,5 +1350,27 @@ ViewGroup：ViewGroup 在 onLayout() 中会调用自己的所有子 View 的 lay
 2. 使用 resolveSize() 来让子 View 的计算结果符合父 View 的限制（当然，如果你想用自己的方式来满足父 View 的限制也行）。
 
 #### 重写 onMeasure() 和 onLayout() 来全新定制自定义 ViewGroup 的内部布局。
+
+##### 重写 OnMeasure() 来计算内部布局
+
+###### 调用每个子 View 的 measure() 来计算子 View 的尺寸
+
+计算子 View 的尺寸，关键在于 measure() 方法的两个参数——也就是子 View 的两个 MeasureSpec 的计算。
+
+子 View 的 MeasureSpec 的计算方式：
+
+- 结合开发者的要求（xml 中 layout_ 打头的属性）和自己的可用空间（自己的尺寸上限 - 已用尺寸）
+
+- 尺寸上限根据自己的 MeasureSpec 中的 mode 而定
+  - EXACTLY / AT_MOST：尺寸上限为 MeasureSpec 中的 size
+  - UNSPECIFIED：尺寸无上限
+
+###### 计算子 View 的位置并保存子 View 的位置和尺寸
+
+###### 计算自己的尺寸并用 setMeasuredDimension() 保存
+
+##### 重写OnLayout()来摆放子view
+
+在 onLayout() 里调用每个子 View 的 layout() ，让它们保存自己的位置和尺寸。
 
 ## 触摸反馈
