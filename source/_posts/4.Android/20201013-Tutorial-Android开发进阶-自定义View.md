@@ -1386,3 +1386,46 @@ ViewGroup：ViewGroup 在 onLayout() 中会调用自己的所有子 View 的 lay
 ### requestDisallowInterceptTouchEvent()
 
 当子 View 临时需要阻止父 View 拦截事件流时，可以调用父 View 的 requestDisallowInterceptTouchEvent() ，通知父 View 在当前事件流中不再尝试通过 onInterceptTouchEvent() 来拦截。
+
+### dispatchTouchEvent()
+
+分发事件 如果返回false 则不向下分发 
+
+返回true 则向下分发
+
+```java
+public class ChildViewPager extends ViewPager {
+
+    private static final String TAG = "ChildViewPager";
+    public ChildViewPager(Context context) {
+        super(context);
+    }
+
+    public ChildViewPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    // 用来解决嵌套ViewPager滑动冲突
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        int curPosition;
+
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                getParent().requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                curPosition = this.getCurrentItem();
+                int count = this.getAdapter().getCount();
+                Log.i(TAG, "curPosition:=" +curPosition);
+                // 当当前页面在最后一页和第0页的时候，由父亲拦截触摸事件
+                if (curPosition == count - 1|| curPosition==0) {
+                    getParent().requestDisallowInterceptTouchEvent(false);
+                } else {//其他情况，由孩子拦截触摸事件
+                    getParent().requestDisallowInterceptTouchEvent(true);
+                }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+}
+```
