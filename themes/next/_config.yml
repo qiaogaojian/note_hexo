@@ -497,14 +497,10 @@ math:
   # Default (false) will load mathjax / katex script on demand.
   # That is it only render those page which has `mathjax: true` in front-matter.
   # If you set it to true, it will load mathjax / katex srcipt EVERY PAGE.
-  every_page: true
+  every_page: false
 
-  # MathJax Support
   mathjax:
-    enable: true
-    per_page: true
-    #cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
-    cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    enable: false
 
   katex:
     enable: false
@@ -942,10 +938,3 @@ vendors:
 css: css
 js: js
 images: images
-
-# MathJax Support
-mathjax:
-  enable: true
-  per_page: true
-  cdn: //cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-

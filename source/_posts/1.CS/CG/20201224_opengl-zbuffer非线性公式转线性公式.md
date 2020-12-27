@@ -1,7 +1,3 @@
----
-mathjax: true
---
-
 ### 前言
   正如[LearnOpenGL-高级OpenGL-深度测试](https://learnopengl.com/#!Advanced-OpenGL/Depth-testing)中所述，在OpenGL的深度值可以通过在fragment shader中调用`gl_FragCoord.z`获得，其值域为[0,1]。但是物体离我们眼睛(摄像机)的真正距离是多少呢？怎么通过OpenGL中的深度反求“真正的深度”呢？
 
