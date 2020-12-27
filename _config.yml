@@ -125,7 +125,7 @@ deploy:
   type: git
   #repository: https://github.com/qiaogaojian/qiaogaojian.github.io
   repo:
-      gitee: https://gitee.com/qiaogaojian/qiaogaojian.git
+      # gitee: https://gitee.com/qiaogaojian/qiaogaojian.git
       github: https://github.com/qiaogaojian/qiaogaojian.github.io
   branch: master
 
