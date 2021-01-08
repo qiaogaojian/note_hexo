@@ -4,7 +4,6 @@ db.json
 *.log
 public/
 .deploy*/
-.vscode/
 node_modules/
 package-lock.json
 Jupyter/.ipynb_checkpoints
