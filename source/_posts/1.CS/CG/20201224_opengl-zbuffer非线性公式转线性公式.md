@@ -3,20 +3,20 @@
 
 ### 推导过程
 
-  我们假设在FragmentShader出来的的深度值为$ z_b $ =`gl_FragCoord.z`，因为$ z_b $是值域为[0,1]，我们首先得转换回NDC坐标系下，假设NDC坐标系下的深度值为$ z_n $，OpenGL是这样转换的：
+  我们假设在FragmentShader出来的的深度值为$z_b$= `gl_FragCoord.z`，因为$z_b$是值域为[0,1]，我们首先得转换回NDC坐标系下，假设NDC坐标系下的深度值为$z_n$，OpenGL是这样转换的：
 
 $$
 z_b=0.5z_n+0.5
 $$
 
-  这时$ z_n $的值域为[-1,1]。
+  这时$z_n$的值域为[-1,1]。
   我们设视角坐标下的深度值为$z_r$(也就是实际的深度值，aka.物体到我们眼睛的距离, r for real)，同时我们假设视角截面体的近平面距离=near，远平面距离=far，OpenGL是这样转换的:
 
 $$
 z_b=\frac{1/z_r-1/near}{1/far-1/near}
 $$
 
-  上面公式反求$ z_r $，下面令$ f=far,n=near $：
+  上面公式反求$z_r$，下面令$f=far,n=near$：
 
 $$
 z_b=\frac{\frac{nf}{z_r}-f}{n-f}
@@ -85,6 +85,7 @@ $$
 float depth = (LinearizeDepth(gl_FragCoord.z) - near)/ (far-near); //非线性转线性
 ...
 ```
+
 
 ### 验证
   因为
