@@ -1,8 +1,8 @@
-# Git常用命令速查表
+# Git 常用命令速查表
 
 <!-- TOC -->
 
-- [Git常用命令速查表](#git常用命令速查表)
+- [Git 常用命令速查表](#git-常用命令速查表)
     - [常用命令](#常用命令)
         - [1.下载项目](#1下载项目)
         - [2.添加更改](#2添加更改)
@@ -16,11 +16,12 @@
         - [10.删除文件](#10删除文件)
         - [11.撤销本地所有未提交文件的修改](#11撤销本地所有未提交文件的修改)
         - [12.查看提交历史](#12查看提交历史)
-        - [13.查看git config](#13查看git-config)
+        - [13.查看 git config](#13查看-git-config)
         - [14.查看远程仓库](#14查看远程仓库)
         - [15.删除远程仓库](#15删除远程仓库)
-        - [16.Gitlab新建仓库命令](#16gitlab新建仓库命令)
-    - [Git命令表](#git命令表)
+        - [16.Gitlab 新建仓库命令](#16gitlab-新建仓库命令)
+        - [17. 取消跟踪](#17-取消跟踪)
+    - [Git 命令表](#git-命令表)
 
 <!-- /TOC -->
 
@@ -44,7 +45,7 @@ git add .
 git commit -m "commit message"
 ```
 
-退出vi编辑器: esc + : + wq/q
+退出 vi 编辑器: esc + : + wq/q
 
 ### 4.上传代码
 
@@ -102,9 +103,9 @@ git clean -xdf //清除未跟踪文件
 git log
 ```
 
-退出log: 英文状态下按q
+退出 log: 英文状态下按 q
 
-### 13.查看git config
+### 13.查看 git config
 
 ```sh
 git config --global user.name
@@ -113,28 +114,28 @@ git config --global user.email
 
 ### 14.查看远程仓库
 
-``` sh
+```sh
 git remote -v
 ```
 
 ### 15.删除远程仓库
 
-``` sh
+```sh
 git remote rm origin
 ```
 
-### 16.Gitlab新建仓库命令
+### 16.Gitlab 新建仓库命令
 
 1. Git global setup
 
-``` sh
+```sh
 git config --global user.name "qiaogaojian"
 git config --global user.email "qiaogaojian@vip.qq.com"
 ```
 
 2. Create a new repository
 
-``` sh
+```sh
 git clone git@gitlab.53site.com:qiaogaojian/testremote.git
 cd testremote
 touch README.md
@@ -145,7 +146,7 @@ git push -u origin master
 
 3. Existing folder
 
-``` sh
+```sh
 cd existing_folder
 git init
 git remote add origin git@gitlab.53site.com:qiaogaojian/testremote.git
@@ -156,7 +157,7 @@ git push -u origin master
 
 4. Existing Git repository
 
-``` sh
+```sh
 cd existing_repo
 git remote rename origin old-origin
 git remote add origin git@gitlab.53site.com:qiaogaojian/testremote.git
@@ -164,6 +165,13 @@ git push -u origin --all
 git push -u origin --tags
 ```
 
-## Git命令表
+### 17. 取消跟踪
+
+```sh
+git rm --cached remove.txt     # 删除 readme1.txt 的跟踪，并保留在本地。
+git rm --f remove.txt          # 删除 readme1.txt 的跟踪，并且删除本地文件。
+```
+
+## Git 命令表
 
 ![image.png](https://upload-images.jianshu.io/upload_images/3947109-efdd076117d53040.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
