@@ -1,10 +1,10 @@
 # Home
 
-## [Branch 1](branch1.md)
+## [Branch 1](../20210730_Trick-branch1)
 
-## [Branch 2](branch2.md)
+## [Branch 2](../20210730_Trick-branch2)
 
-## [Branch 3](deep/branch3.md)
+## [Branch 3](../deep/20210730_Trick-branch3)
 
 ```markmap
 # Mindmap
