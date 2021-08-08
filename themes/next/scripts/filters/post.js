@@ -5,6 +5,10 @@
 const { parse } = require('url');
 
 hexo.extend.filter.register('after_post_render', data => {
+  if (data.content.indexOf("../..") != -1) {
+      data.content = data.content.replace("../../image","/image")
+  }
+
   const { config } = hexo;
   const theme = hexo.theme.config;
   if (!theme.exturl && !theme.lazyload) return;
