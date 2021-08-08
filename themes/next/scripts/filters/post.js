@@ -5,9 +5,15 @@
 const { parse } = require('url');
 
 hexo.extend.filter.register('after_post_render', data => {
-  if (data.content.indexOf("../..") != -1) {
+  if (data.content.indexOf("../../image") != -1) {
       data.content = data.content.replace("../../image","/image")
   }
+
+  data.content = data.content.replace(/([^"]+).md"[^>]*>([^<]+)<\/a>/g,(match,href,html)=>{
+    let markdownUrl = "../" + match;
+    markdownUrl = markdownUrl.replace(".md","");
+    return markdownUrl;
+  })
 
   const { config } = hexo;
   const theme = hexo.theme.config;
