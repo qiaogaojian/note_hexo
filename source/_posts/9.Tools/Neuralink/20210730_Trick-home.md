@@ -33,3 +33,15 @@
   - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
   - $$\int_{0}^{\infty} f(x) dx$$
 ```
+
+{% pullquote mindmap mindmap-md %}
+
+- 知识图谱
+  - Scala
+  - Python
+  - java
+      - jvm
+ - 消息队列
+    - kafka
+    - pulsar
+{% endpullquote %}
