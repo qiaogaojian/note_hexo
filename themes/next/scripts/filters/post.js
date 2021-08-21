@@ -8,20 +8,23 @@ hexo.extend.filter.register('after_post_render', data => {
   if (data.content.indexOf("../../../../../../../images") != -1) {
       data.content = data.content.replace(new RegExp("../../../../../../../images","gm"),"/images")
   }
-   if (data.content.indexOf("../../../../../../images") != -1) {
+  else if (data.content.indexOf("../../../../../../images") != -1) {
       data.content = data.content.replace(new RegExp("../../../../../../images","gm"),"/images")
   }
-   if (data.content.indexOf("../../../../../images") != -1) {
+  else if (data.content.indexOf("../../../../../images") != -1) {
       data.content = data.content.replace(new RegExp("../../../../../images","gm"),"/images")
   }
-   if (data.content.indexOf("../../../../images") != -1) {
+  else if (data.content.indexOf("../../../../images") != -1) {
       data.content = data.content.replace(new RegExp("../../../../images","gm"),"/images")
   }
-   if (data.content.indexOf("../../../images") != -1) {
+  else if (data.content.indexOf("../../../images") != -1) {
       data.content = data.content.replace(new RegExp("../../../images","gm"),"/images")
   }
-   if (data.content.indexOf("../../images") != -1) {
+  else if (data.content.indexOf("../../images") != -1) {
       data.content = data.content.replace(new RegExp("../../images","gm"),"/images")
+  }
+  else if (data.content.indexOf("../images") != -1) {
+    data.content = data.content.replace(new RegExp("../images","gm"),"/images")
   }
 
   data.content = data.content.replace(/([^"]+).md"[^>]*>([^<]+)<\/a>/g,(match,href,html)=>{
