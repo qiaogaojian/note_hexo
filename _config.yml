@@ -130,7 +130,7 @@ deploy:
   branch: master
 
 live2d:
-  enable: true #????
+  enable: true
   scriptFrom: local
   model:
     use: live2d-widget-model-wanko
