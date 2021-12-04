@@ -1,4 +1,7 @@
 {
-    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
-  }
-
+  // ## Paste Image
+  "pasteImage.path": "${projectRoot}/source/images",
+  "pasteImage.basePath": "${projectRoot}/source",
+  "pasteImage.forceUnixStyleSeparator": true,
+  "pasteImage.prefix": "/"
+}
