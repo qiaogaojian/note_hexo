@@ -10,13 +10,13 @@ keywords: Math,数学,Calculus,微积分,Linear Algebra,线性代数,Computer Sc
 tags: Math,数学,Calculus,微积分,Linear Algebra,线性代数,Computer Science,计算机原理,编程,设计模式,计算机网络,计算机图形学,Computer Graphics,Unity,Unity3d,CG,HLSL,OpenGL,C#,Android,Java,GameFramework,ML,Shader,Golang,Go,Asm,Adb,BlockChain,VSCode,Web,Tools,PHP,Ubuntu,ThinkPHP,MySql,Sqlite,重构,Windows,Win10,Git,Mac,Linux,树莓派,VS,AS,Android Studio,PhpStorm,PyCharm,Vim,Rider,Jupyter,Kali,Js,JavaScript,Hexo,3dMax,Maya,Zbrush,汇编,游戏设计,Roguelike,Roguelite,地图生成,技能,FSM,NGUI,UGUI,UV,法线,光照,后端,Html,Css,C语言,C++,Python,机器学习,信息安全,操作系统,IDE,工具,效率,VR,AR,BitCoin,Eos,数据结构,算法,排序,查找,Leetcode,RoadMap,Tips,Trick,Bug,BestPratice,Tutorial,Tao
 author: qiaogaojian
 language: zh-CN
-timezone: ""
+timezone: "Asia/Shanghai"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://example.com/child' and root as '/child/'
 url: https://qiaogaojian.github.io/
 root: /
-permalink: :year/:month/:day/:title/
+permalink: "/:categories"
 permalink_defaults: https://qiaogaojian.github.io/
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
