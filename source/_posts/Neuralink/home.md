@@ -1,13 +1,11 @@
+---
+abbrlink: 2
+---
 # Home
 
-[Branch 1](branch1.md)
-
-[Branch 2](branch2.md)
-
-[Branch 3](deep/branch3.md)
-
-{% post_link 20100730_Trick-branch1 点击这里查看这篇文章 %}
-{% post_link Trick-branch1 点击这里查看这篇文章 %}
+[[branch1]]
+[[branch1]]
+[[branch1]]
 
 {% pullquote mindmap mindmap-lg %}
 
@@ -21,3 +19,228 @@
     - pulsar
 
 {% endpullquote %}
+
+
+# Markdown
+
+Markdown简易入门教程   
+使用方式：打开 Source Mode 就可以看到所有markdown格式，照着来用就行了    
+
+## 标题
+
+```
+# 标题一
+## 标题二
+### 标题三
+#### 标题四
+##### 标题五
+###### 标题六
+```
+
+## 文本
+
+**粗体**   
+
+> 引用   
+
+~~中划线~~   
+
+<u>下划线</u> 
+
+---
+
+<mark style="background: #fefe00A6;">三空格+换行＝换行</mark>   
+
+*斜体*   
+
+***斜体加粗体***   
+
+**常用markdown标记?**
+??
+```sh
+
+**粗体**   
+
+> 引用   
+
+~~中划线~~   
+
+<u>下划线</u> 
+
+---
+
+三空格+换行＝换行   
+
+*斜体*   
+
+***斜体加粗体***   
+
+```
+<!--SR:!2022-11-16,64,250-->
+
+## 段落
+
+### 链接
+
+[链接](https://gitee.com/qiaogaojian)  
+```
+[链接](链接地址)  
+```
+
+### 图片
+
+![[Pasted image 20221009213236.png]]
+
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-1c9256e2c1f95874.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+```
+![图片](图片地址)
+```
+
+
+### 代码
+
+```java
+public class HelloWord{
+	public static void main(String[] args){
+		System.out.println("HelloWord");
+	}
+}
+```
+
+### 表格
+
+| 标题1     | 标题2     |
+| --------- | --------- |
+| 行 1 列 1 | 行 1 列 2 |
+| 行 2 列 1 | 行 2 列 2 |
+
+**markdown 表格标记**   
+??   
+```
+| 标题1     | 标题2     |
+| --------- | --------- |
+| 行 1 列 1 | 行 1 列 2 |
+| 行 2 列 1 | 行 2 列 2 |
+```
+<!--SR:!2022-08-19,10,250-->
+
+### 公式
+
+**数学公式**   
+```latex
+$y = x^2$
+```
+$y=x^2$
+
+> 注: Latex语法参考[[常用的 LaTeX 符号公式]]
+
+
+## 列表
+
+### 无序
+
+- 普通序列
+	- 1
+		- a
+		- b
+		- c
+	- 2
+	- 3
+- 普通序列
+- 普通序列
+- 普通序列   
+
+### 有序
+
+1. 数字序列
+2. 数字序列
+3. 数字序列
+4. 数字序列
+
+### 混合
+
+- 混合序列
+  - 混合序列
+  - 混合序列
+  - 混合序列
+  - 混合序列
+- 混合序列
+- 混合序列
+  1. 混合序列
+  2. 混合序列
+  3. 混合序列
+  4. 混合序列
+- 混合序列
+
+### 任务
+
+**任务列表**   
+??   
+- [ ] 未完成   
+- [x] 已完成   
+```
+- [ ] 未完成   
+- [x] 已完成   
+```
+<!--SR:!2022-08-16,7,250-->
+
+## 图表
+
+**mermaid 流程图**   
+??
+```
+graph LR
+A-->B
+B-->c
+```
+```mermaid
+graph LR
+A-->B
+B-->c
+
+```
+<!--SR:!2022-11-07,57,250-->
+
+**mermaid 顺序图**   
+??
+```
+sequenceDiagram
+A->>B: How are you?
+B->>A: Great!
+```
+```mermaid
+sequenceDiagram
+A->>B: How are you?
+B->>A: Great!
+```
+<!--SR:!2022-11-15,64,250-->
+
+**mermaid 甘特图**   
+??
+```
+gantt
+dateFormat YYYY-MM-DD
+
+section S1
+T1: 2014-01-01, 3d
+
+section S2
+T2: 2014-01-11, 6d
+
+section S3
+T3: 2014-01-02, 9d
+```
+```mermaid
+gantt
+dateFormat YYYY-MM-DD
+
+section S1
+T1: 2014-01-01, 3d
+
+section S2
+T2: 2014-01-11, 6d
+
+section S3
+T3: 2014-01-02, 9d
+```
+<!--SR:!2022-10-11,40,250-->
