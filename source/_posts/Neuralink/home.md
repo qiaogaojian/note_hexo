@@ -1,10 +1,10 @@
 # Home
 
-[Branch 1](20100730_Trick-branch1.md)
+[Branch 1](branch1.md)
 
-[Branch 2](20100730_Trick-branch2.md)
+[Branch 2](branch2.md)
 
-[Branch 3](deep/20100730_Trick-branch3.md)
+[Branch 3](deep/branch3.md)
 
 {% post_link 20100730_Trick-branch1 点击这里查看这篇文章 %}
 {% post_link Trick-branch1 点击这里查看这篇文章 %}
