@@ -199,6 +199,13 @@ atob@^2.1.2:
   resolved "https://registry.npmmirror.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+axios@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.npmmirror.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
+  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
+  dependencies:
+    follow-redirects "^1.14.4"
+
 babel-polyfill@6.23.0:
   version "6.23.0"
   resolved "https://registry.npmmirror.com/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
@@ -1178,6 +1185,11 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
 
+follow-redirects@^1.14.4:
+  version "1.15.2"
+  resolved "https://registry.npmmirror.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -1409,6 +1421,14 @@ he@^1.0.0:
   resolved "https://registry.npmmirror.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+hexo-abbrlink@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npmmirror.com/hexo-abbrlink/-/hexo-abbrlink-2.2.1.tgz#03a3bbf73816ed19279e97452ce617c6caf98b5a"
+  integrity sha512-yvazN7bbrIb7p8QU3nJ/8fbDmir1mFroYvUYcJz5xpc6DtszKggschmqZg6WNUdjhDBFyDwksrIUfwQnw0OOuA==
+  dependencies:
+    hexo-front-matter "^1.0.0"
+    hexo-fs "^3.1.0"
+
 hexo-auto-excerpt@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmmirror.com/hexo-auto-excerpt/-/hexo-auto-excerpt-1.1.2.tgz#d19d3449e4c4c164c629a5641a2e688fff9aace3"
@@ -1574,6 +1594,13 @@ hexo-i18n@^1.0.0:
   integrity sha512-yw90JHr7ybUHN/QOkpHmlWJj1luVk5/v8CUU5NRA0n4TFp6av8NT7ujZ10GDawgnQEdMHnN5PUfAbNIVGR6axg==
   dependencies:
     sprintf-js "^1.0.3"
+
+hexo-link-obsidian@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmmirror.com/hexo-link-obsidian/-/hexo-link-obsidian-1.1.2.tgz#3877a4c544748b82e6a2789ff000222bcb64b0d2"
+  integrity sha512-kFuWKNqCWg2wLZ+1ZpHc4QOWMQIiVWoM8ALgm/Kw54VBGIA6leKGGZOZNG7liGti1qdmqGA2tYTw8WqbyT+mCg==
+  dependencies:
+    axios "^0.24.0"
 
 hexo-log@^0.2.0:
   version "0.2.0"
