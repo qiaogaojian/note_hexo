@@ -1,11 +1,16 @@
 ---
-abbrlink: 2
+title: home
+date: 2022-10-10 02:14:01
+categories: []
+tags: ['#share', '#test', '#hexo']
 ---
+
+#share #test #hexo
 # Home
 
 [[branch1]]
-[[branch1]]
-[[branch1]]
+
+[[9.输出/hexo/Neuralink/deep/branch2]]
 
 {% pullquote mindmap mindmap-lg %}
 
@@ -85,15 +90,17 @@ Markdown简易入门教程
 [链接](https://gitee.com/qiaogaojian)  
 ```
 [链接](链接地址)  
+[[obsidian双链]]
 ```
 
 ### 图片
-
 ![[Pasted image 20221009213236.png]]
-
-![image.png](https://upload-images.jianshu.io/upload_images/3947109-1c9256e2c1f95874.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](0-2.png)
+![image.png](https://upload-images.jianshu.io/upload_images/3947109-1c9256e2c1f95874.png)
 ```
-![图片](图片地址)
+![](远程图片地址)
+![[obsidian 图片]]
+![](obsidian 本地图片名字)
 ```
 
 
