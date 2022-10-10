@@ -93,8 +93,8 @@ Markdown简易入门教程
 ```
 
 ### 图片
-![[Pasted image 20221009213236.png]]
-![](0-2.png)
+![](/images/Pasted image 20221009213236.png)
+![](/images/0-2.png)
 ![image.png](https://upload-images.jianshu.io/upload_images/3947109-1c9256e2c1f95874.png)
 ```
 ![](远程图片地址)
