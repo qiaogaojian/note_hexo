@@ -1,11 +1,10 @@
 ---
 title: home
 date: 2022-10-10 02:14:01
-categories: []
+categories: ['Neuralink']
 tags: ['#share', '#test', '#hexo']
 ---
 
-#share #test #hexo
 # Home
 
 [[branch1]]

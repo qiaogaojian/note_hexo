@@ -1,13 +1,10 @@
 ---
 title: branch1
-categories: []
-tags:
-  - '#share'
-abbrlink: 16118
 date: 2022-10-10 02:14:01
+categories: ['Neuralink']
+tags: ['#share']
 ---
 
-#share
 # Branch 1
 
 [[home]]
