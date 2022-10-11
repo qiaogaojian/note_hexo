@@ -28,9 +28,11 @@
   transform: scale(0);
   transition: transform .4s;
   width: 700px;
+  visibility: hidden;
 
   .search-active & {
     transform: scale(1);
+    visibility: visible;
   }
 
   +mobile() {
