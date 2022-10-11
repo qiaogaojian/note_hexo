@@ -803,7 +803,7 @@ pdf:
 mermaid:
   enable: true
   # Available themes: default | dark | forest | neutral
-  theme: forest
+  theme: dark
 
 
 # ---------------------------------------------------------------
@@ -922,7 +922,7 @@ vendors:
 
   # Mermaid
   mermaid:
-    enable: true
+
   # Animate.css
   # Warning: motion won't work with animate.css version 3.2.0 or later
   animate_css:

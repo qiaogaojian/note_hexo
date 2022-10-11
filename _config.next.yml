@@ -788,7 +788,7 @@ pdf:
 mermaid:
   enable: true
   # Available themes: default | dark | forest | neutral
-  theme: forest
+  theme: dark
 
 # ---------------------------------------------------------------
 # Animation Settings
@@ -905,9 +905,6 @@ vendors:
 
   # Mermaid
   mermaid:
-    enable: true
-    # Available themes: default | dark | forest | neutral
-    theme: forest
 
   # Animate.css
   # Warning: motion won't work with animate.css version 3.2.0 or later
