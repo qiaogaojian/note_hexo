@@ -301,7 +301,6 @@ post_edit:
 # Available values: left | right | false
 post_navigation: left
 
-
 # ---------------------------------------------------------------
 # Custom Page Settings
 # See: https://theme-next.js.org/docs/theme-settings/custom-pages
@@ -328,7 +327,6 @@ calendar:
   singleEvents: true
   maxResults: 250
 
-
 # ---------------------------------------------------------------
 # Misc Theme Settings
 # See: https://theme-next.js.org/docs/theme-settings/miscellaneous
@@ -350,16 +348,16 @@ codeblock:
   # Code Highlight theme
   # All available themes: https://theme-next.js.org/highlight/
   theme:
-    light: default
-    dark: tomorrow-night
+    light: monokai-sublime
+    dark: monokai-sublime
   prism:
     light: prism
     dark: prism-dark
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Available values: default | flat | mac
-    style:
+    style: flat
 
 back2top:
   enable: true
