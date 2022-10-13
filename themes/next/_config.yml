@@ -600,7 +600,7 @@ valine:
   enable: true
   appId: waBo9VOFFCiurlsGpdJsWVUv-gzGzoHsz
   appKey: d3kQWAKtnshFxkzHG3iu6wvB
-  placeholder: "" # Comment box placeholder
+  placeholder: "要不说点啥?" # Comment box placeholder
   avatar: mm # Gravatar style
   meta: [nick, mail] # Custom comment header [nick, mail, link]
   pageSize: 10 # Pagination size
