@@ -2,7 +2,7 @@
 title: 常用 LaTeX 公式符号
 date: 2022-10-12 22:00:04
 categories: ['5.工具', '效率', 'Obsidian']
-tags: ['latex', 'srcard']
+tags: ['srcard', 'latex']
 ---
 
 
