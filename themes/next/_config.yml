@@ -544,7 +544,6 @@ quicklink:
   # See: https://github.com/GoogleChromeLabs/quicklink#custom-ignore-patterns
   ignores:
 
-
 # ---------------------------------------------------------------
 # Comments Settings
 # See: https://theme-next.js.org/docs/third-party-services/comments
@@ -598,20 +597,20 @@ changyan:
 # Valine
 # For more information: https://valine.js.org, https://github.com/xCss/Valine
 valine:
-  enable: false
-  appId: # Your leancloud application appid
-  appKey: # Your leancloud application appkey
-  placeholder: Just go go # Comment box placeholder
+  enable: true
+  appId: waBo9VOFFCiurlsGpdJsWVUv-gzGzoHsz
+  appKey: d3kQWAKtnshFxkzHG3iu6wvB
+  placeholder: "" # Comment box placeholder
   avatar: mm # Gravatar style
-  meta: [nick, mail, link] # Custom comment header
+  meta: [nick, mail] # Custom comment header [nick, mail, link]
   pageSize: 10 # Pagination size
   lang: # Language, available values: en, zh-cn
-  visitor: false # Article reading statistic
+  visitor: true # Article reading statistic
   comment_count: true # If false, comment count will only be displayed in post page, not in home page
-  recordIP: false # Whether to record the commenter IP
+  recordIP: true # Whether to record the commenter IP
   serverURLs: # When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)
   enableQQ: false # Whether to enable the Nickname box to automatically get QQ Nickname and QQ Avatar
-  requiredFields: [] # Set required fields: [nick] | [nick, mail]
+  requiredFields: [nick] # Set required fields: [nick] | [nick, mail]
 
 # LiveRe comments system
 # You can get your uid from https://livere.com/insight/myCode (General web site)
@@ -631,7 +630,6 @@ gitalk:
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
   language:
-
 
 # ---------------------------------------------------------------
 # Post Widgets & Content Sharing Services
