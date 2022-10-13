@@ -2,7 +2,7 @@
   // Search
   var $searchWrap = $('#search-form-wrap'),
     isSearchAnim = false,
-    searchAnimDuration = 200;
+    searchAnimDuration = 100;
 
   var startSearchAnim = function(){
     isSearchAnim = true;
@@ -109,7 +109,7 @@
   // Mobile nav
   var $container = $('#container'),
     isMobileNavAnim = false,
-    mobileNavAnimDuration = 200;
+    mobileNavAnimDuration = 100;
 
   var startMobileNavAnim = function(){
     isMobileNavAnim = true;

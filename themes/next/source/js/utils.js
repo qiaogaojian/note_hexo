@@ -170,7 +170,7 @@ NexT.utils = {
     backToTop && backToTop.addEventListener('click', () => {
       window.anime({
         targets  : document.scrollingElement,
-        duration : 500,
+        duration : 100,
         easing   : 'linear',
         scrollTop: 0
       });
@@ -249,7 +249,7 @@ NexT.utils = {
         const offset = target.getBoundingClientRect().top + window.scrollY;
         window.anime({
           targets  : document.scrollingElement,
-          duration : 500,
+          duration : 100,
           easing   : 'linear',
           scrollTop: offset + 10
         });
@@ -275,7 +275,7 @@ NexT.utils = {
     const tocElement = document.querySelector('.post-toc-wrap');
     window.anime({
       targets  : tocElement,
-      duration : 200,
+      duration : 100,
       easing   : 'linear',
       scrollTop: tocElement.scrollTop - (tocElement.offsetHeight / 2) + target.getBoundingClientRect().top - tocElement.getBoundingClientRect().top
     });
