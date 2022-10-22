@@ -16,6 +16,6 @@ tags: ['obsidian', 'test', 'markdown', 'hexo']
 
 **Backlinks:**
 
-- [Obsidian+Hexo Markdown 测试](../cf5e875dd18a1a28fcad3f7d9ef0f7f956287483)
-- [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
 - [test_note2](../a1051e510da0bf87d685c05b40001b7020d14a66)
+- [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
+- [Obsidian+Hexo Markdown 测试](../cf5e875dd18a1a28fcad3f7d9ef0f7f956287483)
