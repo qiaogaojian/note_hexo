@@ -2,7 +2,7 @@
 title: Learn Regex the Easy Way
 date: 2022-10-18 21:55:08
 categories: ['5.工具', '开发', 'Regex']
-tags: ['regex', 'srcard']
+tags: ['srcard', 'regex']
 ---
 
 
