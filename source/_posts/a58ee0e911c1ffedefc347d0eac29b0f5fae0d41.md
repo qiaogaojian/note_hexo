@@ -2,7 +2,7 @@
 title: test_note1
 date: 2022-10-11 21:40:23
 categories: ['9.输出', 'hexo']
-tags: ['obsidian', 'hexo', 'markdown', 'test']
+tags: ['obsidian', 'hexo', 'test', 'markdown']
 ---
 
 # 双链测试笔记 1
@@ -12,9 +12,9 @@ tags: ['obsidian', 'hexo', 'markdown', 'test']
 [test_note2](../a1051e510da0bf87d685c05b40001b7020d14a66/#Branch 2)
 
 [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
-**
 
-Backlinks:**
+
+**Backlinks:**
 
 - [test_note2](../a1051e510da0bf87d685c05b40001b7020d14a66)
 - [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
