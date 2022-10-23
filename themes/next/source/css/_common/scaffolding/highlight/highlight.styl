@@ -23,7 +23,7 @@ $code-inline {
 $code-block {
   @extend $code-inline;
   line-height: $line-height-code-block;
-  margin: 0 auto 20px;
+  margin: 30px auto 0px;
 }
 
 pre, code {
@@ -131,5 +131,44 @@ pre {
     background: none;
     padding: 0;
     text-shadow: none;
+  }
+}
+
+.highlight-wrap[data-rel] {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 5px 5px 0px rgba(0,0,0,0.4);
+  margin: 35px 0;
+  ::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+      border-radius: 3px;
+      background: #f2f2f2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 3px;
+      background: #b1b1b1;
+  }
+  &::before {
+    color: white;
+    content: attr(data-rel);
+    height: 30px;
+    line-height: 30px;
+    background: #ffffff;
+    color: #b1b1b1;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    padding: 0px;
+    text-indent: 12px;
+    float: left;
   }
 }
