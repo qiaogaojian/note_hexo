@@ -1,0 +1,12 @@
+.deploy_git/
+.idea/
+Jupyter/
+node_modules/
+public/
+.deploy*/
+*.log
+db.json
+Thumbs.db
+.DS_Store
+package.json
+package-lock.json
