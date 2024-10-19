@@ -20,9 +20,9 @@ tags: ['hexo', 'obsidian', 'test', 'markdown']
 - [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
 
 {% pullquote mindmap mindmap-md %}
-- test_note1
-  - [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
+- 🔵
   - [Obsidian+Hexo Markdown 测试](../cf5e875dd18a1a28fcad3f7d9ef0f7f956287483)
-  - [Obsidian+Hexo Markdown 测试#注脚](../cf5e875dd18a1a28fcad3f7d9ef0f7f956287483/#注脚)
   - [test_note2](../a1051e510da0bf87d685c05b40001b7020d14a66)
+  - [Obsidian+Hexo Markdown 测试#注脚](../cf5e875dd18a1a28fcad3f7d9ef0f7f956287483/#注脚)
+  - [test_note2](../8f6545d7e67011208be5a476458127a9efcf702f)
 {% endpullquote %}

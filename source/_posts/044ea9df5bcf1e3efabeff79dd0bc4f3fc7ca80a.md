@@ -2,7 +2,7 @@
 title: Fish 命令行工具
 date: 2022-11-12 00:42:56
 categories: ['6.工具', '开发', '开发环境']
-tags: ['shell', 'linux']
+tags: ['linux', 'shell']
 ---
 
 deepin 的终端命令行没有智能提示，感觉不好用，推荐安装 fish，命令行辅助工具。
@@ -62,7 +62,7 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 - [开发环境](../8ed3626f24d1fafe372135071b6d2bc66a7b7436)
 
 {% pullquote mindmap mindmap-md %}
-- Fish 命令行工具
+- 🔵
   - [开发环境](../8ed3626f24d1fafe372135071b6d2bc66a7b7436)
   - [Fish 入门指南](../295d228c58beb58d3e477c857137241300856830)
 {% endpullquote %}
