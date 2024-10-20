@@ -2,7 +2,7 @@
 title: Fish 命令行工具
 date: 2022-11-12 00:42:56
 categories: ['6.工具', '开发', '开发环境']
-tags: ['linux', 'shell']
+tags: ['shell', 'linux']
 ---
 
 deepin 的终端命令行没有智能提示，感觉不好用，推荐安装 fish，命令行辅助工具。
