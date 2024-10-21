@@ -2,7 +2,7 @@
 title: 深入浅出 python 闭包
 date: 2022-11-12 00:42:56
 categories: ['5.技能', '编程语言', 'Python']
-tags: ['python']
+tags: ['Python', '技能', '编程语言', 'python']
 ---
 
 >原文地址 [zhuanlan.zhihu.com](https://zhuanlan.zhihu.com/p/22229197)
