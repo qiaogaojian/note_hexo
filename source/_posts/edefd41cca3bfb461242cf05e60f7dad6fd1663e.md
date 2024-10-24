@@ -2,7 +2,7 @@
 title: Python 开发环境
 date: 2022-11-12 00:42:56
 categories: ['6.工具', '开发', '开发环境']
-tags: ['工具', '开发', 'srcard', 'python', '开发环境']
+tags: ['开发环境', 'python', 'srcard', '工具', '开发']
 ---
   
   
@@ -112,7 +112,7 @@ launch.json 设置调试时以当前文件路径为工作路径
 {% pullquote mindmap mindmap-md %}
 - 🔵
   - [说说 Python 的命名规范](../f4d9b39cffbb9a542e360bd81bf53fa67120f26c)
-  - [Python 项目管理最佳实践 Poetry](../acc2d6da5dd37affe3f03e94d2997ae7cd02bc92)
   - [开发环境](../0c32955781debd23d9593f3ed51d05fde4a7304f)
   - [Python 修改 pip 源为国内镜像源](../e85089d47d0a9a1e5419aad022437f772a987bd7)
+  - [Python 项目管理最佳实践 Poetry](../acc2d6da5dd37affe3f03e94d2997ae7cd02bc92)
 {% endpullquote %}
