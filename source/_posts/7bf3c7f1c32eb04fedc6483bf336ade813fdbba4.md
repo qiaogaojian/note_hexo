@@ -1,7 +1,7 @@
 ---
 title: Android Databinding 报错 Index -1 out of bounds for length
 date: 2023-11-21 18:00:43
-categories: []
+categories: ['5.技能', '问题记录']
 tags: ['问题记录', '技能', 'android']
 ---
   
