@@ -2,7 +2,7 @@
 title: Android Gradle 自定义插件
 date: 2022-11-29 19:06:08
 categories: ['5.技能', 'Android']
-tags: ['技能', 'Android', 'gradle', 'srcard', 'android']
+tags: ['Android', 'srcard', 'android', 'gradle', '技能']
 ---
 
 Android studio 通过 Gradle 来构建我们的项目。一般情况下，我们只是使用 Gradle 来配置一些功能，比如，**buildTypes**，**productFlavors** 等等。  

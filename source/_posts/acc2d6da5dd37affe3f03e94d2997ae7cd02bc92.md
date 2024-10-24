@@ -2,7 +2,7 @@
 title: Python 项目管理最佳实践 Poetry
 date: 2022-11-12 00:42:56
 categories: ['5.技能', '编程语言', 'Python']
-tags: ['python', '编程语言', '技能', 'srcard', 'Python']
+tags: ['Python', 'srcard', 'python', '技能', '编程语言']
 ---
 
 <mark style="background: #83d98fA6;">最好只用poetry来运行python程序, 安装使用 micromamba 或 pip, 导出 environment.yaml 或 requirements.txt</mark> 
@@ -573,14 +573,14 @@ if __name__ == "__main__":
 [^5]: [How do I add a python package built by poetry to another python project with poetry? - Stack Overflow](https://stackoverflow.com/questions/59621373/how-do-i-add-a-python-package-built-by-poetry-to-another-python-project-with-poe)
 [^6]: [Commands | Documentation | Poetry - Python dependency management and packaging made easy](https://python-poetry.org/docs/cli/#add)
 
-**Backlinks:**
+**相关笔记:**
 
 - [Python 开发环境](../edefd41cca3bfb461242cf05e60f7dad6fd1663e)
 - [Python Micromamba + Poetry 环境管理](../34423981d978e285acba77d18622f5a99ad45aeb)
 
 {% pullquote mindmap mindmap-md %}
 - 🔵
-  - [Python 开发环境](../edefd41cca3bfb461242cf05e60f7dad6fd1663e)
   - [Python Micromamba + Poetry 环境管理#Micromamba 的安装与配置](../34423981d978e285acba77d18622f5a99ad45aeb/#Micromamba 的安装与配置)
+  - [Python 开发环境](../edefd41cca3bfb461242cf05e60f7dad6fd1663e)
   - [Python Micromamba + Poetry 环境管理](../34423981d978e285acba77d18622f5a99ad45aeb)
 {% endpullquote %}
