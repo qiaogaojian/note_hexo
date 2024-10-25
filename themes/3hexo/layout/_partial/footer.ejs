@@ -329,6 +329,7 @@
 
 </script>
 
+<script src="<%=theme.blog_path?theme.blog_path.lastIndexOf("/") === theme.blog_path.length-1?theme.blog_path.slice(0, theme.blog_path.length-1):theme.blog_path:'' %>/js/busuanzi.pure.mini.js" ></script>
 <!--加入行号的高亮代码块样式-->
 <%if(theme.highlight && theme.highlight.on && theme.highlight.lineNum){%>
 <style>
