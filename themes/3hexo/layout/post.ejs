@@ -44,18 +44,23 @@
 }) %>
 <% } %>
 </body>
-<% if (theme.baidu_analytics) { %>
 <script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?<%= theme.baidu_analytics %>";
+  hm.src = "https://hm.baidu.com/hm.js?07b17699976e6c59a5432b46de225325";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<% } %>
 <%- fragment_cache('footer', function(){
     return partial('_partial/footer');
 }) %>
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof reinitMindmap === 'function') {
+      reinitMindmap();
+    }
+  });
+</script> -->
 </html>

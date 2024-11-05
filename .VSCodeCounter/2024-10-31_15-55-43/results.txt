@@ -1,0 +1,342 @@
+Date : 2024-10-31 15:55:43
+Directory : d:\Git\Note\note_hexo
+Total : 260 files,  30636 codes, 1299 comments, 9029 blanks, all 40964 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| Markdown           |        109 |     16,134 |          7 |      7,540 |     23,681 |
+| JavaScript         |         70 |      7,588 |        648 |        870 |      9,106 |
+| YAML               |         40 |      2,922 |        593 |        300 |      3,815 |
+| HTML               |         24 |      1,255 |         26 |        117 |      1,398 |
+| CSS                |          1 |      1,043 |         15 |        125 |      1,183 |
+| XML                |         11 |        893 |         10 |         73 |        976 |
+| JSON               |          4 |        797 |          0 |          3 |        800 |
+| JSON with Comments |          1 |          4 |          0 |          1 |          5 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                              | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                 |        260 |     30,636 |      1,299 |      9,029 |     40,964 |
+| . (Files)                                                                         |          2 |        138 |         36 |         19 |        193 |
+| scaffolds                                                                         |          3 |         13 |          0 |          3 |         16 |
+| source                                                                            |         88 |     14,487 |          0 |      6,952 |     21,439 |
+| source\_posts                                                                     |         86 |     14,475 |          0 |      6,950 |     21,425 |
+| source\categories                                                                 |          1 |          6 |          0 |          1 |          7 |
+| source\tags                                                                       |          1 |          6 |          0 |          1 |          7 |
+| themes                                                                            |        167 |     15,998 |      1,263 |      2,055 |     19,316 |
+| themes\3hexo                                                                      |         41 |      8,393 |        603 |        728 |      9,724 |
+| themes\3hexo (Files)                                                              |          2 |        216 |        120 |         54 |        390 |
+| themes\3hexo\languages                                                            |          2 |         68 |          0 |          0 |         68 |
+| themes\3hexo\layout                                                               |         25 |      1,262 |         26 |        123 |      1,411 |
+| themes\3hexo\layout (Files)                                                       |          3 |        123 |          7 |          8 |        138 |
+| themes\3hexo\layout\_partial                                                      |         22 |      1,139 |         19 |        115 |      1,273 |
+| themes\3hexo\layout\_partial (Files)                                              |         15 |        997 |         16 |        106 |      1,119 |
+| themes\3hexo\layout\_partial\comments                                             |          7 |        142 |          3 |          9 |        154 |
+| themes\3hexo\source                                                               |         12 |      6,847 |        457 |        551 |      7,855 |
+| themes\3hexo\source\css                                                           |          4 |      1,841 |         18 |        190 |      2,049 |
+| themes\3hexo\source\css (Files)                                                   |          1 |      1,043 |         15 |        125 |      1,183 |
+| themes\3hexo\source\css\fonts                                                     |          3 |        798 |          3 |         65 |        866 |
+| themes\3hexo\source\js                                                            |          8 |      5,006 |        439 |        361 |      5,806 |
+| themes\next                                                                       |        126 |      7,605 |        660 |      1,327 |      9,592 |
+| themes\next (Files)                                                               |          8 |        720 |        417 |        231 |      1,368 |
+| themes\next\.github                                                               |         19 |        527 |         27 |        217 |        771 |
+| themes\next\.github (Files)                                                       |          9 |        309 |         24 |        123 |        456 |
+| themes\next\.github\ISSUE_TEMPLATE                                                |          4 |        119 |          0 |         76 |        195 |
+| themes\next\.github\workflows                                                     |          6 |         99 |          3 |         18 |        120 |
+| themes\next\docs                                                                  |          6 |      1,036 |          0 |        314 |      1,350 |
+| themes\next\docs (Files)                                                          |          2 |        622 |          0 |        115 |        737 |
+| themes\next\docs\ru                                                               |          1 |        112 |          0 |         57 |        169 |
+| themes\next\docs\zh-CN                                                            |          3 |        302 |          0 |        142 |        444 |
+| themes\next\languages                                                             |         22 |      1,929 |          0 |         48 |      1,977 |
+| themes\next\scripts                                                               |         37 |        988 |        120 |        252 |      1,360 |
+| themes\next\scripts (Files)                                                       |          2 |         55 |          3 |          9 |         67 |
+| themes\next\scripts\events                                                        |          6 |        246 |         19 |         34 |        299 |
+| themes\next\scripts\events (Files)                                                |          1 |         21 |          5 |          4 |         30 |
+| themes\next\scripts\events\lib                                                    |          5 |        225 |         14 |         30 |        269 |
+| themes\next\scripts\filters                                                       |         12 |        251 |         32 |         86 |        369 |
+| themes\next\scripts\filters (Files)                                               |          4 |         85 |         12 |         28 |        125 |
+| themes\next\scripts\filters\comment                                               |          8 |        166 |         20 |         58 |        244 |
+| themes\next\scripts\helpers                                                       |          5 |        181 |         23 |         36 |        240 |
+| themes\next\scripts\tags                                                          |         12 |        255 |         43 |         87 |        385 |
+| themes\next\source                                                                |         17 |      1,933 |         96 |        139 |      2,168 |
+| themes\next\source\images                                                         |          9 |        811 |          7 |          8 |        826 |
+| themes\next\source\js                                                             |          8 |      1,122 |         89 |        131 |      1,342 |
+| themes\next\source\js (Files)                                                     |          7 |      1,069 |         86 |        125 |      1,280 |
+| themes\next\source\js\schemes                                                     |          1 |         53 |          3 |          6 |         62 |
+| themes\next\test                                                                  |         17 |        472 |          0 |        126 |        598 |
+| themes\next\test (Files)                                                          |          1 |          6 |          0 |          2 |          8 |
+| themes\next\test\helpers                                                          |          3 |        112 |          0 |         23 |        135 |
+| themes\next\test\tags                                                             |         12 |        323 |          0 |         96 |        419 |
+| themes\next\test\validate                                                         |          1 |         31 |          0 |          5 |         36 |
++-----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                          | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| d:\Git\Note\note_hexo\_config.yml                                                 | YAML               |        104 |         36 |         18 |        158 |
+| d:\Git\Note\note_hexo\package.json                                                | JSON               |         34 |          0 |          1 |         35 |
+| d:\Git\Note\note_hexo\scaffolds\draft.md                                          | Markdown           |          4 |          0 |          1 |          5 |
+| d:\Git\Note\note_hexo\scaffolds\page.md                                           | Markdown           |          4 |          0 |          1 |          5 |
+| d:\Git\Note\note_hexo\scaffolds\post.md                                           | Markdown           |          5 |          0 |          1 |          6 |
+| d:\Git\Note\note_hexo\source\_posts\0392a0e3ceaeed8b3de4b915d8129b9bc39ecb46.md   | Markdown           |        473 |          0 |        143 |        616 |
+| d:\Git\Note\note_hexo\source\_posts\053607f1ecbb56d63ebb7de4259e83a4be807ce6.md   | Markdown           |         38 |          0 |         18 |         56 |
+| d:\Git\Note\note_hexo\source\_posts\07578cff2dd4bfd8c55f223f930878824a64ceaa.md   | Markdown           |        223 |          0 |        107 |        330 |
+| d:\Git\Note\note_hexo\source\_posts\0951b49d41f9fcd124f4e34b6dcdd3a8b3c57776.md   | Markdown           |        188 |          0 |         90 |        278 |
+| d:\Git\Note\note_hexo\source\_posts\0b3130ada3d0531d62d35d48e876a299c5888b77.md   | Markdown           |         81 |          0 |         38 |        119 |
+| d:\Git\Note\note_hexo\source\_posts\0c32955781debd23d9593f3ed51d05fde4a7304f.md   | Markdown           |         89 |          0 |         33 |        122 |
+| d:\Git\Note\note_hexo\source\_posts\10d99ef2a6dd035cac70c5f8def086cda109f1ad.md   | Markdown           |         41 |          0 |         27 |         68 |
+| d:\Git\Note\note_hexo\source\_posts\128e80a43f1ada4a71707853f6686b261ffbe241.md   | Markdown           |        106 |          0 |        124 |        230 |
+| d:\Git\Note\note_hexo\source\_posts\152d72cba6e2a9d433c833539acb7aad0d157e32.md   | Markdown           |         61 |          0 |         29 |         90 |
+| d:\Git\Note\note_hexo\source\_posts\168f80ccc9a1e0380cb794165e96a3ede46e9989.md   | Markdown           |        326 |          0 |         86 |        412 |
+| d:\Git\Note\note_hexo\source\_posts\1724764acb83566cfbcc5cedf7fe0bf07a4ed3a1.md   | Markdown           |        118 |          0 |         62 |        180 |
+| d:\Git\Note\note_hexo\source\_posts\1fb05f97cf4037d2eec2f0599f188ff8500faf52.md   | Markdown           |         45 |          0 |         34 |         79 |
+| d:\Git\Note\note_hexo\source\_posts\28d1a8623c53b973e6eba5aa565993ad168ff4c7.md   | Markdown           |         51 |          0 |         37 |         88 |
+| d:\Git\Note\note_hexo\source\_posts\28d7c50088a145a2bd9672fc6e86430b1c6c7778.md   | Markdown           |        353 |          0 |        330 |        683 |
+| d:\Git\Note\note_hexo\source\_posts\2d1f9519eec9a78f5d1c656af80d324daef1e7d3.md   | Markdown           |         53 |          0 |         30 |         83 |
+| d:\Git\Note\note_hexo\source\_posts\2ecb1b3db0ee1e06c985b053a234f661d8ad4410.md   | Markdown           |         15 |          0 |          5 |         20 |
+| d:\Git\Note\note_hexo\source\_posts\2f88c002ba6526df0f92a7b357c463949c11dcf1.md   | Markdown           |        137 |          0 |         46 |        183 |
+| d:\Git\Note\note_hexo\source\_posts\33120becbdc187139d7db6f82981ed7857eb67c4.md   | Markdown           |        540 |          0 |        164 |        704 |
+| d:\Git\Note\note_hexo\source\_posts\34423981d978e285acba77d18622f5a99ad45aeb.md   | Markdown           |        164 |          0 |         38 |        202 |
+| d:\Git\Note\note_hexo\source\_posts\3971919f211d721a9f8d95e718242813c25f0224.md   | Markdown           |         39 |          0 |         20 |         59 |
+| d:\Git\Note\note_hexo\source\_posts\398c907730d3d916e72688bf34e18ad17c4edeff.md   | Markdown           |         58 |          0 |         35 |         93 |
+| d:\Git\Note\note_hexo\source\_posts\41291e4cef1b7c5ee961eb9d22af60f1f3203b23.md   | Markdown           |         61 |          0 |         63 |        124 |
+| d:\Git\Note\note_hexo\source\_posts\508c9a68905bb93d25c20ae865f0112a1de431d4.md   | Markdown           |        193 |          0 |         36 |        229 |
+| d:\Git\Note\note_hexo\source\_posts\559d1c14e339502eb59ce0020fe110f15c087dee.md   | Markdown           |         74 |          0 |         28 |        102 |
+| d:\Git\Note\note_hexo\source\_posts\56cb0e4adfad291addb261565828641abeb80450.md   | Markdown           |         40 |          0 |         22 |         62 |
+| d:\Git\Note\note_hexo\source\_posts\56d70cf3369177ebae7b633765b1511801136821.md   | Markdown           |         41 |          0 |         27 |         68 |
+| d:\Git\Note\note_hexo\source\_posts\5e9148833be13811cc59d73a3b6e21becdfa6d33.md   | Markdown           |         33 |          0 |         17 |         50 |
+| d:\Git\Note\note_hexo\source\_posts\620293c2dd4cc0e2283aea0680aff5d2076e8bfb.md   | Markdown           |         87 |          0 |         63 |        150 |
+| d:\Git\Note\note_hexo\source\_posts\67a4849e0e109ca44843a368388ff861956e472d.md   | Markdown           |         16 |          0 |          6 |         22 |
+| d:\Git\Note\note_hexo\source\_posts\689f27ebabe459360038ee0e75643af26f2e718a.md   | Markdown           |         53 |          0 |         38 |         91 |
+| d:\Git\Note\note_hexo\source\_posts\6978a289dcba3aeb0d923a1a4eccfa6de5d90adb.md   | Markdown           |         36 |          0 |         13 |         49 |
+| d:\Git\Note\note_hexo\source\_posts\6f252f6a1db58de9aa515272f56dab6e4f95c489.md   | Markdown           |         23 |          0 |         12 |         35 |
+| d:\Git\Note\note_hexo\source\_posts\77451a76ae1222084a1d5bf6efd199dc659c54c0.md   | Markdown           |         48 |          0 |         11 |         59 |
+| d:\Git\Note\note_hexo\source\_posts\7864604a0891d53c1a4994773d776e209e02b19f.md   | Markdown           |        629 |          0 |        426 |      1,055 |
+| d:\Git\Note\note_hexo\source\_posts\7b091b2e5e657dc1b00930468a070a01e85e4293.md   | Markdown           |         43 |          0 |         20 |         63 |
+| d:\Git\Note\note_hexo\source\_posts\7b448d3954955971e57a58afd73611f31b5e5a6c.md   | Markdown           |         58 |          0 |         56 |        114 |
+| d:\Git\Note\note_hexo\source\_posts\7bacfdd00ff5a8e8d795626f99fe26ccfd3f2bee.md   | Markdown           |         61 |          0 |         51 |        112 |
+| d:\Git\Note\note_hexo\source\_posts\7bf3c7f1c32eb04fedc6483bf336ade813fdbba4.md   | Markdown           |         29 |          0 |         18 |         47 |
+| d:\Git\Note\note_hexo\source\_posts\8183437d1e8a3a1b5ffeb5e902bff641794983a4.md   | Markdown           |         90 |          0 |         36 |        126 |
+| d:\Git\Note\note_hexo\source\_posts\83c7554526d9f6f294c507e0cebbc479c501c9b6.md   | Markdown           |         18 |          0 |          8 |         26 |
+| d:\Git\Note\note_hexo\source\_posts\84abb5852d04cebae88a5ff2c7454d832391fecf.md   | Markdown           |        352 |          0 |        143 |        495 |
+| d:\Git\Note\note_hexo\source\_posts\86a4ca2747eb0b337ebe6bd34e1d8f48db19e6e6.md   | Markdown           |        139 |          0 |         59 |        198 |
+| d:\Git\Note\note_hexo\source\_posts\88126fb48eff3a2801350be86a88d44654485719.md   | Markdown           |         21 |          0 |          7 |         28 |
+| d:\Git\Note\note_hexo\source\_posts\8b9b73b54d7308edd29570d8d41c94b255818281.md   | Markdown           |        315 |          0 |         87 |        402 |
+| d:\Git\Note\note_hexo\source\_posts\8d431f07c8d4c47c4e9646c57f218a9fa1d9864a.md   | Markdown           |        228 |          0 |         95 |        323 |
+| d:\Git\Note\note_hexo\source\_posts\939ad8bd1529bf657e3a88d27d336d13020d0bb4.md   | Markdown           |        147 |          0 |         52 |        199 |
+| d:\Git\Note\note_hexo\source\_posts\9bc9a7485650f095deaae9b54954ff069f4b967c.md   | Markdown           |        160 |          0 |         81 |        241 |
+| d:\Git\Note\note_hexo\source\_posts\a40746dc076dc0723d0b0f534a88fdc8d9835bfe.md   | Markdown           |        557 |          0 |        228 |        785 |
+| d:\Git\Note\note_hexo\source\_posts\a69be125961a1ce5fdd646ee40f33bddb5085f93.md   | Markdown           |        272 |          0 |        202 |        474 |
+| d:\Git\Note\note_hexo\source\_posts\a8a30876dbd0634ee6c5cea023ef0046c4106029.md   | Markdown           |         93 |          0 |         39 |        132 |
+| d:\Git\Note\note_hexo\source\_posts\abbec60d7f2fb585a004df0095b46c95af076c53.md   | Markdown           |        122 |          0 |         71 |        193 |
+| d:\Git\Note\note_hexo\source\_posts\abbf70ac8ba77757a641c0239455ace455e75d93.md   | Markdown           |        139 |          0 |         64 |        203 |
+| d:\Git\Note\note_hexo\source\_posts\acc2d6da5dd37affe3f03e94d2997ae7cd02bc92.md   | Markdown           |        398 |          0 |        188 |        586 |
+| d:\Git\Note\note_hexo\source\_posts\b16b8cbb6354ce048d8af60c5393d71fef7ff366.md   | Markdown           |         41 |          0 |         47 |         88 |
+| d:\Git\Note\note_hexo\source\_posts\b53e358a25ba3e25467609d60291ee2c9907edf2.md   | Markdown           |        334 |          0 |        149 |        483 |
+| d:\Git\Note\note_hexo\source\_posts\b780bb9e95975417c037cc3060dfd3da8b830810.md   | Markdown           |         62 |          0 |         35 |         97 |
+| d:\Git\Note\note_hexo\source\_posts\b8bc8d6b00b5f8aacbc31724c33dd6ecb004e746.md   | Markdown           |         68 |          0 |         16 |         84 |
+| d:\Git\Note\note_hexo\source\_posts\ba467b73efcd15a60483f83c189c000cf0942806.md   | Markdown           |         74 |          0 |         40 |        114 |
+| d:\Git\Note\note_hexo\source\_posts\bb000b546660c66d13b4e96258ca3f5a491be94a.md   | Markdown           |         57 |          0 |         25 |         82 |
+| d:\Git\Note\note_hexo\source\_posts\bcc078844d812baf3f3b68274a6e012c483473c3.md   | Markdown           |         26 |          0 |         19 |         45 |
+| d:\Git\Note\note_hexo\source\_posts\c105306376235e068a5bdf844b850dfeef744b03.md   | Markdown           |         99 |          0 |         34 |        133 |
+| d:\Git\Note\note_hexo\source\_posts\c2e8c098df921faf1829e09a3915f459a93b29d0.md   | Markdown           |         31 |          0 |         29 |         60 |
+| d:\Git\Note\note_hexo\source\_posts\d1804a15ace07b410373641e47601a0feea08b84.md   | Markdown           |         35 |          0 |         18 |         53 |
+| d:\Git\Note\note_hexo\source\_posts\d2cb8fb770f80b19ad9497aaca6122a86a7a16bf.md   | Markdown           |         70 |          0 |         14 |         84 |
+| d:\Git\Note\note_hexo\source\_posts\d39be376aabd974a170ece9d764aefad9a10716a.md   | Markdown           |         34 |          0 |         15 |         49 |
+| d:\Git\Note\note_hexo\source\_posts\d3a05d21422f48a7ec5201cd68c70d24af5ce081.md   | Markdown           |         65 |          0 |         28 |         93 |
+| d:\Git\Note\note_hexo\source\_posts\d654a8e3a8d8cd17a3ce34bfdb21aca3bf2174a8.md   | Markdown           |         29 |          0 |         13 |         42 |
+| d:\Git\Note\note_hexo\source\_posts\dafbf23c5bb3f1d8424b4f834eebbe9529c9a5a2.md   | Markdown           |        127 |          0 |         79 |        206 |
+| d:\Git\Note\note_hexo\source\_posts\db420423d1fbc960f8c883a692a8a16e45a73523.md   | Markdown           |        129 |          0 |         58 |        187 |
+| d:\Git\Note\note_hexo\source\_posts\ddf3c4fa453b37a29757e2fadc5ce4bdc4f3368c.md   | Markdown           |      2,960 |          0 |      1,458 |      4,418 |
+| d:\Git\Note\note_hexo\source\_posts\dffaec73c007ef934fe39c476c8808f2511390b2.md   | Markdown           |         99 |          0 |         59 |        158 |
+| d:\Git\Note\note_hexo\source\_posts\e1257bd34fdb147bfaa2dba0b1d8b5f7a8d1c85b.md   | Markdown           |        341 |          0 |        103 |        444 |
+| d:\Git\Note\note_hexo\source\_posts\e3241164d2ab8c7695daba3b911d08ae7e2b2873.md   | Markdown           |         15 |          0 |          2 |         17 |
+| d:\Git\Note\note_hexo\source\_posts\e4b141ee8dc17c4b43e1fd1f735217e727de0901.md   | Markdown           |         21 |          0 |         11 |         32 |
+| d:\Git\Note\note_hexo\source\_posts\e74920cc7906fcb231ccf12aa8c5650951c16c02.md   | Markdown           |        800 |          0 |        339 |      1,139 |
+| d:\Git\Note\note_hexo\source\_posts\e85089d47d0a9a1e5419aad022437f772a987bd7.md   | Markdown           |         60 |          0 |         23 |         83 |
+| d:\Git\Note\note_hexo\source\_posts\ea19a057b9f6962770374b42fe9d89e6419c5b15.md   | Markdown           |         50 |          0 |         61 |        111 |
+| d:\Git\Note\note_hexo\source\_posts\eae48e333decc89b2d7694211309b582a3a53702.md   | Markdown           |         40 |          0 |         27 |         67 |
+| d:\Git\Note\note_hexo\source\_posts\ec75ee41345f503e58f539d384bf00b7f6619bf3.md   | Markdown           |        102 |          0 |         54 |        156 |
+| d:\Git\Note\note_hexo\source\_posts\edeac672c5add21d3ccf7222dee322ab10cfc8d3.md   | Markdown           |        275 |          0 |         72 |        347 |
+| d:\Git\Note\note_hexo\source\_posts\edefd41cca3bfb461242cf05e60f7dad6fd1663e.md   | Markdown           |         79 |          0 |         39 |        118 |
+| d:\Git\Note\note_hexo\source\_posts\f4d9b39cffbb9a542e360bd81bf53fa67120f26c.md   | Markdown           |         80 |          0 |         42 |        122 |
+| d:\Git\Note\note_hexo\source\_posts\f73bfa22fa41a750b86dbbf00f115c1aee76a24c.md   | Markdown           |        101 |          0 |         47 |        148 |
+| d:\Git\Note\note_hexo\source\_posts\f7bf833465dabddc3cd869dddcaf81e9212e2ad6.md   | Markdown           |        322 |          0 |        169 |        491 |
+| d:\Git\Note\note_hexo\source\_posts\fb2736e62d44c8a1f1c732650a20795e18086c1b.md   | Markdown           |         55 |          0 |         51 |        106 |
+| d:\Git\Note\note_hexo\source\_posts\fe1909fe74c4cb6f352187498b19f73b6b30b23d.md   | Markdown           |         19 |          0 |         11 |         30 |
+| d:\Git\Note\note_hexo\source\categories\index.md                                  | Markdown           |          6 |          0 |          1 |          7 |
+| d:\Git\Note\note_hexo\source\tags\index.md                                        | Markdown           |          6 |          0 |          1 |          7 |
+| d:\Git\Note\note_hexo\themes\3hexo\README.md                                      | Markdown           |         60 |          0 |         10 |         70 |
+| d:\Git\Note\note_hexo\themes\3hexo\_config.yml                                    | YAML               |        156 |        120 |         44 |        320 |
+| d:\Git\Note\note_hexo\themes\3hexo\languages\en.yml                               | YAML               |         34 |          0 |          0 |         34 |
+| d:\Git\Note\note_hexo\themes\3hexo\languages\zh-CN.yml                            | YAML               |         34 |          0 |          0 |         34 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\article.ejs                    | HTML               |        113 |          0 |          4 |        117 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\article_copyright.ejs          | HTML               |         13 |          0 |          1 |         14 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comment.ejs                    | HTML               |          6 |          0 |          0 |          6 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\click2show.ejs        | HTML               |         31 |          0 |          1 |         32 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\disqus.ejs            | HTML               |         19 |          1 |          1 |         21 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\giscus.ejs            | HTML               |         24 |          0 |          0 |         24 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\gitalk.ejs            | HTML               |         18 |          0 |          2 |         20 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\gitment.ejs           | HTML               |         15 |          0 |          1 |         16 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\livere.ejs            | HTML               |         19 |          2 |          3 |         24 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\comments\utteranc.ejs          | HTML               |         16 |          0 |          1 |         17 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\copyright.ejs                  | HTML               |          7 |          1 |          1 |          9 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\dashang.ejs                    | HTML               |         16 |          0 |          1 |         17 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\footer.ejs                     | HTML               |        506 |         12 |         83 |        601 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\friends.ejs                    | HTML               |         13 |          0 |          0 |         13 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\full-toc.ejs                   | HTML               |          2 |          0 |          1 |          3 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\header.ejs                     | HTML               |         63 |          0 |          5 |         68 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\mathjax.ejs                    | HTML               |         36 |          3 |          0 |         39 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\meta.ejs                       | HTML               |         33 |          0 |          2 |         35 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\nav-left.ejs                   | HTML               |        121 |          0 |          2 |        123 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\nav-right.ejs                  | HTML               |         41 |          0 |          4 |         45 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\tag.ejs                        | HTML               |         10 |          0 |          2 |         12 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\_partial\toc-ref.ejs                    | HTML               |         17 |          0 |          0 |         17 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\index.ejs                               | HTML               |         57 |          0 |          1 |         58 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\indexs.md                               | Markdown           |          7 |          0 |          6 |         13 |
+| d:\Git\Note\note_hexo\themes\3hexo\layout\post.ejs                                | HTML               |         59 |          7 |          1 |         67 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\css\fonts\icomoon.svg                   | XML                |         33 |          0 |          0 |         33 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\css\fonts\iconfont.svg                  | XML                |         49 |          3 |         65 |        117 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\css\fonts\selection.json                | JSON               |        716 |          0 |          0 |        716 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\css\gitalk.css                          | CSS                |      1,043 |         15 |        125 |      1,183 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\busuanzi.pure.mini.js                | JavaScript         |          1 |          0 |          0 |          1 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\gitalk.js                            | JavaScript         |          6 |         29 |          1 |         36 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\gitment.js                           | JavaScript         |      3,555 |         35 |        162 |      3,752 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\iconfont.js                          | JavaScript         |          1 |          0 |          0 |          1 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\jquery.pjax.js                       | JavaScript         |        502 |        277 |        138 |        917 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\script.js                            | JavaScript         |        784 |         66 |         50 |        900 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\search.js                            | JavaScript         |        109 |         28 |         10 |        147 |
+| d:\Git\Note\note_hexo\themes\3hexo\source\js\titleTip.js                          | JavaScript         |         48 |          4 |          0 |         52 |
+| d:\Git\Note\note_hexo\themes\next\.eslintrc.json                                  | JSON with Comments |          4 |          0 |          1 |          5 |
+| d:\Git\Note\note_hexo\themes\next\.github\CODE_OF_CONDUCT.md                      | Markdown           |         62 |          0 |         36 |         98 |
+| d:\Git\Note\note_hexo\themes\next\.github\CONTRIBUTING.md                         | Markdown           |        132 |          0 |         51 |        183 |
+| d:\Git\Note\note_hexo\themes\next\.github\ISSUE_TEMPLATE\bug-report.md            | Markdown           |         40 |          0 |         26 |         66 |
+| d:\Git\Note\note_hexo\themes\next\.github\ISSUE_TEMPLATE\feature-request.md       | Markdown           |         23 |          0 |         17 |         40 |
+| d:\Git\Note\note_hexo\themes\next\.github\ISSUE_TEMPLATE\other.md                 | Markdown           |         16 |          0 |          7 |         23 |
+| d:\Git\Note\note_hexo\themes\next\.github\ISSUE_TEMPLATE\question.md              | Markdown           |         40 |          0 |         26 |         66 |
+| d:\Git\Note\note_hexo\themes\next\.github\PULL_REQUEST_TEMPLATE.md                | Markdown           |         28 |          7 |         12 |         47 |
+| d:\Git\Note\note_hexo\themes\next\.github\config.yml                              | YAML               |          6 |          5 |          4 |         15 |
+| d:\Git\Note\note_hexo\themes\next\.github\issue_label_bot.yaml                    | YAML               |          4 |          0 |          1 |          5 |
+| d:\Git\Note\note_hexo\themes\next\.github\label-commenter-config.yml              | YAML               |         29 |          1 |          2 |         32 |
+| d:\Git\Note\note_hexo\themes\next\.github\labeler.yml                             | YAML               |          6 |          1 |          2 |          9 |
+| d:\Git\Note\note_hexo\themes\next\.github\release-drafter.yml                     | YAML               |         27 |          1 |         13 |         41 |
+| d:\Git\Note\note_hexo\themes\next\.github\stale.yml                               | YAML               |         15 |          9 |          2 |         26 |
+| d:\Git\Note\note_hexo\themes\next\.github\workflows\label-commenter.yml           | YAML               |         16 |          0 |          3 |         19 |
+| d:\Git\Note\note_hexo\themes\next\.github\workflows\labeler.yml                   | YAML               |         10 |          0 |          3 |         13 |
+| d:\Git\Note\note_hexo\themes\next\.github\workflows\linter.yml                    | YAML               |         12 |          0 |          3 |         15 |
+| d:\Git\Note\note_hexo\themes\next\.github\workflows\lock.yml                      | YAML               |         16 |          1 |          3 |         20 |
+| d:\Git\Note\note_hexo\themes\next\.github\workflows\release-drafter.yml           | YAML               |         12 |          2 |          3 |         17 |
+| d:\Git\Note\note_hexo\themes\next\.github\workflows\tester.yml                    | YAML               |         33 |          0 |          3 |         36 |
+| d:\Git\Note\note_hexo\themes\next\LICENSE.md                                      | Markdown           |         51 |          0 |         13 |         64 |
+| d:\Git\Note\note_hexo\themes\next\README.md                                       | Markdown           |        110 |          0 |         56 |        166 |
+| d:\Git\Note\note_hexo\themes\next\_config.yml                                     | YAML               |        361 |        415 |        156 |        932 |
+| d:\Git\Note\note_hexo\themes\next\_vendors.yml                                    | YAML               |        138 |          2 |          2 |        142 |
+| d:\Git\Note\note_hexo\themes\next\crowdin.yml                                     | YAML               |          9 |          0 |          1 |         10 |
+| d:\Git\Note\note_hexo\themes\next\docs\AGPL3.md                                   | Markdown           |        543 |          0 |        106 |        649 |
+| d:\Git\Note\note_hexo\themes\next\docs\AUTHORS.md                                 | Markdown           |         79 |          0 |          9 |         88 |
+| d:\Git\Note\note_hexo\themes\next\docs\ru\README.md                               | Markdown           |        112 |          0 |         57 |        169 |
+| d:\Git\Note\note_hexo\themes\next\docs\zh-CN\CODE_OF_CONDUCT.md                   | Markdown           |         61 |          0 |         35 |         96 |
+| d:\Git\Note\note_hexo\themes\next\docs\zh-CN\CONTRIBUTING.md                      | Markdown           |        131 |          0 |         51 |        182 |
+| d:\Git\Note\note_hexo\themes\next\docs\zh-CN\README.md                            | Markdown           |        110 |          0 |         56 |        166 |
+| d:\Git\Note\note_hexo\themes\next\languages\README.md                             | Markdown           |         29 |          0 |         11 |         40 |
+| d:\Git\Note\note_hexo\themes\next\languages\ar.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\de.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\default.yml                           | YAML               |          1 |          0 |          0 |          1 |
+| d:\Git\Note\note_hexo\themes\next\languages\en.yml                                | YAML               |         94 |          0 |         18 |        112 |
+| d:\Git\Note\note_hexo\themes\next\languages\es.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\fa.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\fr.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\id.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\it.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\ja.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\ko.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\nl.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\pt-BR.yml                             | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\pt.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\ru.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\tr.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\uk.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\vi.yml                                | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\zh-CN.yml                             | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\zh-HK.yml                             | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\languages\zh-TW.yml                             | YAML               |         95 |          0 |          1 |         96 |
+| d:\Git\Note\note_hexo\themes\next\package.json                                    | JSON               |         42 |          0 |          1 |         43 |
+| d:\Git\Note\note_hexo\themes\next\renovate.json                                   | JSON               |          5 |          0 |          1 |          6 |
+| d:\Git\Note\note_hexo\themes\next\scripts\codeblock.js                            | JavaScript         |         22 |          0 |          2 |         24 |
+| d:\Git\Note\note_hexo\themes\next\scripts\events\index.js                         | JavaScript         |         21 |          5 |          4 |         30 |
+| d:\Git\Note\note_hexo\themes\next\scripts\events\lib\config.js                    | JavaScript         |         44 |          1 |          9 |         54 |
+| d:\Git\Note\note_hexo\themes\next\scripts\events\lib\highlight.js                 | JavaScript         |         25 |          0 |          4 |         29 |
+| d:\Git\Note\note_hexo\themes\next\scripts\events\lib\injects.js                   | JavaScript         |         66 |         12 |          8 |         86 |
+| d:\Git\Note\note_hexo\themes\next\scripts\events\lib\utils.js                     | JavaScript         |         55 |          1 |          6 |         62 |
+| d:\Git\Note\note_hexo\themes\next\scripts\events\lib\vendors.js                   | JavaScript         |         35 |          0 |          3 |         38 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\changyan.js             | JavaScript         |         33 |          3 |         10 |         46 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\common.js               | JavaScript         |         21 |          0 |          3 |         24 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\default-config.js       | JavaScript         |         26 |          5 |          4 |         35 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\disqus.js               | JavaScript         |         29 |          3 |         10 |         42 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\disqusjs.js             | JavaScript         |         14 |          2 |          7 |         23 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\gitalk.js               | JavaScript         |          8 |          2 |          7 |         17 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\livere.js               | JavaScript         |         12 |          2 |          7 |         21 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\comment\valine.js               | JavaScript         |         23 |          3 |         10 |         36 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\default-injects.js              | JavaScript         |         16 |          1 |          8 |         25 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\locals.js                       | JavaScript         |         27 |          7 |          4 |         38 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\minify.js                       | JavaScript         |         23 |          1 |          9 |         33 |
+| d:\Git\Note\note_hexo\themes\next\scripts\filters\post.js                         | JavaScript         |         19 |          3 |          7 |         29 |
+| d:\Git\Note\note_hexo\themes\next\scripts\helpers\engine.js                       | JavaScript         |         54 |          7 |         11 |         72 |
+| d:\Git\Note\note_hexo\themes\next\scripts\helpers\font.js                         | JavaScript         |         16 |          3 |          7 |         26 |
+| d:\Git\Note\note_hexo\themes\next\scripts\helpers\next-config.js                  | JavaScript         |         44 |          4 |          4 |         52 |
+| d:\Git\Note\note_hexo\themes\next\scripts\helpers\next-url.js                     | JavaScript         |         40 |          8 |         11 |         59 |
+| d:\Git\Note\note_hexo\themes\next\scripts\helpers\next-vendors.js                 | JavaScript         |         27 |          1 |          3 |         31 |
+| d:\Git\Note\note_hexo\themes\next\scripts\renderer.js                             | JavaScript         |         33 |          3 |          7 |         43 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\button.js                          | JavaScript         |         16 |          3 |          5 |         24 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\caniuse.js                         | JavaScript         |          9 |          3 |          5 |         17 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\center-quote.js                    | JavaScript         |          6 |          3 |          3 |         12 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\group-pictures.js                  | JavaScript         |        106 |         12 |         15 |        133 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\index.js                           | JavaScript         |         31 |          1 |         24 |         56 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\label.js                           | JavaScript         |          6 |          3 |          5 |         14 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\link-grid.js                       | JavaScript         |         13 |          3 |          3 |         19 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\mermaid.js                         | JavaScript         |          8 |          3 |          4 |         15 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\note.js                            | JavaScript         |         20 |          3 |          3 |         26 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\pdf.js                             | JavaScript         |          5 |          3 |          3 |         11 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\tabs.js                            | JavaScript         |         31 |          3 |         14 |         48 |
+| d:\Git\Note\note_hexo\themes\next\scripts\tags\video.js                           | JavaScript         |          4 |          3 |          3 |         10 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-by-nc-nd.svg                   | XML                |        120 |          1 |          1 |        122 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-by-nc-sa.svg                   | XML                |        120 |          1 |          1 |        122 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-by-nc.svg                      | XML                |        120 |          1 |          1 |        122 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-by-nd.svg                      | XML                |        116 |          1 |          1 |        118 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-by-sa.svg                      | XML                |        120 |          1 |          1 |        122 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-by.svg                         | XML                |        120 |          1 |          1 |        122 |
+| d:\Git\Note\note_hexo\themes\next\source\images\cc-zero.svg                       | XML                |         71 |          1 |          1 |         73 |
+| d:\Git\Note\note_hexo\themes\next\source\images\logo-algolia-nebula-blue-full.svg | XML                |          1 |          0 |          0 |          1 |
+| d:\Git\Note\note_hexo\themes\next\source\images\logo.svg                          | XML                |         23 |          0 |          1 |         24 |
+| d:\Git\Note\note_hexo\themes\next\source\js\algolia-search.js                     | JavaScript         |        111 |          5 |         13 |        129 |
+| d:\Git\Note\note_hexo\themes\next\source\js\bookmark.js                           | JavaScript         |         43 |          9 |          5 |         57 |
+| d:\Git\Note\note_hexo\themes\next\source\js\local-search.js                       | JavaScript         |        277 |         26 |         28 |        331 |
+| d:\Git\Note\note_hexo\themes\next\source\js\motion.js                             | JavaScript         |        108 |          2 |         16 |        126 |
+| d:\Git\Note\note_hexo\themes\next\source\js\next-boot.js                          | JavaScript         |        106 |          8 |         14 |        128 |
+| d:\Git\Note\note_hexo\themes\next\source\js\schedule.js                           | JavaScript         |        112 |          6 |         22 |        140 |
+| d:\Git\Note\note_hexo\themes\next\source\js\schemes\muse.js                       | JavaScript         |         53 |          3 |          6 |         62 |
+| d:\Git\Note\note_hexo\themes\next\source\js\utils.js                              | JavaScript         |        312 |         30 |         27 |        369 |
+| d:\Git\Note\note_hexo\themes\next\test\helpers\font.js                            | JavaScript         |         76 |          0 |         11 |         87 |
+| d:\Git\Note\note_hexo\themes\next\test\helpers\index.js                           | JavaScript         |          5 |          0 |          2 |          7 |
+| d:\Git\Note\note_hexo\themes\next\test\helpers\next-url.js                        | JavaScript         |         31 |          0 |         10 |         41 |
+| d:\Git\Note\note_hexo\themes\next\test\index.js                                   | JavaScript         |          6 |          0 |          2 |          8 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\button.js                             | JavaScript         |         25 |          0 |          9 |         34 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\caniuse.js                            | JavaScript         |         13 |          0 |          5 |         18 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\center-quote.js                       | JavaScript         |         15 |          0 |          7 |         22 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\group-pictures.js                     | JavaScript         |         38 |          0 |          8 |         46 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\index.js                              | JavaScript         |         14 |          0 |          2 |         16 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\label.js                              | JavaScript         |         16 |          0 |          6 |         22 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\link-grid.js                          | JavaScript         |         41 |          0 |          9 |         50 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\mermaid.js                            | JavaScript         |         16 |          0 |          6 |         22 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\note.js                               | JavaScript         |         42 |          0 |         14 |         56 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\pdf.js                                | JavaScript         |         18 |          0 |          6 |         24 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\tabs.js                               | JavaScript         |         77 |          0 |         20 |         97 |
+| d:\Git\Note\note_hexo\themes\next\test\tags\video.js                              | JavaScript         |          8 |          0 |          4 |         12 |
+| d:\Git\Note\note_hexo\themes\next\test\validate\index.js                          | JavaScript         |         31 |          0 |          5 |         36 |
+| Total                                                                             |                    |     30,636 |      1,299 |      9,029 |     40,964 |
++-----------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
